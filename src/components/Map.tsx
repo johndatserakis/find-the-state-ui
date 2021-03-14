@@ -1,42 +1,42 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Map as MapboxMap, MapMouseEvent, MapboxGeoJSONFeature } from 'mapbox-gl';
+import { useEffect, useRef, useState } from 'react';
+import { Map as MapboxMap } from 'mapbox-gl';
+import styled from 'styled-components/macro';
+import { getTopFeatureAtMouseEvent } from '../utils/map';
+import { blue500, blue600 } from '../utils/colors';
 
-const getFeatureAtMouseEvent = (
-  event: MapMouseEvent,
-  map: MapboxMap,
-  layerId: string,
-): MapboxGeoJSONFeature | undefined => {
-  const { point } = event;
-  const layers = [layerId];
+const DEFAULT_LNG = -96.7079;
+const DEFAULT_LAT = 38.9832;
+const DEFAULT_ZOOM = 3.5;
 
-  try {
-    const renderedFeatures = map.queryRenderedFeatures(point, { layers });
-    if (!renderedFeatures.length) return;
-    return renderedFeatures[0];
-  } catch (error) {
-    return undefined;
-  }
-};
+const Container = styled.div`
+  height: 500px;
+  margin: 0 auto;
+  width: 1000px;
+`;
+
+const MapContainer = styled.div`
+  height: 100%;
+  width: 100%;
+`;
 
 export const Map = () => {
   const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
   const mapContainer = useRef<HTMLDivElement>(null);
-  const [lng, setLng] = useState(-100.486052);
-  const [lat, setLat] = useState(37.830348);
-  const [zoom, setZoom] = useState(3.75);
+  const [selectedState, setSelectedState] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    console.log('mapContainer', mapContainer);
-
     if (!mapContainer.current) return;
 
     const map = new MapboxMap({
       accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [lng, lat],
-      zoom: zoom,
+      center: [DEFAULT_LNG, DEFAULT_LAT],
+      zoom: DEFAULT_ZOOM,
     });
+
+    map.dragPan.disable();
+    map.scrollZoom.disable();
 
     var hoveredStateId: string | number | undefined = '';
 
@@ -52,8 +52,8 @@ export const Map = () => {
         source: 'states',
         layout: {},
         paint: {
-          'fill-color': '#627BC1',
-          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 1, 0.5],
+          'fill-color': blue500,
+          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.85, 0.5],
         },
       });
 
@@ -63,7 +63,7 @@ export const Map = () => {
         source: 'states',
         layout: {},
         paint: {
-          'line-color': '#627BC1',
+          'line-color': blue600,
           'line-width': 2,
         },
       });
@@ -86,19 +86,16 @@ export const Map = () => {
       });
 
       map.on('click', (e) => {
-        const feature = getFeatureAtMouseEvent(e, map, 'state-fills');
+        const feature = getTopFeatureAtMouseEvent(e, map, 'state-fills');
         if (!feature) return;
 
         const { properties } = feature;
         const state = properties?.STATE_NAME;
 
-        console.log('feature', feature);
-        console.log('properties', properties);
-        console.log('state', state);
+        setSelectedState(state);
       });
     });
 
-    console.log('map', map);
     setMapboxMap(map);
 
     return () => map.remove();
@@ -108,14 +105,9 @@ export const Map = () => {
   console.log('mapboxMap', mapboxMap);
 
   return (
-    <>
-      <div className="map-container" ref={mapContainer} style={{ height: '600px', width: '100%' }} />
-      {/* {mapboxMap && (
-        <div>
-          <div className="map-container" ref={mapContainer} style={{ height: '600px', width: '100%' }} />
-        </div>
-      )} */}
-      {/* <div>Loading...</div> */}
-    </>
+    <Container>
+      <MapContainer className="map-container" ref={mapContainer} />
+      {selectedState}
+    </Container>
   );
 };
