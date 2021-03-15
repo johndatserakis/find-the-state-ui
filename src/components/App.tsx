@@ -1,5 +1,5 @@
-import { Map } from './Map';
+import { View } from './View';
 
 export const App = () => {
-  return <Map />;
+  return <View />;
 };

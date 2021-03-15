@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Map as MapboxMap } from 'mapbox-gl';
 import styled from 'styled-components/macro';
 import { getTopFeatureAtMouseEvent } from '../utils/map';
@@ -8,21 +8,19 @@ const DEFAULT_LNG = -96.7079;
 const DEFAULT_LAT = 38.9832;
 const DEFAULT_ZOOM = 3.5;
 
-const Container = styled.div`
-  height: 500px;
-  margin: 0 auto;
-  width: 1000px;
-`;
-
 const MapContainer = styled.div`
   height: 100%;
+  max-height: 500px;
   width: 100%;
 `;
 
-export const Map = () => {
-  const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
+interface MapProps {
+  onClick: (item: string) => void;
+}
+
+export const Map = ({ onClick }: MapProps) => {
+  // const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
   const mapContainer = useRef<HTMLDivElement>(null);
-  const [selectedState, setSelectedState] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -37,10 +35,14 @@ export const Map = () => {
 
     map.dragPan.disable();
     map.scrollZoom.disable();
+    map.doubleClickZoom.disable();
 
     var hoveredStateId: string | number | undefined = '';
 
     map.on('load', () => {
+      map.setLayoutProperty('state-label', 'visibility', 'none');
+      map.setLayoutProperty('settlement-label', 'visibility', 'none');
+
       map.addSource('states', {
         type: 'geojson',
         data: 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson',
@@ -92,22 +94,19 @@ export const Map = () => {
         const { properties } = feature;
         const state = properties?.STATE_NAME;
 
-        setSelectedState(state);
+        onClick(state);
       });
     });
 
-    setMapboxMap(map);
+    // setMapboxMap(map);
 
     return () => map.remove();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log('mapboxMap', mapboxMap);
-
   return (
-    <Container>
+    <>
       <MapContainer className="map-container" ref={mapContainer} />
-      {selectedState}
-    </Container>
+    </>
   );
 };
