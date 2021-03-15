@@ -41,6 +41,7 @@ export const View = () => {
       setIsRightAnswer(true);
       setIsWrongAnswer(false);
       setUsedItems((old) => [...old, selected]);
+      setSelected(undefined);
     } else {
       setIsRightAnswer(false);
       setIsWrongAnswer(true);

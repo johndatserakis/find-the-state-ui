@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import { App } from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
+import mapboxgl from 'mapbox-gl';
+
+// Fix for prod mapbox-gl bug https://github.com/mapbox/mapbox-gl-js/issues/10173#issuecomment-750489778
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 ReactDOM.render(
   <React.StrictMode>
