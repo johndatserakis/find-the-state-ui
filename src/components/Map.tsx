@@ -6,11 +6,10 @@ import { blue500, blue600 } from '../utils/colors';
 
 const DEFAULT_LNG = -96.7079;
 const DEFAULT_LAT = 38.9832;
-const DEFAULT_ZOOM = 3.5;
+const DEFAULT_ZOOM = 3.4;
 
 const MapContainer = styled.div`
-  height: 100%;
-  max-height: 500px;
+  height: 450px;
   width: 100%;
 `;
 

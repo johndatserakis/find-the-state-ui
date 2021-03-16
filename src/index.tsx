@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './components/App';
+import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
 import mapboxgl from 'mapbox-gl';
+import { ChakraProvider } from '@chakra-ui/react';
+import { theme } from './utils/theme';
 
 // Fix for prod mapbox-gl bug https://github.com/mapbox/mapbox-gl-js/issues/10173#issuecomment-750489778
 // @ts-ignore
@@ -12,9 +14,11 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 ReactDOM.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
+    <ChakraProvider theme={theme}>
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

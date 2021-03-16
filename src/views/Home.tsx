@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Map } from './Map';
-import { TargetDisplay } from './TargetDisplay';
+import { Map } from '../components/Map';
+import { TargetDisplay } from '../components/TargetDisplay';
 import styled from 'styled-components/macro';
 import { availableItemsState, targetItemState, usedItemsState } from '../recoil/game';
 import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { sample as _sample } from 'lodash';
+import { Container } from '../components/chakra/Container';
+import { Paragraph } from '../components/chakra/Paragraph';
+import { Box, Button } from '@chakra-ui/react';
 
-const Container = styled.div`
-  height: 800px;
-  margin: 0 auto;
-  width: 1000px;
-`;
+const SectionContainer = styled.div``;
 
-export const View = () => {
+export const Home = () => {
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
   const resetTargetItem = useResetRecoilState(targetItemState);
   const setUsedItems = useSetRecoilState(usedItemsState);
@@ -78,28 +77,32 @@ export const View = () => {
   };
 
   return (
-    <Container>
-      <TargetDisplay />
-      <Map onClick={(item) => setSelected(item)} />
-      {selected && (
-        <p>
-          You selected: <strong>{selected}</strong>
-        </p>
-      )}
-      {!isGameOver && (
-        <>
-          {isWrongAnswer && <p>🧐 Hmm that's not it. Try again.</p>}
-          {isRightAnswer && <p>🎉 That's that one!</p>}
-          <p>
-            <button onClick={resetGame}>Reset game</button>
-          </p>
-        </>
-      )}
-      {isGameOver && (
-        <p>
-          ⭐️ Great Job, you found all the states! <button onClick={resetGame}>Play again?</button>
-        </p>
-      )}
-    </Container>
+    <SectionContainer>
+      <Container py={4}>
+        <TargetDisplay />
+        <Box mb={4}>
+          <Map onClick={(item) => setSelected(item)} />
+        </Box>
+        {selected && (
+          <Paragraph>
+            You selected: <strong>{selected}</strong>
+          </Paragraph>
+        )}
+        {!isGameOver && (
+          <>
+            {isWrongAnswer && <Paragraph>🧐 Hmm that's not it. Try again.</Paragraph>}
+            {isRightAnswer && <Paragraph>🎉 That's that one!</Paragraph>}
+            <Paragraph>
+              <Button onClick={resetGame}>Reset game</Button>
+            </Paragraph>
+          </>
+        )}
+        {isGameOver && (
+          <Paragraph>
+            ⭐️ Great Job, you found all the states! <Button onClick={resetGame}>Play again?</Button>
+          </Paragraph>
+        )}
+      </Container>
+    </SectionContainer>
   );
 };
