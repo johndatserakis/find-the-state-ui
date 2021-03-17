@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Map as MapboxMap } from 'mapbox-gl';
 import styled from 'styled-components/macro';
 import { getTopFeatureAtMouseEvent } from '../utils/map';
-import { blue500, blue600 } from '../utils/colors';
+import { colors } from '../style/colors';
 
 const DEFAULT_LNG = -96.7079;
 const DEFAULT_LAT = 38.9832;
@@ -53,7 +53,7 @@ export const Map = ({ onClick }: MapProps) => {
         source: 'states',
         layout: {},
         paint: {
-          'fill-color': blue500,
+          'fill-color': colors.blue[500],
           'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.85, 0.5],
         },
       });
@@ -64,7 +64,7 @@ export const Map = ({ onClick }: MapProps) => {
         source: 'states',
         layout: {},
         paint: {
-          'line-color': blue600,
+          'line-color': colors.blue[600],
           'line-width': 2,
         },
       });

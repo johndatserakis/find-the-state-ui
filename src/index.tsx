@@ -5,7 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
 import mapboxgl from 'mapbox-gl';
 import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from './utils/theme';
+import { theme } from './style/theme';
+import { Fonts } from './style/fonts';
 
 // Fix for prod mapbox-gl bug https://github.com/mapbox/mapbox-gl-js/issues/10173#issuecomment-750489778
 // @ts-ignore
@@ -15,6 +16,7 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
+      <Fonts />
       <RecoilRoot>
         <App />
       </RecoilRoot>
