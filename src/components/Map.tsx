@@ -9,7 +9,7 @@ const DEFAULT_LAT = 38.9832;
 const DEFAULT_ZOOM = 3.4;
 
 const MapContainer = styled.div`
-  height: 450px;
+  height: 100%;
   width: 100%;
 `;
 

@@ -1,3 +1,5 @@
+// https://chakra-ui.com/guides/custom-fonts
+
 import { Global } from '@emotion/react';
 
 export const Fonts = () => (

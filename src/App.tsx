@@ -7,7 +7,6 @@ export const App = () => {
   return (
     <div>
       <Navbar />
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

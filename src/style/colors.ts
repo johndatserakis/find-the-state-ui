@@ -1,3 +1,5 @@
+// https://chakra-ui.com/docs/theming/theme
+
 // 500 is the base for each color
 export const colors = {
   black: '#3F464C',

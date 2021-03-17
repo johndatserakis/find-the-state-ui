@@ -1,3 +1,5 @@
+// https://chakra-ui.com/docs/features/style-props
+
 import { extendTheme } from '@chakra-ui/react';
 import { colors } from './colors';
 

@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Map } from '../components/Map';
-import { TargetDisplay } from '../components/TargetDisplay';
-import styled from 'styled-components/macro';
+import { Display } from '../components/Display';
 import { availableItemsState, targetItemState, usedItemsState } from '../recoil/game';
 import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { sample as _sample } from 'lodash';
 import { Container } from '../components/chakra/Container';
 import { Paragraph } from '../components/chakra/Paragraph';
 import { Box, Button } from '@chakra-ui/react';
-
-const SectionContainer = styled.div``;
 
 export const Home = () => {
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
@@ -77,32 +74,45 @@ export const Home = () => {
   };
 
   return (
-    <SectionContainer>
-      <Container py={4}>
-        <TargetDisplay />
-        <Box mb={4}>
+    <Container py="2">
+      <Box mb={4} display="flex" h="85vh">
+        <Box
+          w="100%"
+          bg="white"
+          borderRadius="lg"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          shadow="lg"
+          mr="4"
+          overflow="hidden"
+        >
           <Map onClick={(item) => setSelected(item)} />
         </Box>
-        {selected && (
+
+        <Display />
+      </Box>
+
+      {/* {selected && (
+        <Paragraph>
+          You selected: <strong>{selected}</strong>
+        </Paragraph>
+      )}
+      {!isGameOver && (
+        <>
+          {isWrongAnswer && <Paragraph>🧐 Hmm that's not it. Try again.</Paragraph>}
+          {isRightAnswer && <Paragraph>🎉 That's that one!</Paragraph>}
           <Paragraph>
-            You selected: <strong>{selected}</strong>
+            <Button onClick={resetGame}>Reset game</Button>
           </Paragraph>
-        )}
-        {!isGameOver && (
-          <>
-            {isWrongAnswer && <Paragraph>🧐 Hmm that's not it. Try again.</Paragraph>}
-            {isRightAnswer && <Paragraph>🎉 That's that one!</Paragraph>}
-            <Paragraph>
-              <Button onClick={resetGame}>Reset game</Button>
-            </Paragraph>
-          </>
-        )}
-        {isGameOver && (
-          <Paragraph>
-            ⭐️ Great Job, you found all the states! <Button onClick={resetGame}>Play again?</Button>
-          </Paragraph>
-        )}
-      </Container>
-    </SectionContainer>
+        </>
+      )}
+      {isGameOver && (
+        <Paragraph>
+          ⭐️ Great Job, you found all the states! <Button onClick={resetGame}>Play again?</Button>
+        </Paragraph>
+      )} */}
+    </Container>
   );
 };
