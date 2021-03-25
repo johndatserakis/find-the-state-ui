@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { availableItemsCount, targetItemState } from '../recoil/game';
 import { useRecoilValue } from 'recoil';
 import { Box, Button, ButtonGroup, Heading, Link, Stack, Text } from '@chakra-ui/react';
