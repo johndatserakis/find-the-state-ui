@@ -6,13 +6,13 @@ import { FaGithub } from 'react-icons/fa';
 export const Navbar = () => {
   return (
     <Container>
-      <Flex py="4">
+      <Flex py="3" align="center">
         <Box>
           <Heading size="md">🔍 &nbsp;Find The State</Heading>
         </Box>
         <Spacer />
         <Box>
-          <Button colorScheme="blue">
+          <Button size="sm" colorScheme="blue">
             <Icon as={FaGithub} mr="2" /> View on GitHub
           </Button>
         </Box>
