@@ -1,3 +1,5 @@
+// https://smart-swatch.netlify.app/
+
 // 500 is the base for each color
 export const colors = {
   black: '#3F464C',

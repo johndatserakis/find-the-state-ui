@@ -4,10 +4,11 @@ import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
 import mapboxgl from 'mapbox-gl';
-import './style/main.css';
+import './css/main.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
 import { theme } from './style/theme';
+import { ThemeProvider } from 'styled-components';
 
 // Fix for prod mapbox-gl bug https://github.com/mapbox/mapbox-gl-js/issues/10173#issuecomment-750489778
 // @ts-ignore
@@ -17,10 +18,12 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <MuiThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </MuiThemeProvider>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root'),

@@ -5,9 +5,30 @@ import { Display } from '../components/Display';
 import { availableItemsState, targetItemState, usedItemsState } from '../recoil/game';
 import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { sample as _sample } from 'lodash';
-// import { Container } from '../components/chakra/Container';
-// import { Paragraph } from '../components/chakra/Paragraph';
-// import { Box, Button } from '@chakra-ui/react';
+import { Container } from '@material-ui/core';
+import { Grid } from '../components/mui/Grid';
+import styled from 'styled-components/macro';
+import { shadows } from '@material-ui/system';
+import { withTheme } from '@material-ui/core/styles';
+
+const StyledContainer = styled(Container)`
+  height: 100%;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  @media (min-width: 960px) {
+    height: 95vh;
+  }
+`;
+
+const MapContainer = styled.div`
+  border-radius: 0.25rem;
+  box-shadow: ${({ theme }) => theme.shadows[3]};
+  height: 100%;
+  min-height: 500px;
+  overflow: hidden;
+  width: 100%;
+`;
 
 export const Home = () => {
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
@@ -75,45 +96,17 @@ export const Home = () => {
   };
 
   return (
-    <p>
-      Home
-      {/* <Box mb={4} display="flex" h="85vh">
-        <Box
-          w="100%"
-          bg="white"
-          borderRadius="lg"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          shadow="lg"
-          mr="4"
-          overflow="hidden"
-        >
-          <Map onClick={(item) => setSelected(item)} />
-        </Box>
-
-        <Display />
-      </Box> */}
-      {/* {selected && (
-        <Paragraph>
-          You selected: <strong>{selected}</strong>
-        </Paragraph>
-      )}
-      {!isGameOver && (
-        <>
-          {isWrongAnswer && <Paragraph>🧐 Hmm that's not it. Try again.</Paragraph>}
-          {isRightAnswer && <Paragraph>🎉 That's that one!</Paragraph>}
-          <Paragraph>
-            <Button onClick={resetGame}>Reset game</Button>
-          </Paragraph>
-        </>
-      )}
-      {isGameOver && (
-        <Paragraph>
-          ⭐️ Great Job, you found all the states! <Button onClick={resetGame}>Play again?</Button>
-        </Paragraph>
-      )} */}
-    </p>
+    <StyledContainer>
+      <Grid container spacing={2}>
+        <Grid item md={9}>
+          <MapContainer>
+            <Map onClick={(item) => setSelected(item)} />
+          </MapContainer>
+        </Grid>
+        <Grid item md={3}>
+          <Display />
+        </Grid>
+      </Grid>
+    </StyledContainer>
   );
 };
