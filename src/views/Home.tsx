@@ -5,9 +5,9 @@ import { Display } from '../components/Display';
 import { availableItemsState, targetItemState, usedItemsState } from '../recoil/game';
 import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { sample as _sample } from 'lodash';
-import { Container } from '../components/chakra/Container';
-import { Paragraph } from '../components/chakra/Paragraph';
-import { Box, Button } from '@chakra-ui/react';
+// import { Container } from '../components/chakra/Container';
+// import { Paragraph } from '../components/chakra/Paragraph';
+// import { Box, Button } from '@chakra-ui/react';
 
 export const Home = () => {
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
@@ -75,8 +75,9 @@ export const Home = () => {
   };
 
   return (
-    <Container py="2">
-      <Box mb={4} display="flex" h="85vh">
+    <p>
+      Home
+      {/* <Box mb={4} display="flex" h="85vh">
         <Box
           w="100%"
           bg="white"
@@ -93,8 +94,7 @@ export const Home = () => {
         </Box>
 
         <Display />
-      </Box>
-
+      </Box> */}
       {/* {selected && (
         <Paragraph>
           You selected: <strong>{selected}</strong>
@@ -114,6 +114,6 @@ export const Home = () => {
           ⭐️ Great Job, you found all the states! <Button onClick={resetGame}>Play again?</Button>
         </Paragraph>
       )} */}
-    </Container>
+    </p>
   );
 };
