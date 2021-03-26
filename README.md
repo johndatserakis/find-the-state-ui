@@ -1,10 +1,8 @@
 Work in progress...
 
-## MUI
+## [MUI](https://material-ui.com/components/box/)
 
-### Default Breakpoints
-
-https://material-ui.com/customization/breakpoints/
+### [Default Breakpoints](https://material-ui.com/customization/breakpoints/)
 
 Using md 960 as main breakpoint. But using lg for breakpoint in container.
 
@@ -14,9 +12,7 @@ Using md 960 as main breakpoint. But using lg for breakpoint in container.
 - lg, large: 1280px
 - xl, extra-large: 1920px
 
-## Container
-
-https://material-ui.com/components/container/
+### [Container](https://material-ui.com/components/container/)
 
 Make sure all base content is wrapped in a `Container` and use a consistent maxWidth across the app.
 
@@ -24,15 +20,11 @@ Make sure all base content is wrapped in a `Container` and use a consistent maxW
 <Container maxWidth="lg">...</Container>
 ```
 
-## Grid
-
-https://material-ui.com/components/grid/
+### [Grid](https://material-ui.com/components/grid/)
 
 For some reason the main `Grid` from MUI doesn't come with a full height and width. Import the `Grid` from `'./components/mui/Grid'` to get that added by default.
 
-## Access MUI styles in Styled-Components
-
-https://material-ui.com/guides/interoperability/#theme
+### [Access MUI styles in Styled-Components](https://material-ui.com/guides/interoperability/#theme)
 
 ```tsx
 const Container = styled.div`
