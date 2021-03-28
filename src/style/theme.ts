@@ -6,7 +6,7 @@ const sourceSansPro = {
   fontStyle: 'normal',
   fontDisplay: 'swap' as const,
   fontWeight: 400,
-  // Get first item's values from here
+  // Get first item's src values from here
   // https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;700&display=swap
   src: `
     url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lujVj9_mf.woff2) format('woff2')
@@ -32,6 +32,11 @@ export const theme = createMuiTheme({
     },
     secondary: {
       main: '#e67200',
+    },
+  },
+  props: {
+    MuiButton: {
+      disableElevation: true,
     },
   },
 });

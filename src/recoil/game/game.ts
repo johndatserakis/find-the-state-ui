@@ -42,11 +42,10 @@ export const availableItemsCountState = selector({
 export const resetGameFunc = selector({
   key: 'resetGame',
   get: () => undefined,
-  set: ({ get, set, reset }) => {
+  set: ({ set, reset }) => {
     reset(isGameOverState);
     reset(selectedItemState);
     reset(streakState);
-    reset(targetItemState);
     reset(usedItemsState);
 
     const availableItems = getAvailableItems([]);

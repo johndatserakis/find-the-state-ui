@@ -91,6 +91,8 @@ function TempCelsius() {
 
 ## [MUI](https://material-ui.com/components/box/)
 
+- [Material Design Library docs](https://material.io/components)
+
 ### [Default Breakpoints](https://material-ui.com/customization/breakpoints/)
 
 Using md 960 as main breakpoint. But using lg for breakpoint in container.
@@ -120,6 +122,37 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.primary.main};
   box-shadow: ${({ theme }) => theme.shadows[3]};
 `;
+```
+
+### [Typography Components](https://material-ui.com/components/typography/#component)
+
+### [Default Theme Object](https://material-ui.com/customization/default-theme/?expand-path=$.typography#explore)
+
+### [Icon List](https://material-ui.com/components/material-icons/)
+
+### [Palette](https://material-ui.com/system/palette/#palette)
+
+## CSS
+
+### Sixteenths for rem spacing
+
+```bash
+16/16 - 1
+15/16 - 0.9375
+14/16 - 0.875
+13/16 - 0.8125
+12/16 - 0.75
+11/16 - 0.6875
+10/16 - 0.625
+9/16 - 0.5625
+8/16 - 0.5
+7/16 - 0.4375
+6/16 - 0.375
+5/16 - 0.3125
+4/16 - 0.25
+3/16 - 0.1875
+2/16 - 0.125
+1/16 - 0.0625
 ```
 
 ## Notes

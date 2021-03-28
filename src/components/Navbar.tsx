@@ -2,6 +2,8 @@ import { AppBar, Button, Container, Toolbar, Typography } from '@material-ui/cor
 import { GitHub } from '@material-ui/icons';
 import styled from 'styled-components/macro';
 import { colors } from '../style/colors';
+import { SearchRounded } from '@material-ui/icons';
+import { IconWithItem } from './mui/IconWithItem';
 
 const BackgroundColorContainer = styled.div`
   background: ${colors.blue[500]};
@@ -17,9 +19,7 @@ export const Navbar = () => {
       <Container maxWidth="lg">
         <AppBar position="static" elevation={0}>
           <Toolbar variant="dense">
-            <Typography variant="h6">
-              🔍 &nbsp;<strong>Find The State</strong>
-            </Typography>
+            <IconWithItem iconLeft={<SearchRounded />} item={<Typography variant="h6">Find The State</Typography>} />
             <StyledButton
               // color="secondary"
               color="inherit"
