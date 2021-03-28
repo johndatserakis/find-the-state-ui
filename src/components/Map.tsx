@@ -39,7 +39,7 @@ export const Map = ({ onClick }: MapProps) => {
     var hoveredStateId: string | number | undefined = '';
 
     map.on('load', () => {
-      map.setLayoutProperty('state-label', 'visibility', 'none');
+      // map.setLayoutProperty('state-label', 'visibility', 'none');
       map.setLayoutProperty('settlement-label', 'visibility', 'none');
 
       map.addSource('states', {

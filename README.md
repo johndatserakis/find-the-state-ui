@@ -1,4 +1,93 @@
-Work in progress...
+# Find The State
+
+Find all the States in the USA on a map. Simple enough.
+
+## [Recoil](https://recoiljs.org/docs/introduction/installation)
+
+### Basics
+
+Info from the docs:
+
+#### [atoms](https://recoiljs.org/docs/api-reference/core/atom)
+
+An atom represents state in Recoil. The atom() function returns a writeable RecoilState object.
+
+Most often, you'll use the following hooks to interact with atoms:
+
+- `useRecoilState`: Use this hook when you intend on both reading and writing to the atom. This hook subscribes the component to the atom.
+- `useRecoilValue`: Use this hook when you intend on only reading the atom. This hook subscribes the component to the atom.
+- `useSetRecoilState`: Use this hook when you intend on only writing to the atom.
+- `useResetRecoilState`: Use this hook to reset an atom to its default value.
+- For rare cases where you need to read an atom's value without subscribing to the component, see `useRecoilCallback`.
+
+```tsx
+import { atom, useRecoilState } from 'recoil';
+
+const counter = atom({
+  key: 'myCounter',
+  default: 0,
+});
+
+function Counter() {
+  const [count, setCount] = useRecoilState(counter);
+  const incrementByOne = () => setCount(count + 1);
+
+  return (
+    <div>
+      Count: {count}
+      <br />
+      <button onClick={incrementByOne}>Increment</button>
+    </div>
+  );
+}
+```
+
+#### [selector](https://recoiljs.org/docs/api-reference/core/selector)
+
+Selectors represent a function, or derived state in Recoil. You can think of them as similar to an "idempotent" or "pure function" without side-effects that always returns the same value for a given set of dependency values. If only a get function is provided, the selector is read-only and returns a RecoilValueReadOnly object. If a set is also provided, it returns a writeable RecoilState object.
+
+```tsx
+import {atom, selector, useRecoilState, DefaultValue} from 'recoil';
+
+const tempFahrenheit = atom({
+  key: 'tempFahrenheit',
+  default: 32,
+});
+
+const tempCelsius = selector({
+  key: 'tempCelsius',
+  get: ({get}) => ((get(tempFahrenheit) - 32) * 5) / 9,
+  set: ({set}, newValue) =>
+    set(
+      tempFahrenheit,
+      newValue instanceof DefaultValue ? newValue : (newValue * 9) / 5 + 32
+    ),
+});
+
+function TempCelsius() {
+  const [tempF, setTempF] = useRecoilState(tempFahrenheit);
+  const [tempC, setTempC] = useRecoilState(tempCelsius);
+  const resetTemp = useResetRecoilState(tempCelsius);
+
+  const addTenCelsius = () => setTempC(tempC + 10);
+  const addTenFahrenheit = () => setTempF(tempF + 10);
+  const reset = () => resetTemp();
+
+  return (
+    <div>
+      Temp (Celsius): {tempC}
+      <br />
+      Temp (Fahrenheit): {tempF}
+      <br />
+      <button onClick={addTenCelsius}>Add 10 Celsius</button>
+      <br />
+      <button onClick={addTenFahrenheit}>Add 10 Fahrenheit</button>
+      <br />
+      <button onClick={reset}>>Reset</button>
+    </div>
+  );
+}
+```
 
 ## [MUI](https://material-ui.com/components/box/)
 
@@ -32,3 +121,7 @@ const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadows[3]};
 `;
 ```
+
+## Notes
+
+This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) exclusively playing.
