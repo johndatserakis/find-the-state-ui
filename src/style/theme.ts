@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import { colors } from '../style/colors';
 
 // https://material-ui.com/customization/typography/#self-hosted-fonts
 const sourceSansPro = {
@@ -32,6 +33,9 @@ export const theme = createMuiTheme({
     },
     secondary: {
       main: '#e67200',
+    },
+    text: {
+      primary: colors.black,
     },
   },
   props: {

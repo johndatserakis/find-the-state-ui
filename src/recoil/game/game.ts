@@ -1,11 +1,16 @@
 import { atom, selector } from 'recoil';
 import { getAvailableItems } from './utils';
-import { Items } from './types';
+import { Items, LastSelectionResult } from './types';
 import { sample as _sample } from 'lodash';
 
 export const isGameOverState = atom({
   key: 'isGameOverState',
   default: false,
+});
+
+export const lastSelectionResultState = atom<LastSelectionResult>({
+  key: 'lastSelectionResultState',
+  default: undefined,
 });
 
 export const targetItemState = atom<string | undefined>({
@@ -47,6 +52,7 @@ export const resetGameFunc = selector({
     reset(selectedItemState);
     reset(streakState);
     reset(usedItemsState);
+    reset(lastSelectionResultState);
 
     const availableItems = getAvailableItems([]);
     const randomItem = _sample(availableItems);

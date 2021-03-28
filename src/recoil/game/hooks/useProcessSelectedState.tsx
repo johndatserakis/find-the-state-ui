@@ -1,6 +1,13 @@
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { isGameOverState, selectedItemState, streakState, targetItemState, usedItemsState } from '../game';
+import {
+  isGameOverState,
+  lastSelectionResultState,
+  selectedItemState,
+  streakState,
+  targetItemState,
+  usedItemsState,
+} from '../game';
 import { getAvailableItems } from '../../game/utils';
 import { sample as _sample } from 'lodash';
 
@@ -10,16 +17,19 @@ export const useProcessSelectedState = () => {
   const [usedItems, setUsedItems] = useRecoilState(usedItemsState);
   const setIsGameOver = useSetRecoilState(isGameOverState);
   const setStreak = useSetRecoilState(streakState);
+  const setLastSelectionResult = useSetRecoilState(lastSelectionResultState);
 
   useEffect(() => {
     if (!selectedItem) return;
 
     if (selectedItem !== targetItem) {
       setStreak(0);
+      setLastSelectionResult('incorrect');
       return;
     }
 
     setStreak((prevStreak) => prevStreak + 1);
+    setLastSelectionResult('correct');
 
     const newUsedItems = [...usedItems, selectedItem];
 
@@ -37,5 +47,15 @@ export const useProcessSelectedState = () => {
     setSelectedItem(undefined);
     setTargetItem(randomItem);
     setUsedItems(newUsedItems);
-  }, [selectedItem, setIsGameOver, setSelectedItem, setStreak, setTargetItem, setUsedItems, targetItem, usedItems]);
+  }, [
+    selectedItem,
+    setIsGameOver,
+    setLastSelectionResult,
+    setSelectedItem,
+    setStreak,
+    setTargetItem,
+    setUsedItems,
+    targetItem,
+    usedItems,
+  ]);
 };

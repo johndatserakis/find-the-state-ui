@@ -1,11 +1,12 @@
 import { CardContent, Chip, Typography } from '@material-ui/core';
 import { FullSizeCard } from '../mui/FullSizeCard';
-import { targetItemState } from '../../recoil/game/game';
+import { targetItemState, lastSelectionResultState } from '../../recoil/game/game';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components/macro';
 import { colors } from '../../style/colors';
 import { getGradient } from '../../style/helpers';
 import { CheckCircleOutlineRounded, HighlightOffRounded } from '@material-ui/icons';
+import { LastSelectionResult } from '../../recoil/game/types';
 
 const StyledFullSizeCard = styled(FullSizeCard)`
   position: relative;
@@ -14,8 +15,7 @@ const StyledFullSizeCard = styled(FullSizeCard)`
 const Media = styled.div`
   width: 100%;
   height: 100%;
-  // background: ${({ theme }) => getGradient(theme.palette.primary.main, theme.palette.primary.light)};
-  background: ${getGradient(colors.blue[400], colors.blue[300])};
+  background: ${getGradient(colors.blue[400], colors.purple[200])};
   color: ${colors.white};
 `;
 
@@ -32,9 +32,9 @@ const StyledCardContent = styled(CardContent)`
   color: ${colors.white};
 `;
 
-const StyledChip = styled(Chip)`
+const StyledChip = styled(Chip)<{ type: 'success' | 'error' }>`
   margin-top: auto;
-  background: ${({ theme }) => theme.palette.success.main};
+  background: ${({ type, theme }) => (type === 'success' ? theme.palette.success.main : theme.palette.error.main)};
   color: ${colors.white};
 
   svg {
@@ -42,8 +42,29 @@ const StyledChip = styled(Chip)`
   }
 `;
 
+interface SelectionResultProps {
+  result: LastSelectionResult;
+}
+
+export const SelectionResult = ({ result }: SelectionResultProps) => {
+  if (!result) {
+    return null;
+  }
+
+  if (result === 'correct') {
+    return <StyledChip type="success" icon={<CheckCircleOutlineRounded />} label="That's the one!" />;
+  }
+
+  if (result === 'incorrect') {
+    return <StyledChip type="error" icon={<HighlightOffRounded />} label="Hmm, that's not it." />;
+  }
+
+  return null;
+};
+
 export const ItemToFind = () => {
   const targetItem = useRecoilValue(targetItemState);
+  const lastSelectionResult = useRecoilValue(lastSelectionResultState);
 
   return (
     <StyledFullSizeCard>
@@ -55,8 +76,7 @@ export const ItemToFind = () => {
         <Typography variant="h4">
           <strong>{targetItem}</strong>
         </Typography>
-        <StyledChip icon={<CheckCircleOutlineRounded />} label="That's the one!" />
-        <StyledChip icon={<HighlightOffRounded />} label="Hmm, that's not it." />
+        <SelectionResult result={lastSelectionResult} />
       </StyledCardContent>
     </StyledFullSizeCard>
   );
