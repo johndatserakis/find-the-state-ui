@@ -23,6 +23,11 @@ export const usedItemsState = atom({
   default: [] as Items,
 });
 
+export const streakState = atom({
+  key: 'streakState',
+  default: 0,
+});
+
 export const availableItemsCountState = selector({
   key: 'availableItemsCountState',
   get: ({ get }) => {
@@ -39,8 +44,9 @@ export const resetGameFunc = selector({
   get: () => undefined,
   set: ({ get, set, reset }) => {
     reset(isGameOverState);
-    reset(targetItemState);
     reset(selectedItemState);
+    reset(streakState);
+    reset(targetItemState);
     reset(usedItemsState);
 
     const availableItems = getAvailableItems([]);

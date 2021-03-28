@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { isGameOverState, selectedItemState, targetItemState, usedItemsState } from '../game';
+import { isGameOverState, selectedItemState, streakState, targetItemState, usedItemsState } from '../game';
 import { getAvailableItems } from '../../game/utils';
 import { sample as _sample } from 'lodash';
 
@@ -9,11 +9,17 @@ export const useProcessSelectedState = () => {
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
   const [usedItems, setUsedItems] = useRecoilState(usedItemsState);
   const setIsGameOver = useSetRecoilState(isGameOverState);
+  const setStreak = useSetRecoilState(streakState);
 
   useEffect(() => {
     if (!selectedItem) return;
 
-    if (selectedItem !== targetItem) return;
+    if (selectedItem !== targetItem) {
+      setStreak(0);
+      return;
+    }
+
+    setStreak((prevStreak) => prevStreak + 1);
 
     const newUsedItems = [...usedItems, selectedItem];
 
