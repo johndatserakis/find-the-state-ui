@@ -17,7 +17,9 @@ export const Navbar = () => {
       <Container maxWidth="lg">
         <AppBar position="static" elevation={0}>
           <Toolbar variant="dense">
-            <Typography variant="h6">🔍 &nbsp;Find The State</Typography>
+            <Typography variant="h6">
+              🔍 &nbsp;<strong>Find The State</strong>
+            </Typography>
             <StyledButton
               // color="secondary"
               color="inherit"
