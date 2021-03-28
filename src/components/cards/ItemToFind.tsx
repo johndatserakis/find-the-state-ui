@@ -1,6 +1,6 @@
 import { CardContent, Typography } from '@material-ui/core';
 import { FullSizeCard } from '../mui/FullSizeCard';
-import { targetItemState } from '../../recoil/game';
+import { targetItemState } from '../../recoil/game/game';
 import { useRecoilValue } from 'recoil';
 
 export const ItemToFind = () => {

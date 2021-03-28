@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { resetGameFunc } from '../../game';
+import { resetGameFunc } from '../game';
 
 export const useResetGameOnFirstLoad = () => {
   const resetGame = useSetRecoilState(resetGameFunc);

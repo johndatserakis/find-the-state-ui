@@ -1,15 +1,15 @@
 import { Button, CardActions, CardContent, Typography } from '@material-ui/core';
 import { LinearProgressWithLabel } from '../mui/LinearProgressWithLabel';
 import { FullSizeCard } from '../mui/FullSizeCard';
-import { availableItemsCountState, isGameOverState, resetGameFunc } from '../../recoil/game';
+import { availableItemsCountState, isGameOverState, resetGameFunc } from '../../recoil/game/game';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-const TOTAL_ITEMS = 48;
+const TOTAL_ITEM_COUNT = 48;
 
 export const GameInformation = () => {
   const availableItemsCount = useRecoilValue(availableItemsCountState);
   const isGameOver = useRecoilValue(isGameOverState);
-  const currentPercentage = ((TOTAL_ITEMS - availableItemsCount) / TOTAL_ITEMS) * 100;
+  const currentPercentage = ((TOTAL_ITEM_COUNT - availableItemsCount) / TOTAL_ITEM_COUNT) * 100;
 
   const resetGame = useSetRecoilState(resetGameFunc);
 

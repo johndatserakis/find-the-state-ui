@@ -1,20 +1,12 @@
 import { atom, selector } from 'recoil';
-import _states from '../data/states.json';
+import { getAvailableItems } from './utils';
+import { Items } from './types';
 import { sample as _sample } from 'lodash';
-import { getAvailableItems } from './game/utils';
-
-type Items = string[];
-
-const itemsList = _states as Items;
-
-// Game states
 
 export const isGameOverState = atom({
   key: 'isGameOverState',
   default: false,
 });
-
-//
 
 export const targetItemState = atom<string | undefined>({
   key: 'targetItemState',

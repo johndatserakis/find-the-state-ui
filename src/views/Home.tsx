@@ -1,6 +1,6 @@
 import { Map } from '../components/Map';
 import { Display } from '../components/Display';
-import { selectedItemState } from '../recoil/game';
+import { selectedItemState } from '../recoil/game/game';
 import { useSetRecoilState } from 'recoil';
 import { Container } from '@material-ui/core';
 import { Grid } from '../components/mui/Grid';

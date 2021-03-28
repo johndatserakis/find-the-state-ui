@@ -1,7 +1,4 @@
-import _states from '../../../data/states.json';
+import { items } from '../data';
+import { getUnusedItems } from '../../../utils/array';
 
-type Items = string[];
-
-const itemsList = _states as Items;
-
-export const getAvailableItems = (used: string[]) => itemsList.filter((item) => !used.includes(item));
+export const getAvailableItems = (used: string[]) => getUnusedItems(items, used);

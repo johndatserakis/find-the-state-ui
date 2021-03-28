@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { isGameOverState, selectedItemState, targetItemState, usedItemsState } from '../../game';
+import { isGameOverState, selectedItemState, targetItemState, usedItemsState } from '../game';
 import { getAvailableItems } from '../../game/utils';
 import { sample as _sample } from 'lodash';
 
