@@ -37,5 +37,5 @@ export const useProcessSelectedState = () => {
     setSelectedItem(undefined);
     setTargetItem(randomItem);
     setUsedItems(newUsedItems);
-  }, [selectedItem, setIsGameOver, setSelectedItem, setTargetItem, setUsedItems, targetItem, usedItems]);
+  }, [selectedItem, setIsGameOver, setSelectedItem, setStreak, setTargetItem, setUsedItems, targetItem, usedItems]);
 };
