@@ -157,6 +157,9 @@ const Container = styled.div`
 
 ## [React Spring](https://www.react-spring.io/docs/hooks/basics)
 
+- There's an issue with the documentation for `useTransition` mentioned [here](https://github.com/pmndrs/react-spring/issues/1052#issuecomment-805398650)
+- Concerning casting in `from`: [comment](https://github.com/microsoft/TypeScript/issues/11465#issuecomment-252453037)
+
 ## Notes
 
 This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) exclusively playing.

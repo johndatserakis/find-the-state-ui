@@ -10,7 +10,7 @@ export const isGameOverState = atom({
 
 export const lastSelectionResultState = atom<LastSelectionResult>({
   key: 'lastSelectionResultState',
-  default: undefined,
+  default: 'none',
 });
 
 export const targetItemState = atom<string | undefined>({
