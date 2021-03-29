@@ -77,30 +77,56 @@ const GameOverCardContent = () => (
   </StyledCardContent>
 );
 
-const GameActiveCardContent = () => {
-  const targetItem = useRecoilValue(targetItemState);
-  const lastSelectionResult = useRecoilValue(lastSelectionResultState);
-
-  return (
-    <StyledCardContent>
-      <Typography variant="subtitle1" gutterBottom>
-        Find this state:
-      </Typography>
-      <Typography variant="h4">
-        <strong>{targetItem}</strong>
-      </Typography>
-      <SelectionResult result={lastSelectionResult} />
-    </StyledCardContent>
-  );
-};
-
-const AnimatedContainer = styled(animated.div)`
+const ContentAnimationContainer = styled(animated.div)`
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   position: absolute;
 `;
+
+const TextAnimationContainer = styled(animated.div)`
+  position: absolute;
+`;
+
+const GameActiveCardContent = () => {
+  const targetItem = useRecoilValue(targetItemState);
+  const lastSelectionResult = useRecoilValue(lastSelectionResultState);
+
+  const transitions = useTransition(targetItem, {
+    from: {
+      opacity: 0,
+      transform: 'translate3d(-100%,0,0)',
+    },
+    enter: {
+      opacity: 1,
+      transform: 'translate3d(0%,0,0)',
+    },
+    leave: {
+      opacity: 0,
+      transform: 'translate3d(75%,0,0)',
+    },
+    config: config.gentle,
+  });
+
+  const animatedContent = transitions((props, item) => (
+    <TextAnimationContainer style={props}>
+      <Typography variant="h4">
+        <strong>{item}</strong>
+      </Typography>
+    </TextAnimationContainer>
+  ));
+
+  return (
+    <StyledCardContent>
+      <Typography variant="subtitle1" gutterBottom>
+        Find this state:
+      </Typography>
+      {animatedContent}
+      <SelectionResult result={lastSelectionResult} />
+    </StyledCardContent>
+  );
+};
 
 export const ItemToFind = () => {
   const isGameOver = useRecoilValue(isGameOverState);
@@ -124,13 +150,13 @@ export const ItemToFind = () => {
 
   const animatedContent = transitions((props, item) =>
     item ? (
-      <AnimatedContainer style={props}>
+      <ContentAnimationContainer style={props}>
         <GameOverCardContent />
-      </AnimatedContainer>
+      </ContentAnimationContainer>
     ) : (
-      <AnimatedContainer style={props}>
+      <ContentAnimationContainer style={props}>
         <GameActiveCardContent />
-      </AnimatedContainer>
+      </ContentAnimationContainer>
     ),
   );
 
