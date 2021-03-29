@@ -1,5 +1,5 @@
 import { Button, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
-import { FullSizeCard } from '../mui/FullSizeCard';
+import { FullSizeCard } from '../../mui/FullSizeCard';
 import styled from 'styled-components/macro';
 import { OpenInNewRounded, ShareRounded } from '@material-ui/icons';
 
@@ -42,10 +42,10 @@ export const ItemInformation = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" variant="contained" endIcon={<OpenInNewRounded />} fullWidth={true}>
+        <Button size="small" color="primary" variant="contained" endIcon={<OpenInNewRounded />} fullWidth>
           Wikipedia
         </Button>
-        <Button size="small" color="secondary" variant="contained" startIcon={<ShareRounded />} fullWidth={true}>
+        <Button size="small" color="secondary" variant="contained" startIcon={<ShareRounded />} fullWidth>
           Share
         </Button>
       </CardActions>

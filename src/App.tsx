@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
+import { Navbar } from './components/common/Navbar';
 import { Home } from './views/Home';
 import { About } from './views/About';
 import styled from 'styled-components/macro';

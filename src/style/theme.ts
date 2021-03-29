@@ -29,10 +29,10 @@ export const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: '#125bd3',
+      main: colors.purple[600],
     },
     secondary: {
-      main: '#e67200',
+      main: colors.purple[800],
     },
     text: {
       primary: colors.black,

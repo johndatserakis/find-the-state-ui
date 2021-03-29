@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Map as MapboxMap } from 'mapbox-gl';
 import styled from 'styled-components/macro';
-import { getTopFeatureAtMouseEvent } from '../utils/map';
-import { colors } from '../style/colors';
+import { getTopFeatureAtMouseEvent } from '../../utils/map';
+import { colors } from '../../style/colors';
 
 const DEFAULT_LNG = -96.7079;
 const DEFAULT_LAT = 38.9832;

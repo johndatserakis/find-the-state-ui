@@ -1,5 +1,5 @@
-import { Map } from '../components/Map';
-import { Display } from '../components/Display';
+import { Map } from '../components/program/Map';
+import { Display } from '../components/program/Display';
 import { selectedItemState } from '../recoil/game/game';
 import { useSetRecoilState } from 'recoil';
 import { Container } from '@material-ui/core';
@@ -10,11 +10,11 @@ import { useProcessSelectedState } from '../recoil/game/hooks/useProcessSelected
 
 const StyledContainer = styled(Container)`
   height: 100%;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 
   @media (min-width: 960px) {
-    height: 95vh;
+    height: 93vh;
   }
 `;
 

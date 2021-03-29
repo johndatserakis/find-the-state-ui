@@ -1,14 +1,19 @@
 import { CardContent, Chip, Typography } from '@material-ui/core';
-import { FullSizeCard } from '../mui/FullSizeCard';
-import { isGameOverState, lastSelectionResultState, targetItemState } from '../../recoil/game/game';
-import { useRecoilValue } from 'recoil';
-import styled from 'styled-components/macro';
-import { colors } from '../../style/colors';
-import { getGradient } from '../../style/helpers';
 import { CheckCircleOutlineRounded, HighlightOffRounded, Map } from '@material-ui/icons';
-import { LastSelectionResult } from '../../recoil/game/types';
+import { colors } from '../../../style/colors';
+import {
+  AnimationContainerNormalizer,
+  ContentAnimationContainer,
+  TextAnimationContainer,
+} from '../../../utils/animation';
+import { Emoji } from '../../common/Emoji';
+import { FullSizeCard } from '../../mui/FullSizeCard';
+import { getGradient } from '../../../style/helpers';
+import { isGameOverState, lastSelectionResultState, targetItemState } from '../../../recoil/game/game';
+import { LastSelectionResult } from '../../../recoil/game/types';
+import { useRecoilValue } from 'recoil';
 import { useTransition, animated, config } from 'react-spring';
-import { Emoji } from '../Emoji';
+import styled from 'styled-components/macro';
 
 const StyledFullSizeCard = styled(FullSizeCard)`
   position: relative;
@@ -27,7 +32,7 @@ const StyledCardContent = styled(CardContent)`
   color: ${colors.white};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   left: 0;
   position: absolute;
   right: 0;
@@ -41,7 +46,6 @@ const StyledChip = styled(animated(Chip))<{ result: LastSelectionResult }>`
     (result === 'incorrect' && theme.palette.error.main) ||
     colors.gray[400]};
   color: ${colors.white};
-  margin-top: auto;
 
   svg {
     color: ${colors.white};
@@ -77,18 +81,6 @@ const GameOverCardContent = () => (
   </StyledCardContent>
 );
 
-const ContentAnimationContainer = styled(animated.div)`
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
-`;
-
-const TextAnimationContainer = styled(animated.div)`
-  position: absolute;
-`;
-
 const GameActiveCardContent = () => {
   const targetItem = useRecoilValue(targetItemState);
   const lastSelectionResult = useRecoilValue(lastSelectionResultState);
@@ -119,10 +111,8 @@ const GameActiveCardContent = () => {
 
   return (
     <StyledCardContent>
-      <Typography variant="subtitle1" gutterBottom>
-        Find this state:
-      </Typography>
-      {animatedContent}
+      <Typography variant="subtitle1">Find this state:</Typography>
+      <AnimationContainerNormalizer>{animatedContent}</AnimationContainerNormalizer>
       <SelectionResult result={lastSelectionResult} />
     </StyledCardContent>
   );

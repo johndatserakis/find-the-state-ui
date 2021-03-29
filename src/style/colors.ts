@@ -2,9 +2,9 @@
 
 // 500 is the base for each color
 export const colors = {
-  black: '#3F464C',
+  black: 'rgba(0, 0, 0, 0.87)', // theme.palette.text.primary
   white: '#ffffff',
-  offWhite: '#F9F7F7',
+  offWhite: '#fafafa', // theme.palette.background.default
   gray: {
     50: '#edf2fc',
     100: '#d3d9e0',

@@ -1,12 +1,17 @@
 import { AppBar, Button, Container, Toolbar, Typography } from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
 import styled from 'styled-components/macro';
-import { colors } from '../style/colors';
-import { SearchRounded } from '@material-ui/icons';
-import { IconWithItem } from './mui/IconWithItem';
+import { IconWithItem } from '../mui/IconWithItem';
+import { Emoji } from './Emoji';
 
 const BackgroundColorContainer = styled.div`
-  background: ${colors.blue[500]};
+  background: ${({ theme }) => theme.palette.background.default};
+  color: ${({ theme }) => theme.palette.text.primary};
+`;
+
+const StyledAppBar = styled(AppBar)`
+  background: ${({ theme }) => theme.palette.background.default};
+  color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 const StyledButton = styled(Button)`
@@ -17,9 +22,12 @@ export const Navbar = () => {
   return (
     <BackgroundColorContainer>
       <Container maxWidth="lg">
-        <AppBar position="static" elevation={0}>
+        <StyledAppBar position="static" elevation={0}>
           <Toolbar variant="dense">
-            <IconWithItem iconLeft={<SearchRounded />} item={<Typography variant="h6">Find The State</Typography>} />
+            <IconWithItem
+              iconLeft={<Emoji symbol="🔍" label="Search" />}
+              item={<Typography variant="h6">Find The State</Typography>}
+            />
             <StyledButton
               // color="secondary"
               color="inherit"
@@ -31,7 +39,7 @@ export const Navbar = () => {
               <GitHub />
             </StyledButton>
           </Toolbar>
-        </AppBar>
+        </StyledAppBar>
       </Container>
     </BackgroundColorContainer>
   );

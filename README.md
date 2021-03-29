@@ -121,6 +121,9 @@ For some reason the main `Grid` from MUI doesn't come with a full height and wid
 const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.primary.main};
   box-shadow: ${({ theme }) => theme.shadows[3]};
+  color: ${({ theme }) => theme.palette.text.primary}; // primary font color
+  color: ${({ theme }) => theme.palette.text.secondary}; // muted font color
+  background: ${({ theme }) => theme.palette.background.default}; // page background color
 `;
 ```
 

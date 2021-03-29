@@ -4,8 +4,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
 
-  svg {
+  .icon-left {
     margin-right: 0.375rem;
+  }
+
+  .icon-right {
+    margin-left: 0.375rem;
   }
 `;
 
@@ -18,7 +22,8 @@ interface IconWithItemProps {
 export const IconWithItem = ({ iconLeft, iconRight, item }: IconWithItemProps) => {
   return (
     <Container>
-      {iconLeft && iconLeft} {item} {iconRight && iconRight}
+      <span className="icon-left">{iconLeft && iconLeft}</span> {item}{' '}
+      <span className="icon-right">{iconRight && iconRight}</span>
     </Container>
   );
 };
