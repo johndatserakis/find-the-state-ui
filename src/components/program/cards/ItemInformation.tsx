@@ -9,10 +9,11 @@ const StyledCard = styled(FullSizeCard)`
 `;
 
 const HeaderOverlay = styled(Typography)`
-  position: absolute;
-  top: 2rem;
-  left: 1rem;
   color: white;
+  font-weight: bold;
+  left: 1rem;
+  position: absolute;
+  top: 3rem;
 ` as typeof Typography;
 
 export const ItemInformation = () => {
@@ -21,7 +22,7 @@ export const ItemInformation = () => {
       <CardMedia
         component="img"
         alt="Shore of Maine"
-        height="80"
+        height="100"
         image="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/A_beach_in_maine_on_a_clear_day.jpg/500px-A_beach_in_maine_on_a_clear_day.jpg"
         title="Shore of Maine"
       />

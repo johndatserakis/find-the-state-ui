@@ -1,4 +1,4 @@
-import { Button, CardActions, CardContent, Typography } from '@material-ui/core';
+import { Box, Button, CardActions, CardContent, Chip, Typography } from '@material-ui/core';
 import { LinearProgressWithLabel } from '../../mui/LinearProgressWithLabel';
 import { FullSizeCard } from '../../mui/FullSizeCard';
 import { availableItemsCountState, isGameOverState, resetGameFunc, streakState } from '../../../recoil/game/game';
@@ -32,16 +32,22 @@ export const GameInformation = () => {
   return (
     <StyledCard>
       <StyledCardContent>
-        <div>
-          {isGameOver ? (
-            <Typography variant="h5">Game Over</Typography>
-          ) : (
-            <Typography variant="h5">
+        <Box visibility={streak > 0 ? 'visible' : 'hidden'}>
+          <Typography color="textSecondary" align="center" gutterBottom>
+            <Chip label={`Streak: ${streak}`} variant="outlined" color="primary" />
+          </Typography>
+        </Box>
+        {isGameOver ? (
+          <Typography variant="h4" align="center" gutterBottom>
+            <strong>Game Over</strong>
+          </Typography>
+        ) : (
+          <Typography variant="h4" align="center" gutterBottom>
+            <strong>
               {availableItemsCount} State{availableItemsCount !== 1 ? 's' : ''} Left
-            </Typography>
-          )}
-          <Typography color="textSecondary">Streak: {streak}</Typography>
-        </div>
+            </strong>
+          </Typography>
+        )}
         <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
       </StyledCardContent>
       <CardActions>

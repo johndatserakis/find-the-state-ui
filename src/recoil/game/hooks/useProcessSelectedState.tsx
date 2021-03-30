@@ -37,6 +37,8 @@ export const useProcessSelectedState = () => {
 
     const randomItem = _sample(availableItems);
 
+    setUsedItems(newUsedItems);
+
     if (!randomItem) {
       setIsGameOver(true);
       setSelectedItem(undefined);
@@ -46,7 +48,6 @@ export const useProcessSelectedState = () => {
 
     setSelectedItem(undefined);
     setTargetItem(randomItem);
-    setUsedItems(newUsedItems);
   }, [
     selectedItem,
     setIsGameOver,

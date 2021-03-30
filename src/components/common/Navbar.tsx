@@ -26,7 +26,11 @@ export const Navbar = () => {
           <Toolbar variant="dense">
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
-              item={<Typography variant="h6">Find The State</Typography>}
+              item={
+                <Typography variant="h6">
+                  <strong>Find The State</strong>
+                </Typography>
+              }
             />
             <StyledButton
               // color="secondary"
