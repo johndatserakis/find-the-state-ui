@@ -15,11 +15,12 @@ export const useProcessSelectedState = () => {
   const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState);
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
   const [usedItems, setUsedItems] = useRecoilState(usedItemsState);
-  const setIsGameOver = useSetRecoilState(isGameOverState);
+  const [isGameOver, setIsGameOver] = useRecoilState(isGameOverState);
   const setStreak = useSetRecoilState(streakState);
   const setLastSelectionResult = useSetRecoilState(lastSelectionResultState);
 
   useEffect(() => {
+    if (isGameOver) return;
     if (!selectedItem) return;
 
     if (selectedItem !== targetItem) {
@@ -49,6 +50,7 @@ export const useProcessSelectedState = () => {
     setSelectedItem(undefined);
     setTargetItem(randomItem);
   }, [
+    isGameOver,
     selectedItem,
     setIsGameOver,
     setLastSelectionResult,
