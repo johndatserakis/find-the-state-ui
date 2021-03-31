@@ -7,21 +7,48 @@ import { ReplayRounded } from '@material-ui/icons';
 import styled from 'styled-components/macro';
 import { useTransition, config } from 'react-spring';
 import { AnimationContainerNormalizer, TextAnimationContainer } from '../../../utils/animation';
+import { getGradient } from '../../../style/helpers';
+import { colors } from '../../../style/colors';
 
 const TOTAL_ITEM_COUNT = 48;
 
-const StyledCard = styled(FullSizeCard)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: auto;
+// const StyledFullSizeCard = styled(FullSizeCard)`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   overflow: auto;
+// `;
+
+// const StyledCardContent = styled(CardContent)`
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+//   justify-content: space-between;
+// `;
+
+const StyledFullSizeCard = styled(FullSizeCard)`
+  position: relative;
+`;
+
+const Media = styled.div`
+  background: ${getGradient(colors.blue[400], colors.purple[200])};
+  color: ${colors.white};
+  height: 100%;
+  width: 100%;
 `;
 
 const StyledCardContent = styled(CardContent)`
+  align-items: stretch;
+  bottom: 0;
+  color: ${colors.white};
   display: flex;
   flex-direction: column;
-  height: 100%;
   justify-content: space-between;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  will-change: transform, opacity;
 `;
 
 export const GameInformation = () => {
@@ -53,7 +80,7 @@ export const GameInformation = () => {
       item && (
         <TextAnimationContainer style={props}>
           <Typography color="textSecondary" align="center" gutterBottom>
-            <Chip label={`Streak: ${streak}`} variant="outlined" color="primary" />
+            <Chip label={`Streak: ${streak}`} color="primary" size="small" />
           </Typography>
         </TextAnimationContainer>
       )
@@ -61,7 +88,8 @@ export const GameInformation = () => {
   });
 
   return (
-    <StyledCard>
+    <StyledFullSizeCard>
+      <Media />
       <StyledCardContent>
         <AnimationContainerNormalizer>{animatedContent}</AnimationContainerNormalizer>
         {isGameOver ? (
@@ -76,19 +104,19 @@ export const GameInformation = () => {
           </Typography>
         )}
         <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            startIcon={<ReplayRounded />}
+            onClick={() => resetGame(undefined)}
+            fullWidth
+          >
+            {isGameOver ? 'New Game' : 'Reset Game'}
+          </Button>
+        </CardActions>
       </StyledCardContent>
-      <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          startIcon={<ReplayRounded />}
-          onClick={() => resetGame(undefined)}
-          fullWidth
-        >
-          {isGameOver ? 'New Game' : 'Reset Game'}
-        </Button>
-      </CardActions>
-    </StyledCard>
+    </StyledFullSizeCard>
   );
 };

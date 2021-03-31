@@ -26,6 +26,15 @@ export const theme = createMuiTheme({
         '@font-face': [sourceSansPro],
       },
     },
+    // https://stackoverflow.com/a/60403040/8014660
+    MuiCardContent: {
+      root: {
+        padding: 16,
+        '&:last-child': {
+          paddingBottom: 16, // MUI has this at 24
+        },
+      },
+    },
   },
   palette: {
     primary: {
