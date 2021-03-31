@@ -9,6 +9,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
 import { theme } from './style/theme';
 import { ThemeProvider } from 'styled-components';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from './views/ErrorFallback';
 
 // Fix for prod mapbox-gl bug https://github.com/mapbox/mapbox-gl-js/issues/10173#issuecomment-750489778
 // @ts-ignore
@@ -21,7 +23,9 @@ ReactDOM.render(
       <MuiThemeProvider theme={theme}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <App />
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <App />
+          </ErrorBoundary>
         </ThemeProvider>
       </MuiThemeProvider>
     </RecoilRoot>
