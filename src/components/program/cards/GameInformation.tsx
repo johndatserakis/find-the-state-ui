@@ -1,4 +1,4 @@
-import { Button, CardActions, CardContent, Chip, Typography } from '@material-ui/core';
+import { Box, Button, CardActions, CardContent, Chip, Typography } from '@material-ui/core';
 import { LinearProgressWithLabel } from '../../mui/LinearProgressWithLabel';
 import { FullSizeCard } from '../../mui/FullSizeCard';
 import { availableItemsCountState, isGameOverState, resetGameFunc, streakState } from '../../../recoil/game/game';
@@ -12,20 +12,6 @@ import { colors } from '../../../style/colors';
 
 const TOTAL_ITEM_COUNT = 48;
 
-// const StyledFullSizeCard = styled(FullSizeCard)`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   overflow: auto;
-// `;
-
-// const StyledCardContent = styled(CardContent)`
-//   display: flex;
-//   flex-direction: column;
-//   height: 100%;
-//   justify-content: space-between;
-// `;
-
 const StyledFullSizeCard = styled(FullSizeCard)`
   position: relative;
 `;
@@ -38,16 +24,18 @@ const Media = styled.div`
 `;
 
 const StyledCardContent = styled(CardContent)`
-  align-items: stretch;
+  align-items: center;
   bottom: 0;
   color: ${colors.white};
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: space-between;
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
+  width: 100%;
   will-change: transform, opacity;
 `;
 
@@ -79,9 +67,7 @@ export const GameInformation = () => {
     return (
       item && (
         <TextAnimationContainer style={props}>
-          <Typography color="textSecondary" align="center" gutterBottom>
-            <Chip label={`Streak: ${streak}`} color="primary" size="small" />
-          </Typography>
+          <Chip label={`Streak: ${streak}`} color="primary" size="small" />
         </TextAnimationContainer>
       )
     );
@@ -91,7 +77,9 @@ export const GameInformation = () => {
     <StyledFullSizeCard>
       <Media />
       <StyledCardContent>
-        <AnimationContainerNormalizer>{animatedContent}</AnimationContainerNormalizer>
+        <Box mt={2} mb={3} width="100%">
+          <AnimationContainerNormalizer>{animatedContent}</AnimationContainerNormalizer>
+        </Box>
         {isGameOver ? (
           <Typography variant="h4" align="center" gutterBottom>
             <strong>Game Over</strong>
@@ -103,7 +91,9 @@ export const GameInformation = () => {
             </strong>
           </Typography>
         )}
-        <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
+        <Box mb={1} width="100%">
+          <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
+        </Box>
         <CardActions>
           <Button
             size="small"

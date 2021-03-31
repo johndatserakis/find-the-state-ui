@@ -32,11 +32,13 @@ const StyledCardContent = styled(CardContent)`
   color: ${colors.white};
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: space-between;
   left: 0;
   position: absolute;
   right: 0;
   top: 0;
+  width: 100%;
   will-change: transform, opacity;
 `;
 
