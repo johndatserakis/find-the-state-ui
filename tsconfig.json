@@ -15,7 +15,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es5",
-    "noUnusedLocals": true
+    "noUnusedLocals": false
   },
   "include": ["src"]
 }

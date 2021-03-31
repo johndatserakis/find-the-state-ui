@@ -16,13 +16,13 @@ const Container = styled.div`
   position: relative;
 `;
 
-const MapWrapper = styled.div<{ loading: boolean }>`
+const MapWrapper = styled.div<{ isLoading: boolean }>`
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: ${(props) => (props.loading ? 0 : 1)};
+  opacity: ${(props) => (props.isLoading ? 0 : 1)};
   height: 100%;
   width: 100%;
   transition: opacity 1s linear;
@@ -41,7 +41,7 @@ export const MapContainer = () => {
   return (
     <Container>
       <StyledSkeleton animation="wave" variant="rect" />
-      <MapWrapper loading={loading}>
+      <MapWrapper isLoading={loading}>
         <Map
           onLoad={() => setLoading(false)}
           onClick={(item) => setSelectedItem(item)}
