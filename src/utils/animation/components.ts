@@ -7,6 +7,8 @@ export const ContentAnimationContainer = styled(animated.div)`
   left: 0;
   right: 0;
   position: absolute;
+  height: 100%;
+  width: 100%;
 `;
 
 export const TextAnimationContainer = styled(animated.div)`

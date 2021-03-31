@@ -1,46 +1,19 @@
-import { CardContent, Chip, Typography } from '@material-ui/core';
+import { Chip, Typography } from '@material-ui/core';
 import { CheckCircleOutlineRounded, HighlightOffRounded, Map } from '@material-ui/icons';
 import { colors } from '../../../style/colors';
 import {
   AnimationContainerNormalizer,
   ContentAnimationContainer,
   TextAnimationContainer,
-} from '../../../utils/animation';
+} from '../../../utils/animation/components';
 import { Emoji } from '../../common/Emoji';
-import { FullSizeCard } from '../../mui/FullSizeCard';
-import { getGradient } from '../../../style/helpers';
 import { isGameOverState, lastSelectionResultState, targetItemState } from '../../../recoil/game/game';
 import { LastSelectionResult } from '../../../recoil/game/types';
 import { useRecoilValue } from 'recoil';
 import { useTransition, animated, config } from 'react-spring';
 import styled from 'styled-components/macro';
-
-const StyledFullSizeCard = styled(FullSizeCard)`
-  position: relative;
-`;
-
-const Media = styled.div`
-  background: ${getGradient(colors.blue[400], colors.purple[200])};
-  color: ${colors.white};
-  height: 100%;
-  width: 100%;
-`;
-
-const StyledCardContent = styled(CardContent)`
-  align-items: center;
-  bottom: 0;
-  color: ${colors.white};
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 100%;
-  will-change: transform, opacity;
-`;
+import { CardWithBackground, CardWithBackgroundContent } from '../../mui/CardWithBackground';
+import { bluePurpleGradient } from '../../../style/program/colors';
 
 const StyledChip = styled(animated(Chip))<{ result: LastSelectionResult }>`
   background: ${({ result, theme }) =>
@@ -75,12 +48,12 @@ export const SelectionResult = ({ result }: SelectionResultProps) => {
 };
 
 const GameOverCardContent = () => (
-  <StyledCardContent>
-    <Typography variant="h2" gutterBottom>
+  <CardWithBackgroundContent>
+    <Typography variant="h2">
       <Emoji symbol="🎉" label="Celebration" />
     </Typography>
     <Typography variant="subtitle1">Nice Job!</Typography>
-  </StyledCardContent>
+  </CardWithBackgroundContent>
 );
 
 const GameActiveCardContent = () => {
@@ -112,11 +85,11 @@ const GameActiveCardContent = () => {
   ));
 
   return (
-    <StyledCardContent>
+    <CardWithBackgroundContent>
       <Typography variant="subtitle1">Find this state:</Typography>
       <AnimationContainerNormalizer>{animatedContent}</AnimationContainerNormalizer>
       <SelectionResult result={lastSelectionResult} />
-    </StyledCardContent>
+    </CardWithBackgroundContent>
   );
 };
 
@@ -152,10 +125,5 @@ export const ItemToFind = () => {
     ),
   );
 
-  return (
-    <StyledFullSizeCard>
-      <Media />
-      {animatedContent}
-    </StyledFullSizeCard>
-  );
+  return <CardWithBackground background={bluePurpleGradient}>{animatedContent}</CardWithBackground>;
 };
