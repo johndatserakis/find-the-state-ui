@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
-import { Map as MapboxMap } from 'mapbox-gl';
+import { useEffect, useRef, useState } from 'react';
+import { Map as MapboxMap, NavigationControl } from 'mapbox-gl';
 import styled from 'styled-components/macro';
 import { getTopFeatureAtMouseEvent } from '../../utils/map';
 import { colors } from '../../style/colors';
 
-const DEFAULT_LNG = -96.7079;
+const DEFAULT_LNG = -96.1222;
 const DEFAULT_LAT = 38.9832;
 const DEFAULT_ZOOM = 3.4;
 
@@ -14,11 +14,13 @@ const MapContainer = styled.div`
 `;
 
 interface MapProps {
+  onLoad: () => void;
   onClick: (item: string) => void;
+  resetBoundsOnThisValueChange?: unknown;
 }
 
-export const Map = ({ onClick }: MapProps) => {
-  // const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
+export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps) => {
+  const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
   const mapContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,11 +34,11 @@ export const Map = ({ onClick }: MapProps) => {
       zoom: DEFAULT_ZOOM,
     });
 
-    map.dragPan.disable();
-    map.scrollZoom.disable();
+    map.addControl(new NavigationControl());
+
     map.doubleClickZoom.disable();
 
-    var hoveredStateId: string | number | undefined = '';
+    let hoveredStateId: string | number | undefined = '';
 
     map.on('load', () => {
       map.setLayoutProperty('state-label', 'visibility', 'none');
@@ -97,15 +99,28 @@ export const Map = ({ onClick }: MapProps) => {
       });
     });
 
-    // setMapboxMap(map);
+    // Kinda secret way to mark a true complete map load
+    // https://stackoverflow.com/a/54140160/8014660
+    map.once('idle', () => {
+      onLoad();
+    });
+
+    setMapboxMap(map);
 
     return () => map.remove();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
-      <MapContainer className="map-container" ref={mapContainer} />
-    </>
-  );
+  useEffect(() => {
+    if (!mapboxMap) return;
+
+    mapboxMap.flyTo({
+      center: [DEFAULT_LNG, DEFAULT_LAT],
+      zoom: DEFAULT_ZOOM,
+    });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mapboxMap, resetBoundsOnThisValueChange]);
+
+  return <MapContainer className="map-container" ref={mapContainer} />;
 };

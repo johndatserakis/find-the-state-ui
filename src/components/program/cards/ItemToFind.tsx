@@ -58,19 +58,17 @@ const GameActiveCardContent = () => {
   const transitions = useTransition(targetItem, slideRightInSlideRightOut);
 
   const animatedTargetStateContent = transitions((props, item) => (
-    <AnimationContainerNormalizer>
-      <TextAnimationContainer style={props}>
-        <Typography variant="h4">
-          <strong>{item}</strong>
-        </Typography>
-      </TextAnimationContainer>
-    </AnimationContainerNormalizer>
+    <TextAnimationContainer style={props}>
+      <Typography variant="h4">
+        <strong>{item}</strong>
+      </Typography>
+    </TextAnimationContainer>
   ));
 
   return (
     <CardWithBackgroundContent>
       <Typography variant="subtitle1">Find this state:</Typography>
-      {animatedTargetStateContent}
+      <AnimationContainerNormalizer>{animatedTargetStateContent}</AnimationContainerNormalizer>
       <ChipSelectionResult result={lastSelectionResult} />
     </CardWithBackgroundContent>
   );

@@ -15,6 +15,8 @@ export const TextAnimationContainer = styled(animated.div)`
   position: absolute;
 `;
 
+// Needs to wrap content in-place when cycling content
+// Can be use directly in `transitions` from the `useTransition` hook when wrapping a single item
 export const AnimationContainerNormalizer = styled.div`
   align-items: center;
   display: flex;

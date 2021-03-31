@@ -33,11 +33,8 @@ export const useProcessSelectedState = () => {
     setLastSelectionResult('correct');
 
     const newUsedItems = [...usedItems, selectedItem];
-
     const availableItems = getAvailableItems(newUsedItems);
-
     const randomItem = _sample(availableItems);
-
     setUsedItems(newUsedItems);
 
     if (!randomItem) {
