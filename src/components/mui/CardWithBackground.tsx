@@ -3,9 +3,16 @@ import { CardContent } from '@material-ui/core';
 import { FullSizeCard } from './FullSizeCard';
 import styled from 'styled-components/macro';
 import { colors } from '../../style/colors';
+import { MAIN_PROGRAM_BREAKPOINT } from '../../style/constants';
 
 const StyledFullSizeCard = styled(FullSizeCard)`
   position: relative;
+  // TODO: Look into needing to set a height for mobile because of the absolutley positioned content below
+  height: 300px;
+
+  @media (min-width: ${MAIN_PROGRAM_BREAKPOINT}px) {
+    height: 100%;
+  }
 `;
 
 const Background = styled.div<{ background: string }>`
@@ -29,6 +36,7 @@ export const CardWithBackgroundContent = styled(CardContent)`
   top: 0;
   width: 100%;
   will-change: transform, opacity;
+  overflow: auto;
 `;
 
 interface CardWithGradientBackgroundProps {

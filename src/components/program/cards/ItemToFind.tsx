@@ -1,4 +1,4 @@
-import { Box, Chip, Typography } from '@material-ui/core';
+import { Chip, Typography } from '@material-ui/core';
 import { CheckCircleOutlineRounded, HighlightOffRounded, Map } from '@material-ui/icons';
 import { colors } from '../../../style/colors';
 import {
@@ -15,7 +15,6 @@ import styled from 'styled-components/macro';
 import { CardWithBackground, CardWithBackgroundContent } from '../../mui/CardWithBackground';
 import { bluePurpleGradient } from '../../../style/program/colors';
 import { slideUpInSlideUpOut, slideRightInSlideRightOut } from '../../../utils/animation/animations';
-import Confetti from 'react-dom-confetti';
 
 const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
   background: ${({ result, theme }) =>
@@ -91,12 +90,5 @@ export const ItemToFind = () => {
     ),
   );
 
-  return (
-    <>
-      <CardWithBackground background={bluePurpleGradient}>{animatedCardContent}</CardWithBackground>
-      <Box display="flex" alignItems="center" justifyContent="center">
-        <Confetti active={isGameOver} />
-      </Box>
-    </>
-  );
+  return <CardWithBackground background={bluePurpleGradient}>{animatedCardContent}</CardWithBackground>;
 };

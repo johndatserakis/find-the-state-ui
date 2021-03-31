@@ -8,6 +8,7 @@ import { AnimationContainerNormalizer, TextAnimationContainer } from '../../../u
 import { CardWithBackground } from '../../mui/CardWithBackground';
 import { bluePurpleGradient } from '../../../style/program/colors';
 import { slideUpInSlideDownOut } from '../../../utils/animation/animations';
+import Confetti from 'react-dom-confetti';
 
 const TOTAL_ITEM_COUNT = 48;
 
@@ -34,11 +35,11 @@ export const GameInformation = () => {
 
   const MainContent = () => {
     return isGameOver ? (
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         <strong>Game Over</strong>
       </Typography>
     ) : (
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h5" align="center" gutterBottom>
         <strong>
           {availableItemsCount} State{availableItemsCount !== 1 ? 's' : ''} Left
         </strong>
@@ -46,8 +47,24 @@ export const GameInformation = () => {
     );
   };
 
+  // https://daniel-lundin.github.io/react-dom-confetti/
+  const confettiConfig = {
+    angle: 214,
+    spread: 360,
+    startVelocity: 27,
+    elementCount: 130,
+    dragFriction: 0.12,
+    duration: 5710,
+    stagger: 3,
+    width: '15px',
+    height: '16px',
+  };
+
   return (
     <CardWithBackground background={bluePurpleGradient}>
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <Confetti active={isGameOver} config={confettiConfig} />
+      </Box>
       <Box mt={2} mb={3} width="100%">
         {animatedStreakContent}
       </Box>
