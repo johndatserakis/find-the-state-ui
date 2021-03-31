@@ -10,12 +10,13 @@ import { Emoji } from '../../common/Emoji';
 import { isGameOverState, lastSelectionResultState, targetItemState } from '../../../recoil/game/game';
 import { LastSelectionResult } from '../../../recoil/game/types';
 import { useRecoilValue } from 'recoil';
-import { useTransition, animated, config } from 'react-spring';
+import { useTransition } from 'react-spring';
 import styled from 'styled-components/macro';
 import { CardWithBackground, CardWithBackgroundContent } from '../../mui/CardWithBackground';
 import { bluePurpleGradient } from '../../../style/program/colors';
+import { slideUpInSlideUpOut, slideRightInSlideRightOut } from '../../../utils/animation/animations';
 
-const StyledChip = styled(animated(Chip))<{ result: LastSelectionResult }>`
+const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
   background: ${({ result, theme }) =>
     (result === 'correct' && theme.palette.success.main) ||
     (result === 'incorrect' && theme.palette.error.main) ||
@@ -27,24 +28,19 @@ const StyledChip = styled(animated(Chip))<{ result: LastSelectionResult }>`
   }
 `;
 
-interface SelectionResultProps {
+interface ChipSelectionResultProps {
   result: LastSelectionResult;
 }
 
-export const SelectionResult = ({ result }: SelectionResultProps) => {
-  if (result === 'none') {
-    return <StyledChip result={result} icon={<Map />} label="Go ahead and take a guess." />;
+export const ChipSelectionResult = ({ result }: ChipSelectionResultProps) => {
+  switch (result) {
+    case 'none':
+      return <StyledChip result={result} icon={<Map />} label="Go ahead and take a guess." />;
+    case 'correct':
+      return <StyledChip result={result} icon={<CheckCircleOutlineRounded />} label="That's the one!" />;
+    case 'incorrect':
+      return <StyledChip result={result} icon={<HighlightOffRounded />} label="Hmm, that's not it." />;
   }
-
-  if (result === 'correct') {
-    return <StyledChip result={result} icon={<CheckCircleOutlineRounded />} label="That's the one!" />;
-  }
-
-  if (result === 'incorrect') {
-    return <StyledChip result={result} icon={<HighlightOffRounded />} label="Hmm, that's not it." />;
-  }
-
-  return <></>;
 };
 
 const GameOverCardContent = () => (
@@ -59,61 +55,32 @@ const GameOverCardContent = () => (
 const GameActiveCardContent = () => {
   const targetItem = useRecoilValue(targetItemState);
   const lastSelectionResult = useRecoilValue(lastSelectionResultState);
+  const transitions = useTransition(targetItem, slideRightInSlideRightOut);
 
-  const transitions = useTransition(targetItem, {
-    from: {
-      opacity: 0,
-      transform: 'translate3d(-100%,0,0)',
-    },
-    enter: {
-      opacity: 1,
-      transform: 'translate3d(0%,0,0)',
-    },
-    leave: {
-      opacity: 0,
-      transform: 'translate3d(75%,0,0)',
-    },
-    config: config.gentle,
-  });
-
-  const animatedContent = transitions((props, item) => (
-    <TextAnimationContainer style={props}>
-      <Typography variant="h4">
-        <strong>{item}</strong>
-      </Typography>
-    </TextAnimationContainer>
+  const animatedTargetStateContent = transitions((props, item) => (
+    <AnimationContainerNormalizer>
+      <TextAnimationContainer style={props}>
+        <Typography variant="h4">
+          <strong>{item}</strong>
+        </Typography>
+      </TextAnimationContainer>
+    </AnimationContainerNormalizer>
   ));
 
   return (
     <CardWithBackgroundContent>
       <Typography variant="subtitle1">Find this state:</Typography>
-      <AnimationContainerNormalizer>{animatedContent}</AnimationContainerNormalizer>
-      <SelectionResult result={lastSelectionResult} />
+      {animatedTargetStateContent}
+      <ChipSelectionResult result={lastSelectionResult} />
     </CardWithBackgroundContent>
   );
 };
 
 export const ItemToFind = () => {
   const isGameOver = useRecoilValue(isGameOverState);
-  // useTransition docs haven't been updated yet
-  // https://github.com/pmndrs/react-spring/issues/1052#issuecomment-805398650
-  const transitions = useTransition(isGameOver, {
-    from: {
-      opacity: 0,
-      transform: 'translate3d(0,-100%,0)',
-    },
-    enter: {
-      opacity: 1,
-      transform: 'translate3d(0,0%,0)',
-    },
-    leave: {
-      opacity: 0,
-      transform: 'translate3d(0,75%,0)',
-    },
-    config: config.gentle,
-  });
+  const transitions = useTransition(isGameOver, slideUpInSlideUpOut);
 
-  const animatedContent = transitions((props, item) =>
+  const animatedCardContent = transitions((props, item) =>
     item ? (
       <ContentAnimationContainer style={props}>
         <GameOverCardContent />
@@ -125,5 +92,5 @@ export const ItemToFind = () => {
     ),
   );
 
-  return <CardWithBackground background={bluePurpleGradient}>{animatedContent}</CardWithBackground>;
+  return <CardWithBackground background={bluePurpleGradient}>{animatedCardContent}</CardWithBackground>;
 };

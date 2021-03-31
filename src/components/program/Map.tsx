@@ -39,7 +39,7 @@ export const Map = ({ onClick }: MapProps) => {
     var hoveredStateId: string | number | undefined = '';
 
     map.on('load', () => {
-      // map.setLayoutProperty('state-label', 'visibility', 'none');
+      map.setLayoutProperty('state-label', 'visibility', 'none');
       map.setLayoutProperty('settlement-label', 'visibility', 'none');
 
       map.addSource('states', {
@@ -53,7 +53,7 @@ export const Map = ({ onClick }: MapProps) => {
         source: 'states',
         layout: {},
         paint: {
-          'fill-color': colors.blue[500],
+          'fill-color': colors.purple[700],
           'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.85, 0.5],
         },
       });
@@ -64,7 +64,7 @@ export const Map = ({ onClick }: MapProps) => {
         source: 'states',
         layout: {},
         paint: {
-          'line-color': colors.blue[600],
+          'line-color': colors.blue[500],
           'line-width': 2,
         },
       });

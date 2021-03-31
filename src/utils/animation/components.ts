@@ -2,12 +2,12 @@ import { animated } from 'react-spring';
 import styled from 'styled-components/macro';
 
 export const ContentAnimationContainer = styled(animated.div)`
-  top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
   height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
   width: 100%;
 `;
 
@@ -16,9 +16,9 @@ export const TextAnimationContainer = styled(animated.div)`
 `;
 
 export const AnimationContainerNormalizer = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 100%;
   justify-content: center;
+  width: 100%;
 `;
