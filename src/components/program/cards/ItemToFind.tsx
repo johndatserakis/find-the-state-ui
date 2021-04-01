@@ -10,11 +10,12 @@ import { Emoji } from '../../common/Emoji';
 import { isGameOverState, lastSelectionResultState, targetItemState } from '../../../recoil/game/game';
 import { LastSelectionResult } from '../../../recoil/game/types';
 import { useRecoilValue } from 'recoil';
-import { useTransition } from 'react-spring';
+import { useTransition, animated, useSpring } from 'react-spring';
 import styled from 'styled-components/macro';
 import { CardWithBackground, CardWithBackgroundContent } from '../../mui/CardWithBackground';
 import { bluePurpleGradient } from '../../../style/program/colors';
-import { slideUpInSlideUpOut, slideRightInSlideRightOut } from '../../../utils/animation/animations';
+import { shakeLeftRight, slideUpInSlideUpOut, slideRightInSlideRightOut } from '../../../utils/animation/animations';
+import { pxToRem } from '../../../utils/style';
 
 const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
   background: ${({ result, theme }) =>
@@ -22,6 +23,9 @@ const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
     (result === 'incorrect' && theme.palette.error.main) ||
     colors.gray[400]};
   color: ${colors.white};
+
+  // Need this due to the "incorrect" animation movement
+  margin-top: ${({ result }) => (result === 'incorrect' ? pxToRem(-6) : '')};
 
   svg {
     color: ${colors.white};
@@ -33,13 +37,24 @@ interface ChipSelectionResultProps {
 }
 
 export const ChipSelectionResult = ({ result }: ChipSelectionResultProps) => {
+  const { springNumber } = useSpring({
+    from: { springNumber: 0 },
+    springNumber: result === 'incorrect' ? 1 : 0,
+    reset: true, // https://stackoverflow.com/a/63972073/8014660
+    config: { duration: 1000 },
+  });
+
   switch (result) {
     case 'none':
       return <StyledChip result={result} icon={<Map />} label="Go ahead and take a guess." />;
     case 'correct':
       return <StyledChip result={result} icon={<CheckCircleOutlineRounded />} label="That's the one!" />;
     case 'incorrect':
-      return <StyledChip result={result} icon={<HighlightOffRounded />} label="Hmm, that's not it." />;
+      return (
+        <animated.div style={shakeLeftRight(springNumber)}>
+          <StyledChip result={result} icon={<HighlightOffRounded />} label="Hmm, that's not it." />
+        </animated.div>
+      );
   }
 };
 

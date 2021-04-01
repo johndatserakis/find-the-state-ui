@@ -1,4 +1,4 @@
-import { config } from 'react-spring';
+import { config, SpringValue } from 'react-spring';
 
 export const slideUpInSlideUpOut = {
   from: {
@@ -46,4 +46,15 @@ export const slideUpInSlideDownOut = {
     transform: 'translate3d(0,75%,0)',
   },
   config: config.gentle,
+};
+
+export const shakeLeftRight = (springNumber: SpringValue<number>) => {
+  return {
+    transform: springNumber
+      .to({
+        range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1],
+        output: [0, -3, 4, -4, 5, -5, 3, -1],
+      })
+      .to((springNumber) => `translate3d(${springNumber}px,0,0)`),
+  };
 };
