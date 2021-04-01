@@ -2,6 +2,7 @@ import { Button, CardActions, CardContent, CardMedia, Typography } from '@materi
 import { FullSizeCard } from '../../mui/FullSizeCard';
 import styled from 'styled-components/macro';
 import { OpenInNewRounded, ShareRounded } from '@material-ui/icons';
+import { pxToRem } from '../../../utils/style';
 
 const StyledCard = styled(FullSizeCard)`
   overflow: auto;
@@ -11,9 +12,9 @@ const StyledCard = styled(FullSizeCard)`
 const HeaderOverlay = styled(Typography)`
   color: white;
   font-weight: bold;
-  left: 1rem;
+  left: ${pxToRem(16)};
   position: absolute;
-  top: 3rem;
+  top: ${pxToRem(48)};
 ` as typeof Typography;
 
 export const ItemInformation = () => {

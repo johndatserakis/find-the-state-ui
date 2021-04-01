@@ -1,15 +1,16 @@
 import { Card, FormControlLabel, Switch } from '@material-ui/core';
 import { Emoji } from '../Emoji';
 import styled from 'styled-components/macro';
+import { pxToRem } from '../../../utils/style';
 
 const DisplayCard = styled(Card)`
   z-index: 1;
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: ${pxToRem(16)};
+  left: ${pxToRem(16)};
   height: auto;
   width: auto;
-  padding: 0.25rem 1rem;
+  padding: ${pxToRem(4)} ${pxToRem(16)};
   box-shadow: ${({ theme }) => theme.shadows[3]};
 `;
 

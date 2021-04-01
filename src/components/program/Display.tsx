@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 import { ItemToFind } from './cards/ItemToFind';
 import { ItemInformation } from './cards/ItemInformation';
 import { GameInformation } from './cards/GameInformation';
+import { pxToRem } from '../../utils/style';
 
 const Container = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const Container = styled.div`
   width: 100%;
 
   > div:not(:last-child) {
-    margin-bottom: 0.75rem !important;
+    margin-bottom: ${pxToRem(12)} !important;
   }
 `;
 

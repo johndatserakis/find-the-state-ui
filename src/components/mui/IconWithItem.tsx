@@ -1,15 +1,16 @@
 import styled from 'styled-components/macro';
+import { pxToRem } from '../../utils/style';
 
 const Container = styled.div`
   display: flex;
   align-items: center;
 
   .icon-left {
-    margin-right: 0.375rem;
+    margin-right: ${pxToRem(6)};
   }
 
   .icon-right {
-    margin-left: 0.375rem;
+    margin-left: ${pxToRem(6)};
   }
 `;
 
