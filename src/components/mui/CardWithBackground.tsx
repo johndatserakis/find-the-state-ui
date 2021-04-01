@@ -3,14 +3,14 @@ import { CardContent } from '@material-ui/core';
 import { FullSizeCard } from './FullSizeCard';
 import styled from 'styled-components/macro';
 import { colors } from '../../style/colors';
-import { MAIN_PROGRAM_BREAKPOINT } from '../../style/constants';
+import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 
 const StyledFullSizeCard = styled(FullSizeCard)`
   position: relative;
   // TODO: Look into needing to set a height for mobile because of the absolutley positioned content below
   height: 300px;
 
-  @media (min-width: ${MAIN_PROGRAM_BREAKPOINT}px) {
+  @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
     height: 100%;
   }
 `;
@@ -29,7 +29,7 @@ export const CardWithBackgroundContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
   left: 0;
   position: absolute;
   right: 0;

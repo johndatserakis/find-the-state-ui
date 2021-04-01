@@ -1,0 +1,2 @@
+export const DEFAULT_PROGRAM_BREAKPOINT = 960;
+export const DEFAULT_CONTAINER_MAX_WIDTH = 'xl';

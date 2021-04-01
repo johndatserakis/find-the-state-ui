@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Map as MapboxMap, NavigationControl } from 'mapbox-gl';
 import styled from 'styled-components/macro';
-import { getTopFeatureAtMouseEvent } from '../../utils/map';
-import { colors } from '../../style/colors';
-
-const DEFAULT_LNG = -96.1222;
-const DEFAULT_LAT = 38.9832;
-const DEFAULT_ZOOM = 3.4;
+import { getTopFeatureAtMouseEvent, fitBounds } from '../../../utils/map';
+import { colors } from '../../../style/colors';
+import { DEFAULT_LNG, DEFAULT_LAT, DEFAULT_BOUNDS_PADDING, DEFAULT_ZOOM, USA_BOUNDS } from '../../../constants/map';
+import { Display } from './Display';
 
 const MapContainer = styled.div`
   height: 100%;
+  position: relative;
   width: 100%;
 `;
 
@@ -22,6 +21,7 @@ interface MapProps {
 export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps) => {
   const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
   const mapContainer = useRef<HTMLDivElement>(null);
+  const [showLabels, setShowLabels] = useState(false);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -37,8 +37,6 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
     map.addControl(new NavigationControl());
 
     map.doubleClickZoom.disable();
-
-    let hoveredStateId: string | number | undefined = '';
 
     map.on('load', () => {
       map.setLayoutProperty('state-label', 'visibility', 'none');
@@ -71,6 +69,8 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
         },
       });
 
+      let hoveredStateId: string | number | undefined = '';
+
       map.on('mousemove', 'state-fills', function (e) {
         if (e && e.features && e.features.length > 0) {
           if (hoveredStateId) {
@@ -99,11 +99,13 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
       });
     });
 
-    // Kinda secret way to mark a true complete map load
+    // Kinda secret/unapproved way to mark a true complete map load
     // https://stackoverflow.com/a/54140160/8014660
     map.once('idle', () => {
       onLoad();
     });
+
+    fitBounds(map, USA_BOUNDS, DEFAULT_BOUNDS_PADDING);
 
     setMapboxMap(map);
 
@@ -114,13 +116,21 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
   useEffect(() => {
     if (!mapboxMap) return;
 
-    mapboxMap.flyTo({
-      center: [DEFAULT_LNG, DEFAULT_LAT],
-      zoom: DEFAULT_ZOOM,
-    });
+    fitBounds(mapboxMap, USA_BOUNDS, DEFAULT_BOUNDS_PADDING);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mapboxMap, resetBoundsOnThisValueChange]);
 
-  return <MapContainer className="map-container" ref={mapContainer} />;
+  const onShowLabelsChecked = (sl: boolean) => {
+    if (!mapboxMap) return;
+
+    setShowLabels(sl);
+    mapboxMap.setLayoutProperty('state-label', 'visibility', sl ? 'visible' : 'none');
+  };
+
+  return (
+    <MapContainer className="map-container" ref={mapContainer}>
+      <Display showLabels={showLabels} onShowLabelsChecked={onShowLabelsChecked} />
+    </MapContainer>
+  );
 };

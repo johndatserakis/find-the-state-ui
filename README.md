@@ -1,6 +1,10 @@
 # Find The State
 
-Find all the States in the USA on a map. Simple enough.
+Find all the States in the contiguous USA on a map. Simple enough.
+
+# Notes
+
+I used a few new libraries during the building of this project. I took some notes on things I needed to reference a bunch of times.
 
 ## [Recoil](https://recoiljs.org/docs/introduction/installation)
 
@@ -95,7 +99,7 @@ function TempCelsius() {
 
 ### [Default Breakpoints](https://material-ui.com/customization/breakpoints/)
 
-Using md 960 as main breakpoint. But using lg for breakpoint in container.
+Using `md` `960` as main breakpoint. But using `xl` for breakpoint in container.
 
 - xs, extra-small: 0px
 - sm, small: 600px
@@ -108,7 +112,7 @@ Using md 960 as main breakpoint. But using lg for breakpoint in container.
 Make sure all base content is wrapped in a `Container` and use a consistent maxWidth across the app.
 
 ```tsx
-<Container maxWidth="lg">...</Container>
+<Container maxWidth="xl">...</Container>
 ```
 
 ### [Grid](https://material-ui.com/components/grid/)
@@ -177,6 +181,10 @@ map.dragPan.disable();
 map.scrollZoom.disable();
 map.doubleClickZoom.disable();
 ```
+
+## Favicons
+
+I found [favicon.io](https://favicon.io/) randomly. I dig it because it made using an emoji for the favicon easy.
 
 ## Notes
 
