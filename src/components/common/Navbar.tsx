@@ -1,9 +1,10 @@
-import { AppBar, Button, Container, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Button, Container, Toolbar, Typography } from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
 import styled from 'styled-components/macro';
 import { IconWithItem } from '../mui/IconWithItem';
 import { Emoji } from './Emoji';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
+import { PlayMusicButton } from '../program/PlayMusicButton';
 
 const BackgroundColorContainer = styled.div`
   background: ${({ theme }) => theme.palette.background.default};
@@ -14,10 +15,6 @@ const StyledAppBar = styled(AppBar)`
   background: ${({ theme }) => theme.palette.background.default};
   color: ${({ theme }) => theme.palette.text.primary};
 `;
-
-const StyledButton = styled(Button)`
-  margin-left: auto;
-` as typeof Button;
 
 export const Navbar = () => {
   return (
@@ -33,15 +30,18 @@ export const Navbar = () => {
                 </Typography>
               }
             />
-            <StyledButton
-              color="inherit"
-              href="https://github.com/johndatserakis/find-the-state"
-              title="View on GitHub"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <GitHub />
-            </StyledButton>
+            <Box ml="auto">
+              <PlayMusicButton />
+              <Button
+                color="inherit"
+                href="https://github.com/johndatserakis/find-the-state"
+                title="View on GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitHub />
+              </Button>
+            </Box>
           </Toolbar>
         </StyledAppBar>
       </Container>

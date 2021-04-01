@@ -186,6 +186,11 @@ map.doubleClickZoom.disable();
 
 I found [favicon.io](https://favicon.io/) randomly. I dig it because it made using an emoji for the favicon easy.
 
+## Sound
+
+- Used [use-sound](https://github.com/joshwcomeau/use-sound) to play the music.
+- Got the music from [here](https://freemusicarchive.org/music/The_United_States_Army_Old_Guard_Fife_and_Drum_Corps/Celebrating_50_Years).
+
 ## Notes
 
 This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) exclusively playing.
