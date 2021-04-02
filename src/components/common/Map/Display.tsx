@@ -10,17 +10,26 @@ const DisplayCard = styled(Card)`
   left: ${pxToRem(16)};
   height: auto;
   width: auto;
-  padding: ${pxToRem(4)} ${pxToRem(16)};
+  padding: ${pxToRem(4)} ${pxToRem(16)} ${pxToRem(3)};
   box-shadow: ${({ theme }) => theme.shadows[3]};
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: ${pxToRem(4)};
+  }
 `;
 
 interface DisplayProps {
+  lockMap: boolean;
   showLabels: boolean;
+  onLockMapChecked: (lockMap: boolean) => void;
   onShowLabelsChecked: (showLabels: boolean) => void;
 }
 
-export const Display = ({ showLabels, onShowLabelsChecked }: DisplayProps) => {
-  const icon = showLabels ? '🐵' : '🙈';
+export const Display = ({ lockMap, showLabels, onLockMapChecked, onShowLabelsChecked }: DisplayProps) => {
+  const showLabelsIcon = showLabels ? '🐵' : '🙈';
+  const lockMapIcon = lockMap ? '🔒' : '🔓';
 
   return (
     <DisplayCard>
@@ -35,7 +44,17 @@ export const Display = ({ showLabels, onShowLabelsChecked }: DisplayProps) => {
         }
         label={
           <>
-            <Emoji symbol={icon} label="Search" /> Cheat
+            <Emoji symbol={showLabelsIcon} label="Search" /> Cheat
+          </>
+        }
+      />
+      <FormControlLabel
+        control={
+          <Switch size="small" checked={lockMap} onChange={(e) => onLockMapChecked(e.target.checked)} name="lockMap" />
+        }
+        label={
+          <>
+            <Emoji symbol={lockMapIcon} label="Lock" /> Lock Map
           </>
         }
       />

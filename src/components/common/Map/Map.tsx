@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Map as MapboxMap, NavigationControl } from 'mapbox-gl';
 import styled from 'styled-components/macro';
-import { getTopFeatureAtMouseEvent, fitBounds } from '../../../utils/map';
+import { getTopFeatureAtMouseEvent, fitBounds, setMapInteractionsStatus } from '../../../utils/map';
 import { colors } from '../../../style/colors';
 import { DEFAULT_LNG, DEFAULT_LAT, DEFAULT_BOUNDS_PADDING, DEFAULT_ZOOM, USA_BOUNDS } from '../../../constants/map';
 import { Display } from './Display';
@@ -22,6 +22,7 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
   const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
   const mapContainer = useRef<HTMLDivElement>(null);
   const [showLabels, setShowLabels] = useState(false);
+  const [lockMap, setLockMap] = useState(false);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -128,9 +129,21 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
     mapboxMap.setLayoutProperty('state-label', 'visibility', sl ? 'visible' : 'none');
   };
 
+  const onLockMapChecked = (l: boolean) => {
+    if (!mapboxMap) return;
+
+    setLockMap(l);
+    setMapInteractionsStatus(mapboxMap, !l);
+  };
+
   return (
     <MapContainer className="map-container" ref={mapContainer}>
-      <Display showLabels={showLabels} onShowLabelsChecked={onShowLabelsChecked} />
+      <Display
+        lockMap={lockMap}
+        showLabels={showLabels}
+        onLockMapChecked={onLockMapChecked}
+        onShowLabelsChecked={onShowLabelsChecked}
+      />
     </MapContainer>
   );
 };
