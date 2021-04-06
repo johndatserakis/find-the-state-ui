@@ -4,6 +4,7 @@ import { Emoji } from '../components/common/Emoji';
 
 export const ErrorFallback = ({ error }: FallbackProps) => (
   <Box padding="1rem 2rem">
+    {/* {JSON.stringify(error.message)} */}
     <Typography variant="body1" gutterBottom>
       <Emoji symbol="🙈" label={'Sad monkey'} style={{ fontSize: '2rem' }} />
     </Typography>

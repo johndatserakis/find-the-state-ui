@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ItemToFind } from './cards/ItemToFind';
-import { ItemInformation } from './cards/ItemInformation';
+import { ItemInformationContainer } from '../../containers/program/cards/ItemInformationContainer';
 import { GameInformation } from './cards/GameInformation';
 import { pxToRem } from '../../utils/style';
 
@@ -20,7 +20,7 @@ export const Display = () => {
     <Container>
       <ItemToFind />
       <GameInformation />
-      <ItemInformation />
+      <ItemInformationContainer />
     </Container>
   );
 };

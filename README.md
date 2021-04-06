@@ -1,12 +1,43 @@
-# Find The State
+# Find The State UI
 
 Find all the States in the contiguous USA on a map. Simple enough.
 
-# Notes
+- [Live URL](https://jolly-murdock-43b71d.netlify.app/)
+- [Frontend UI GitHub](https://github.com/johndatserakis/find-the-state-ui)
+- [Backend API GitHub](https://github.com/johndatserakis/find-the-state-ui)
 
-I used a few new libraries during the building of this project. I took some notes on things I needed to reference a bunch of times.
+## Run
+
+```bash
+# Install deps
+yarn
+
+# Run
+yarn start
+
+# Build
+yarn build
+```
+
+## Built With
+
+- React
+- TypeScript
+- Material-UI
+- Recoil
+- Styled-Components
+- Mapbox
+- React-Spring
+- use-sound
+
+## Notes
+
+I used a few new libraries during the building of this project. I took some notes on things I needed to reference often.
 
 ## [Recoil](https://recoiljs.org/docs/introduction/installation)
+
+<details>
+<summary>Notes</summary>
 
 ### Basics
 
@@ -93,6 +124,8 @@ function TempCelsius() {
 }
 ```
 
+</details>
+
 ## [MUI](https://material-ui.com/components/box/)
 
 - [Material Design Library docs](https://material.io/components)
@@ -169,22 +202,12 @@ const Container = styled.div`
 
 ## [Mapbox / Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/)
 
-### Links
-
 - [API Reference](https://docs.mapbox.com/mapbox-gl-js/api/)
 - [Examples](https://docs.mapbox.com/mapbox-gl-js/example/)
 
-### Some commands I wanted to save
-
-```ts
-map.dragPan.disable();
-map.scrollZoom.disable();
-map.doubleClickZoom.disable();
-```
-
 ## Favicons
 
-I found [favicon.io](https://favicon.io/) randomly. I dig it because it made using an emoji for the favicon easy.
+I found [favicon.io](https://favicon.io/) randomly. I dig it because it made using an emoji as the favicon easy.
 
 ## Sound
 
@@ -193,4 +216,4 @@ I found [favicon.io](https://favicon.io/) randomly. I dig it because it made usi
 
 ## Notes
 
-This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) exclusively playing.
+This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) playing.

@@ -1,12 +1,24 @@
 import { Button, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Alert, Skeleton } from '@material-ui/lab';
 import { FullSizeCard } from '../../mui/FullSizeCard';
 import styled from 'styled-components/macro';
-import { OpenInNewRounded, ShareRounded } from '@material-ui/icons';
+import { OpenInNewRounded } from '@material-ui/icons';
 import { pxToRem } from '../../../utils/style';
+import { State } from '../../../recoil/game/types';
+import { colors } from '../../../style/colors';
 
 const StyledCard = styled(FullSizeCard)`
   overflow: auto;
   position: relative;
+`;
+
+const StyledSkeleton = styled(Skeleton)`
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: inherit;
 `;
 
 const HeaderOverlay = styled(Typography)`
@@ -15,40 +27,62 @@ const HeaderOverlay = styled(Typography)`
   left: ${pxToRem(16)};
   position: absolute;
   top: ${pxToRem(48)};
+  text-shadow: 2px 2px 1px ${colors.gray['800']};
 ` as typeof Typography;
 
-export const ItemInformation = () => {
+const StyledCardMedia = styled(CardMedia)`
+  background-color: ${colors.purple[500]};
+` as typeof CardMedia;
+
+interface ItemInformationProps {
+  errored?: boolean;
+  loading?: boolean;
+  state?: State;
+}
+
+export const ItemInformation = ({ errored = false, loading = false, state }: ItemInformationProps) => {
+  if (errored) {
+    return <Alert severity="error">There was an error getting the State information. Please try again.</Alert>;
+  }
+
+  if (loading) {
+    return (
+      <StyledCard>
+        <StyledSkeleton animation="wave" />
+      </StyledCard>
+    );
+  }
+
+  if (!state) {
+    return <Alert severity="error">There was an error getting the State information. Please try again.</Alert>;
+  }
+
+  const { image, link, name, summary } = state;
+
   return (
     <StyledCard>
-      <CardMedia
-        component="img"
-        alt="Shore of Maine"
-        height="100"
-        image="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/A_beach_in_maine_on_a_clear_day.jpg/500px-A_beach_in_maine_on_a_clear_day.jpg"
-        title="Shore of Maine"
-      />
+      <StyledCardMedia component="img" alt={name} height="100" image={image} title={name} />
       <HeaderOverlay gutterBottom variant="h5" component="h2">
-        Maine
+        {name}
       </HeaderOverlay>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Maine is a state in the New England region of the United States, bordered by New Hampshire to the west; the
-          Atlantic Ocean to the southeast; and the Canadian provinces of New Brunswick and Quebec to the northeast and
-          northwest, respectively. Maine is the 12th-smallest by area, the 9th-least populous, and the 13th-least
-          densely populated of the 50 U.S. states. It is also the northeasternmost among the contiguous United States,
-          the northernmost state east of the Great Lakes, the only state whose name consists of a single syllable, and
-          the only state to border only one other state. Maine is known for its jagged, rocky coastline; low, rolling
-          mountains; heavily forested interior; picturesque waterways; and its seafood cuisine, especially lobster and
-          clams. There is a humid continental climate throughout most of the state, including coastal areas.[12] Its
-          most populous city is Portland, and its capital is Augusta.
+          {summary}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" variant="contained" endIcon={<OpenInNewRounded />} fullWidth>
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+          endIcon={<OpenInNewRounded />}
+          fullWidth
+          href={link}
+          title="View on Wikipedia"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Wikipedia
-        </Button>
-        <Button size="small" color="secondary" variant="contained" startIcon={<ShareRounded />} fullWidth>
-          Share
         </Button>
       </CardActions>
     </StyledCard>
