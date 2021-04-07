@@ -6,6 +6,7 @@ import { OpenInNewRounded } from '@material-ui/icons';
 import { pxToRem } from '../../../utils/style';
 import { State } from '../../../recoil/game/types';
 import { colors } from '../../../style/colors';
+import { bluePurpleGradient } from '../../../style/program/colors';
 
 const StyledCard = styled(FullSizeCard)`
   overflow: auto;
@@ -31,7 +32,7 @@ const HeaderOverlay = styled(Typography)`
 ` as typeof Typography;
 
 const StyledCardMedia = styled(CardMedia)`
-  background-color: ${colors.purple[500]};
+  background: ${bluePurpleGradient};
 ` as typeof CardMedia;
 
 interface ItemInformationProps {
@@ -57,7 +58,8 @@ export const ItemInformation = ({ errored = false, loading = false, state }: Ite
     return <Alert severity="error">There was an error getting the State information. Please try again.</Alert>;
   }
 
-  const { image, link, name, summary } = state;
+  const { link, name, summary } = state;
+  const image = `https://source.unsplash.com/300x100/?${name}`;
 
   return (
     <StyledCard>
