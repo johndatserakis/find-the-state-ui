@@ -7,6 +7,7 @@ import { pxToRem } from '../../../utils/style';
 import { State } from '../../../recoil/game/types';
 import { colors } from '../../../style/colors';
 import { bluePurpleGradient } from '../../../style/program/colors';
+import { splitLongTextIntoParagraphs } from '../../../utils/text';
 
 const StyledCard = styled(FullSizeCard)`
   overflow: auto;
@@ -48,6 +49,7 @@ export const ItemInformation = ({ errored = false, loading = false, state }: Ite
 
   const { link = '', name = '', summary = '' } = state || {};
   const image = `https://source.unsplash.com/300x100/?${name}`;
+  const summaryAsParagraphs = splitLongTextIntoParagraphs(summary);
 
   return (
     <StyledCard>
@@ -69,9 +71,13 @@ export const ItemInformation = ({ errored = false, loading = false, state }: Ite
         </StyledCardContentSkeleton>
       ) : (
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {summary}
-          </Typography>
+          {summaryAsParagraphs.map((para) => {
+            return (
+              <Typography variant="body2" color="textSecondary" component="p" gutterBottom>
+                {para} <br /> <br />
+              </Typography>
+            );
+          })}
         </CardContent>
       )}
 

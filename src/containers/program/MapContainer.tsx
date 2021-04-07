@@ -5,8 +5,10 @@ import { selectedItemState, targetItemState } from '../../recoil/game/game';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Skeleton } from '@material-ui/lab';
 import { pxToRem } from '../../utils/style';
+import { colors } from '../../style/colors';
 
 const Container = styled.div`
+  border: 1px solid ${colors.gray[200]};
   border-radius: ${pxToRem(4)};
   box-shadow: ${({ theme }) => theme.shadows[3]};
   height: 100%;

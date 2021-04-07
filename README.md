@@ -3,8 +3,8 @@
 Find all the States in the contiguous USA on a map. Simple enough.
 
 - [Live URL](https://jolly-murdock-43b71d.netlify.app/)
-- [Frontend UI GitHub](https://github.com/johndatserakis/find-the-state-ui)
-- [Backend API GitHub](https://github.com/johndatserakis/find-the-state-ui)
+- [Frontend UI GitHub](https://github.com/johndatserakis/find-the-state-ui) - Built with TypeScript and React
+- [Backend API GitHub](https://github.com/johndatserakis/find-the-state-api) - Built with Python and FastAPI
 
 ## Run
 
