@@ -1,8 +1,7 @@
 # Global build settings
 [build]
-   base    = "."
-   publish = "build"
-   command = "sed -i s/API_URL_PLACEHOLDER/$API_URL/g netlify.toml && yarn build"
+  publish = "build"
+  command = "sed -i s/API_URL_PLACEHOLDER/$API_URL/g netlify.toml && npm run build"
 
 # Redirects
 [[redirects]]
