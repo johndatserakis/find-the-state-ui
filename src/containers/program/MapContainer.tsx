@@ -2,8 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components/macro';
 import { Map } from '../../components/common/Map/Map';
 import { selectedItemState, targetItemState } from '../../recoil/game/game';
-import { useSetRecoilState } from 'recoil';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Skeleton } from '@material-ui/lab';
 import { pxToRem } from '../../utils/style';
 
