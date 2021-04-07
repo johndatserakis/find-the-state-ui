@@ -13,15 +13,6 @@ const StyledCard = styled(FullSizeCard)`
   position: relative;
 `;
 
-const StyledSkeleton = styled(Skeleton)`
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transform: inherit;
-`;
-
 const HeaderOverlay = styled(Typography)`
   color: white;
   font-weight: bold;
@@ -35,6 +26,15 @@ const StyledCardMedia = styled(CardMedia)`
   background: ${bluePurpleGradient};
 ` as typeof CardMedia;
 
+const StyledCardMediaSkeleton = styled(Skeleton)`
+  height: 180px;
+  margin-top: -50px;
+`;
+
+const StyledCardContentSkeleton = styled(CardContent)`
+  margin-top: -30px;
+`;
+
 interface ItemInformationProps {
   errored?: boolean;
   loading?: boolean;
@@ -46,47 +46,52 @@ export const ItemInformation = ({ errored = false, loading = false, state }: Ite
     return <Alert severity="error">There was an error getting the State information. Please try again.</Alert>;
   }
 
-  if (loading) {
-    return (
-      <StyledCard>
-        <StyledSkeleton animation="wave" />
-      </StyledCard>
-    );
-  }
-
-  if (!state) {
-    return <Alert severity="error">There was an error getting the State information. Please try again.</Alert>;
-  }
-
-  const { link, name, summary } = state;
+  const { link = '', name = '', summary = '' } = state || {};
   const image = `https://source.unsplash.com/300x100/?${name}`;
 
   return (
     <StyledCard>
-      <StyledCardMedia component="img" alt={name} height="100" image={image} title={name} />
+      {loading ? (
+        <StyledCardMediaSkeleton />
+      ) : (
+        <StyledCardMedia component="img" alt={name} height="100" image={image} title={name} />
+      )}
+
       <HeaderOverlay gutterBottom variant="h5" component="h2">
         {name}
       </HeaderOverlay>
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {summary}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          endIcon={<OpenInNewRounded />}
-          fullWidth
-          href={link}
-          title="View on Wikipedia"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Wikipedia
-        </Button>
-      </CardActions>
+
+      {loading ? (
+        <StyledCardContentSkeleton>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </StyledCardContentSkeleton>
+      ) : (
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {summary}
+          </Typography>
+        </CardContent>
+      )}
+
+      {!loading && (
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            endIcon={<OpenInNewRounded />}
+            fullWidth
+            href={link}
+            title="View on Wikipedia"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Wikipedia
+          </Button>
+        </CardActions>
+      )}
     </StyledCard>
   );
 };
