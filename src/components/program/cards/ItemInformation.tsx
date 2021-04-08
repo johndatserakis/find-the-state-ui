@@ -38,11 +38,21 @@ const StyledCardContentSkeleton = styled(CardContent)`
 
 interface ItemInformationProps {
   errored?: boolean;
+  isGameOver?: boolean;
   loading?: boolean;
   state?: State;
 }
 
-export const ItemInformation = ({ errored = false, loading = false, state }: ItemInformationProps) => {
+export const ItemInformation = ({
+  errored = false,
+  isGameOver = false,
+  loading = false,
+  state,
+}: ItemInformationProps) => {
+  if (isGameOver) {
+    return <Alert severity="info">Game Over! Start a new game to play again.</Alert>;
+  }
+
   if (errored) {
     return <Alert severity="error">There was an error getting the State information. Please try again.</Alert>;
   }
