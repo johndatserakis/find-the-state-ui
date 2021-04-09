@@ -1,4 +1,4 @@
-# Find The State UI
+# Find the State UI
 
 Find all the States in the contiguous USA on a map. Simple enough.
 

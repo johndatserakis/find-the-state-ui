@@ -26,7 +26,7 @@ export const Navbar = () => {
               iconLeft={<Emoji symbol="🔍" label="Search" />}
               item={
                 <Typography variant="h6">
-                  <strong>Find The State</strong>
+                  <strong>Find the State</strong>
                 </Typography>
               }
             />
