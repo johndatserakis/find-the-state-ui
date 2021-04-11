@@ -29,11 +29,11 @@ const StyledCardMedia = styled(CardMedia)`
 
 const StyledCardMediaSkeleton = styled(Skeleton)`
   height: 180px;
-  margin-top: -50px;
+  margin-top: ${pxToRem(-50)};
 `;
 
 const StyledCardContentSkeleton = styled(CardContent)`
-  margin-top: -30px;
+  margin-top: ${pxToRem(-30)};
 `;
 
 interface ItemInformationProps {
