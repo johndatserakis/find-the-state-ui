@@ -5,7 +5,7 @@ import { getTopFeatureAtMouseEvent, fitBounds, setMapInteractionsStatus } from '
 import { colors } from '../../../style/colors';
 import { DEFAULT_LNG, DEFAULT_LAT, DEFAULT_BOUNDS_PADDING, DEFAULT_ZOOM, USA_BOUNDS } from '../../../constants/map';
 import { Display } from './Display';
-import { FEATURE_STATE_GUESSES_KEY } from '../../../constants/map';
+import { CHOROPLETH_WRONG_ANSWERS_COLORS, FEATURE_STATE_GUESSES_KEY } from '../../../constants/map';
 // Seems to not like the .geojson filename, json works fine though
 // @ts-ignore
 import _states from '../../../data/states.geojson';
@@ -71,7 +71,7 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
         layout: {},
         paint: {
           'line-color': colors.blue[500],
-          'line-width': 2,
+          'line-width': 1,
         },
       });
 
@@ -86,17 +86,23 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
           'fill-color': [
             'case',
             ['==', ['feature-state', FEATURE_STATE_GUESSES_KEY], null],
-            colors.red[100],
+            CHOROPLETH_WRONG_ANSWERS_COLORS[0],
             ['==', ['feature-state', FEATURE_STATE_GUESSES_KEY], 0],
-            colors.red[100],
+            CHOROPLETH_WRONG_ANSWERS_COLORS[0],
             [
               'interpolate',
               ['linear'],
               ['feature-state', FEATURE_STATE_GUESSES_KEY],
               1,
-              colors.red[200],
+              CHOROPLETH_WRONG_ANSWERS_COLORS[1],
+              5,
+              CHOROPLETH_WRONG_ANSWERS_COLORS[2],
+              10,
+              CHOROPLETH_WRONG_ANSWERS_COLORS[3],
+              15,
+              CHOROPLETH_WRONG_ANSWERS_COLORS[4],
               20,
-              colors.red[700],
+              CHOROPLETH_WRONG_ANSWERS_COLORS[5],
             ],
           ],
           'fill-outline-color': colors.blue[500],

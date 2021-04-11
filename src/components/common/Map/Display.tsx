@@ -1,9 +1,9 @@
-import { Card, FormControl, FormControlLabel, FormHelperText, Switch } from '@material-ui/core';
+import { Card, FormControl, FormControlLabel, Switch } from '@material-ui/core';
 import { Emoji } from '../Emoji';
 import styled from 'styled-components/macro';
 import { pxToRem } from '../../../utils/style';
 import { Divider } from '../../mui/Divider';
-import { colors } from '../../../style/colors';
+import { Legend } from './Legend';
 
 const DisplayCard = styled(Card)`
   bottom: ${pxToRem(16)};
@@ -27,15 +27,6 @@ const DisplayCard = styled(Card)`
   label {
     margin-bottom: ${pxToRem(4)};
   }
-`;
-
-const StyledText = styled.span`
-  background-color: ${colors.red['600']};
-  color: ${colors.white};
-  margin-left: ${pxToRem(2)};
-  padding-left: ${pxToRem(2)};
-  padding-right: ${pxToRem(2)};
-  border-radius: ${pxToRem(4)};
 `;
 
 interface DisplayProps {
@@ -108,14 +99,12 @@ export const Display = ({
           }
           label={
             <>
-              <Emoji symbol={showGuessChoroplethIcon} label="Lock" /> Show Guess Choropleth
+              <Emoji symbol={showGuessChoroplethIcon} label="Lock" /> Show Wrong Answers
             </>
           }
         />
-        <FormHelperText>
-          The darker the shade of <StyledText>red</StyledText>, the more wrong guesses for that state.
-        </FormHelperText>
       </FormControl>
+      {showGuessChoropleth && <Legend />}
     </DisplayCard>
   );
 };
