@@ -17,6 +17,9 @@ yarn start
 
 # Build
 yarn build
+
+# Run tests
+yarn test
 ```
 
 ## Built With
@@ -202,8 +205,50 @@ const Container = styled.div`
 
 ## [Mapbox / Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/)
 
-- [API Reference](https://docs.mapbox.com/mapbox-gl-js/api/)
+- [API reference](https://docs.mapbox.com/mapbox-gl-js/api/)
 - [Examples](https://docs.mapbox.com/mapbox-gl-js/example/)
+- [Mapbox terminology explanation](https://stackoverflow.com/a/66379033/8014660)
+- [Good info on how to style a Choropleth](https://dev.to/laney/mapbox-how-to-conditionally-style-features-based-on-covid-19-data-h78)
+
+### Basics
+
+#### Sources
+
+`Sources` are like data stores in the map. You then use `layers` to visually represent the data.
+
+In this app, the main `source` is the states data loaded from `'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson'` as `geojson`.
+
+Types of sources:
+
+- `GeoJSON`
+- `Vector Tilesets`
+
+#### Layers
+
+`Layers` are considered the visual representation of a `source`. There can be multiple `layers` representing a `source`:
+
+- `fill`: represents boundaries as shared polygons
+- `line`: represents boundaries as an outline
+- `symbol`: represents text labels
+
+#### [Features](https://docs.mapbox.com/help/glossary/features/)
+
+A `feature` is an individual (or in some cases, a group of) points, lines, or polygons in a dataset or in a tileset. These points, lines, and polygons represent an entity in the real world, such as a landmark, a road, or a park. A feature contains:
+
+- `Geometry`: The shape and the location of each feature.
+- `Properties`: This can contain any JSON object. Some examples of common properties, often known as metadata, include title and description.
+
+#### [Dataset](https://docs.mapbox.com/help/glossary/dataset/)
+
+A dataset is an editable collection of GeoJSON features that you can store in your Mapbox account and access or edit as needed.
+
+#### [Tileset](https://docs.mapbox.com/help/glossary/tileset/)
+
+A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at 22 preset zoom levels. In Mapbox libraries and SDKs, tilesets are necessary to make maps visible on mobile devices or in the browser. They are cacheable and load quickly, and Mapbox relies heavily on tilesets to keep our maps performant.
+
+### Notes
+
+Was using `https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson` as my `states` `geojson` `source` before. Now importing it directly.
 
 ## Favicons
 
@@ -214,6 +259,14 @@ I found [favicon.io](https://favicon.io/) randomly. I dig it because it made usi
 - Used [use-sound](https://github.com/joshwcomeau/use-sound) to play the music.
 - Got the music from [here](https://freemusicarchive.org/music/The_United_States_Army_Old_Guard_Fife_and_Drum_Corps/Celebrating_50_Years).
 
-## Notes
+## Other Notes
 
 This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) playing.
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)
+
+## Screenshot
+
+[![Find the State](./src/assets/screenshots/find-the-state.jpg)](https://jolly-murdock-43b71d.netlify.app/)

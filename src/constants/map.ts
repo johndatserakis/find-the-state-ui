@@ -9,3 +9,5 @@ export const USA_BOUNDS = [
 ] as LngLatBoundsLike;
 export const DEFAULT_BOUNDS_PADDING = 20;
 export const DEFAULT_ZOOM = 3.4;
+
+export const FEATURE_STATE_GUESSES_KEY = 'guesses';

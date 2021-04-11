@@ -3,11 +3,14 @@ import { getAvailableItems } from './utils';
 import { Items, LastSelectionResult } from './types';
 import { sample as _sample } from 'lodash';
 
+// Atoms
+
 export const isGameOverState = atom({
   key: 'isGameOverState',
   default: false,
 });
 
+// You can watch for 'none' to determine if a new game is being started
 export const lastSelectionResultState = atom<LastSelectionResult>({
   key: 'lastSelectionResultState',
   default: 'none',
@@ -32,6 +35,14 @@ export const streakState = atom({
   key: 'streakState',
   default: 0,
 });
+
+// Note: guesses are reset in MapContainer.tsx currently due to the Map Choropleth connection
+export const guessesState = atom<Record<string, number>>({
+  key: 'guessesState',
+  default: {},
+});
+
+// Selectors
 
 export const availableItemsCountState = selector({
   key: 'availableItemsCountState',

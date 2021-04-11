@@ -1,8 +1,8 @@
 import { LngLatLike, LngLatBoundsLike, Map as MapboxMap, MapMouseEvent, MapboxGeoJSONFeature } from 'mapbox-gl';
 
 export const getTopFeatureAtMouseEvent = (
-  event: MapMouseEvent,
   map: MapboxMap,
+  event: MapMouseEvent,
   layerId: string,
 ): MapboxGeoJSONFeature | undefined => {
   const { point } = event;
@@ -12,6 +12,20 @@ export const getTopFeatureAtMouseEvent = (
     const renderedFeatures = map.queryRenderedFeatures(point, { layers });
     if (!renderedFeatures.length) return;
     return renderedFeatures[0];
+  } catch (error) {
+    return undefined;
+  }
+};
+
+export const getFeatureFromSource = (map: MapboxMap, source: string, options: { key: string; value: string }) => {
+  const { key, value } = options;
+
+  try {
+    const features = map.querySourceFeatures(source, {
+      filter: ['==', key, value],
+    });
+    if (!features.length) return;
+    return features[0];
   } catch (error) {
     return undefined;
   }

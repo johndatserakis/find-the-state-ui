@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import { Map } from '../../components/common/Map/Map';
-import { selectedItemState, targetItemState } from '../../recoil/game/game';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { guessesState, lastSelectionResultState, selectedItemState, targetItemState } from '../../recoil/game/game';
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { Skeleton } from '@material-ui/lab';
 import { pxToRem } from '../../utils/style';
 import { colors } from '../../style/colors';
+import { Map as MapboxMap } from 'mapbox-gl';
+import { getFeatureFromSource } from '../../utils/map';
+import { FEATURE_STATE_GUESSES_KEY } from '../../constants/map';
 
 const Container = styled.div`
   border: 1px solid ${colors.gray[200]};
@@ -35,20 +38,53 @@ const StyledSkeleton = styled(Skeleton)`
   width: 100%;
 `;
 
+const SOURCE = 'states';
+
 export const MapContainer = () => {
   const setSelectedItem = useSetRecoilState(selectedItemState);
   const targetItem = useRecoilValue(targetItemState);
+  const guesses = useRecoilValue(guessesState);
+  const lastSelectionResult = useRecoilValue(lastSelectionResultState);
+  const resetGuesses = useResetRecoilState(guessesState);
   const [loading, setLoading] = useState(true);
+  const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
+
+  const onLoad = (m: MapboxMap) => {
+    setMapboxMap(m);
+    setLoading(false);
+  };
+
+  // Update Choropleth data when a guess comes in
+  useEffect(() => {
+    if (!mapboxMap || !targetItem) return;
+
+    const feature = getFeatureFromSource(mapboxMap, SOURCE, { key: 'STATE_NAME', value: targetItem });
+    if (!feature) return;
+
+    const { id } = feature;
+    mapboxMap.setFeatureState({ id, source: SOURCE }, { [FEATURE_STATE_GUESSES_KEY]: guesses[targetItem] });
+  }, [guesses, mapboxMap, targetItem]);
+
+  // Clear all dynamically added feature-states when a new game is started
+  useEffect(() => {
+    if (!mapboxMap || lastSelectionResult !== 'none') return;
+
+    for (const [key] of Object.entries(guesses)) {
+      const feature = getFeatureFromSource(mapboxMap, SOURCE, { key: 'STATE_NAME', value: key });
+      if (!feature) continue;
+
+      const { id } = feature;
+      mapboxMap.setFeatureState({ id, source: SOURCE }, { [FEATURE_STATE_GUESSES_KEY]: 0 });
+    }
+
+    resetGuesses();
+  }, [guesses, lastSelectionResult, mapboxMap, resetGuesses]);
 
   return (
     <Container>
       <StyledSkeleton animation="wave" variant="rect" />
       <MapWrapper isLoading={loading}>
-        <Map
-          onLoad={() => setLoading(false)}
-          onClick={(item) => setSelectedItem(item)}
-          resetBoundsOnThisValueChange={targetItem}
-        />
+        <Map onLoad={onLoad} onClick={(item) => setSelectedItem(item)} resetBoundsOnThisValueChange={targetItem} />
       </MapWrapper>
     </Container>
   );

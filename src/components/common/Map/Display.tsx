@@ -1,63 +1,121 @@
-import { Card, FormControlLabel, Switch } from '@material-ui/core';
+import { Card, FormControl, FormControlLabel, FormHelperText, Switch } from '@material-ui/core';
 import { Emoji } from '../Emoji';
 import styled from 'styled-components/macro';
 import { pxToRem } from '../../../utils/style';
+import { Divider } from '../../mui/Divider';
+import { colors } from '../../../style/colors';
 
 const DisplayCard = styled(Card)`
-  z-index: 1;
-  position: absolute;
-  top: ${pxToRem(16)};
-  left: ${pxToRem(16)};
-  height: auto;
-  width: auto;
-  padding: ${pxToRem(4)} ${pxToRem(16)} ${pxToRem(3)};
+  bottom: ${pxToRem(16)};
   box-shadow: ${({ theme }) => theme.shadows[3]};
   display: flex;
   flex-direction: column;
+  height: auto;
+  left: ${pxToRem(16)};
+  max-width: ${pxToRem(260)};
+  opacity: 0.75;
+  padding: ${pxToRem(8)} ${pxToRem(16)} ${pxToRem(8)};
+  position: absolute;
+  transition: opacity 0.4s ease-in-out;
+  width: auto;
+  z-index: 1;
+
+  &:hover {
+    opacity: 1;
+  }
 
   label {
     margin-bottom: ${pxToRem(4)};
   }
 `;
 
+const StyledText = styled.span`
+  background-color: ${colors.red['600']};
+  color: ${colors.white};
+  margin-left: ${pxToRem(2)};
+  padding-left: ${pxToRem(2)};
+  padding-right: ${pxToRem(2)};
+  border-radius: ${pxToRem(4)};
+`;
+
 interface DisplayProps {
   lockMap: boolean;
+  showGuessChoropleth: boolean;
   showLabels: boolean;
   onLockMapChecked: (lockMap: boolean) => void;
+  onShowGuessChoroplethChecked: (showGuessChoropleth: boolean) => void;
   onShowLabelsChecked: (showLabels: boolean) => void;
 }
 
-export const Display = ({ lockMap, showLabels, onLockMapChecked, onShowLabelsChecked }: DisplayProps) => {
-  const showLabelsIcon = showLabels ? '🐵' : '🙈';
+export const Display = ({
+  lockMap,
+  showGuessChoropleth,
+  showLabels,
+  onLockMapChecked,
+  onShowGuessChoroplethChecked,
+  onShowLabelsChecked,
+}: DisplayProps) => {
   const lockMapIcon = lockMap ? '🔒' : '🔓';
+  const showGuessChoroplethIcon = '❓';
+  const showLabelsIcon = showLabels ? '🐵' : '🙈';
 
   return (
     <DisplayCard>
-      <FormControlLabel
-        control={
-          <Switch
-            size="small"
-            checked={showLabels}
-            onChange={(e) => onShowLabelsChecked(e.target.checked)}
-            name="showLabels"
+      <FormControl>
+        <div>
+          <FormControlLabel
+            control={
+              <Switch
+                size="small"
+                checked={showLabels}
+                onChange={(e) => onShowLabelsChecked(e.target.checked)}
+                name="showLabels"
+              />
+            }
+            label={
+              <>
+                <Emoji symbol={showLabelsIcon} label="Search" /> Cheat
+              </>
+            }
           />
-        }
-        label={
-          <>
-            <Emoji symbol={showLabelsIcon} label="Search" /> Cheat
-          </>
-        }
-      />
-      <FormControlLabel
-        control={
-          <Switch size="small" checked={lockMap} onChange={(e) => onLockMapChecked(e.target.checked)} name="lockMap" />
-        }
-        label={
-          <>
-            <Emoji symbol={lockMapIcon} label="Lock" /> Lock Map
-          </>
-        }
-      />
+          <FormControlLabel
+            control={
+              <Switch
+                size="small"
+                checked={lockMap}
+                onChange={(e) => onLockMapChecked(e.target.checked)}
+                name="lockMap"
+              />
+            }
+            label={
+              <>
+                <Emoji symbol={lockMapIcon} label="Lock" /> Lock Map
+              </>
+            }
+          />
+        </div>
+      </FormControl>
+      <Divider tight={true} />
+      <FormControl>
+        <FormControlLabel
+          control={
+            <Switch
+              size="small"
+              checked={showGuessChoropleth}
+              onChange={(e) => onShowGuessChoroplethChecked(e.target.checked)}
+              name="showGuessChoropleth"
+            />
+          }
+          label={
+            <>
+              <Emoji symbol={showGuessChoroplethIcon} label="Lock" /> Show Guess Choropleth
+            </>
+          }
+        />
+        <FormHelperText>
+          The darker the shade of <StyledText>red</StyledText>, the more wrong guesses for that state.
+        </FormHelperText>
+      </FormControl>
     </DisplayCard>
   );
 };
