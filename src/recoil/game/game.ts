@@ -3,6 +3,9 @@ import { getAvailableItems } from './utils';
 import { Items, LastSelectionResult } from './types';
 import { sample as _sample } from 'lodash';
 
+// TODO: Add another atom that holds the current state of the game - pending, active - perhaps that can help reduce
+// the overreliance on isGameOverState and lastSelectionResultState's "none"
+
 // Atoms
 
 export const isGameOverState = atom({

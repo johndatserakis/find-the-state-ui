@@ -9,8 +9,8 @@ import { CardWithBackground } from '../../mui/CardWithBackground';
 import { bluePurpleGradient } from '../../../style/program/colors';
 import { slideUpInSlideDownOut } from '../../../utils/animation/animations';
 import Confetti from 'react-dom-confetti';
-
-const TOTAL_ITEM_COUNT = 48;
+import { Stopwatch } from '../Stopwatch';
+import { TOTAL_ITEM_COUNT } from '../../../constants/game';
 
 export const GameInformation = () => {
   const availableItemsCount = useRecoilValue(availableItemsCountState);
@@ -35,11 +35,11 @@ export const GameInformation = () => {
 
   const MainContent = () => {
     return isGameOver ? (
-      <Typography variant="h5" align="center" gutterBottom>
+      <Typography variant="body1" align="center" gutterBottom>
         <strong>Game Over</strong>
       </Typography>
     ) : (
-      <Typography variant="h5" align="center" gutterBottom>
+      <Typography variant="body1" align="center" gutterBottom>
         <strong>
           {availableItemsCount} State{availableItemsCount !== 1 ? 's' : ''} Left
         </strong>
@@ -65,24 +65,27 @@ export const GameInformation = () => {
       <Box display="flex" alignItems="center" justifyContent="center">
         <Confetti active={isGameOver} config={confettiConfig} />
       </Box>
-      <Box mt={2} mb={3} width="100%">
+      <Box mt={3} mb={3} width="100%">
         {animatedStreakContent}
       </Box>
       <MainContent />
+      <Stopwatch />
       <Box mb={1} width="100%">
         <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
       </Box>
       <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          startIcon={<ReplayRounded />}
-          onClick={() => resetGame(undefined)}
-          fullWidth
-        >
-          {isGameOver ? 'New Game' : 'Reset Game'}
-        </Button>
+        {availableItemsCount !== TOTAL_ITEM_COUNT && (
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            startIcon={<ReplayRounded />}
+            onClick={() => resetGame(undefined)}
+            fullWidth
+          >
+            {isGameOver ? 'New Game' : 'Reset Game'}
+          </Button>
+        )}
       </CardActions>
     </CardWithBackground>
   );

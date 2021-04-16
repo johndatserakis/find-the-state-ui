@@ -12,8 +12,8 @@ const StyledContainer = styled.div`
 export const App = () => {
   return (
     <StyledContainer>
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

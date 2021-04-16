@@ -26,7 +26,7 @@ export const PlayMusicButton = () => {
   };
 
   return (
-    <Button onClick={onClick}>
+    <Button onClick={onClick} title="Play Music">
       <Icon />
     </Button>
   );

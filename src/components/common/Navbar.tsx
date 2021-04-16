@@ -1,10 +1,11 @@
-import { AppBar, Box, Button, Container, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Button, Container, Theme, Toolbar, Typography, useMediaQuery, useTheme } from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
 import styled from 'styled-components/macro';
 import { IconWithItem } from '../mui/IconWithItem';
 import { Emoji } from './Emoji';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
 import { PlayMusicButton } from '../program/PlayMusicButton';
+import { AboutModalButton } from '../program/AboutModalButton';
 
 const BackgroundColorContainer = styled.div`
   background: ${({ theme }) => theme.palette.background.default};
@@ -17,6 +18,9 @@ const StyledAppBar = styled(AppBar)`
 `;
 
 export const Navbar = () => {
+  const theme: Theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
   return (
     <BackgroundColorContainer>
       <Container maxWidth={DEFAULT_CONTAINER_MAX_WIDTH}>
@@ -25,16 +29,15 @@ export const Navbar = () => {
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
               item={
-                <Typography variant="h6">
-                  <strong>Find the State</strong>
-                </Typography>
+                <Typography variant="h6">{matches ? <strong>Find the State</strong> : <strong>FTS</strong>}</Typography>
               }
             />
             <Box ml="auto">
+              <AboutModalButton />
               <PlayMusicButton />
               <Button
                 color="inherit"
-                href="https://github.com/johndatserakis/find-the-state"
+                href="https://github.com/johndatserakis/find-the-state-ui"
                 title="View on GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
