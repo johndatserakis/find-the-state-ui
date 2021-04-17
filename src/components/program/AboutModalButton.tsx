@@ -10,7 +10,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@material-ui/core';
-import { Divider } from '../mui/Divider';
+import { CoffeeButton } from './CoffeeButton';
 
 export const AboutModalButton = () => {
   const [open, setOpen] = useState(false);
@@ -73,21 +73,11 @@ export const AboutModalButton = () => {
             React and TypeScript and the backend is built using FastAPI with Python.
           </DialogContentText>
 
-          <Divider tight={false} />
-
           <DialogContentText>
-            <Box display="flex" justifyContent="center">
-              <a href="https://ko-fi.com/J3J14BTMT" target="_blank" rel="noreferrer">
-                <img
-                  style={{ border: '0', height: '36px' }}
-                  src="https://cdn.ko-fi.com/cdn/kofi1.png?v=2"
-                  alt="Buy Me a Coffee at ko-fi.com"
-                />
-              </a>
+            <Box display="flex" justifyContent="center" mt={4} mb={2}>
+              <CoffeeButton />
             </Box>
           </DialogContentText>
-
-          <Divider tight={false} />
 
           <DialogContentText>
             <strong>Roadmap:</strong>
