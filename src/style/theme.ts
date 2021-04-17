@@ -1,4 +1,5 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+// https://stackoverflow.com/a/64135466/8014660
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core/styles';
 import { colors } from '../style/colors';
 
 // https://material-ui.com/customization/typography/#self-hosted-fonts

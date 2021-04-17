@@ -1,16 +1,8 @@
 import { useState } from 'react';
 import { Info } from '@material-ui/icons';
-import {
-  Box,
-  Button,
-  Link,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from '@material-ui/core';
+import { Box, Button, DialogActions, DialogContent, DialogContentText, DialogTitle, Link } from '@material-ui/core';
 import { CoffeeButton } from './CoffeeButton';
+import { Dialog } from '../mui/Dialog';
 
 export const AboutModalButton = () => {
   const [open, setOpen] = useState(false);
@@ -73,22 +65,24 @@ export const AboutModalButton = () => {
             React and TypeScript and the backend is built using FastAPI with Python.
           </DialogContentText>
 
-          <DialogContentText>
-            <Box display="flex" justifyContent="center" mt={4} mb={2}>
-              <CoffeeButton />
-            </Box>
-          </DialogContentText>
+          <Box display="flex" justifyContent="center" mt={4} mb={2}>
+            <CoffeeButton />
+          </Box>
 
-          <DialogContentText>
+          <Box>
             <strong>Roadmap:</strong>
             <ul>
-              <li>Add a system to save a user's best time to the backend</li>
+              <li>Add an endpoint to save a user's best time to the backend</li>
               <li>
                 Perhaps expand the game and add other countries to the mix - maybe for a country like Canada it would be
                 about finding its provinces and territories
               </li>
+              <li>Show total count of wrong answers for each state when looking at the wrong answer choropleth</li>
+              <li>
+                Show more general information about a user's game - total wrong answers, longest streak, stuff like that
+              </li>
             </ul>
-          </DialogContentText>
+          </Box>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary" variant="contained">

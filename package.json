@@ -54,6 +54,10 @@
     "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1"
   },
+  "jest": {
+    "clearMocks": true,
+    "resetMocks": false
+  },
   "name": "map-testing",
   "private": true,
   "scripts": {
