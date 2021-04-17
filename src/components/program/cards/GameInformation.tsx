@@ -35,11 +35,11 @@ export const GameInformation = () => {
 
   const MainContent = () => {
     return isGameOver ? (
-      <Typography variant="body1" align="center" gutterBottom>
+      <Typography variant="h6" align="center" gutterBottom>
         <strong>Game Over</strong>
       </Typography>
     ) : (
-      <Typography variant="body1" align="center" gutterBottom>
+      <Typography variant="h6" align="center" gutterBottom>
         <strong>
           {availableItemsCount} State{availableItemsCount !== 1 ? 's' : ''} Left
         </strong>
@@ -69,23 +69,23 @@ export const GameInformation = () => {
         {animatedStreakContent}
       </Box>
       <MainContent />
-      <Stopwatch />
-      <Box mb={1} width="100%">
+      <Box mb={1} width="100%" display="flex" alignItems="center">
+        <Box width="100%">
+          <Stopwatch />
+        </Box>
         <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
       </Box>
       <CardActions>
-        {availableItemsCount !== TOTAL_ITEM_COUNT && (
-          <Button
-            size="small"
-            color="primary"
-            variant="contained"
-            startIcon={<ReplayRounded />}
-            onClick={() => resetGame(undefined)}
-            fullWidth
-          >
-            {isGameOver ? 'New Game' : 'Reset Game'}
-          </Button>
-        )}
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+          startIcon={<ReplayRounded />}
+          onClick={() => resetGame(undefined)}
+          fullWidth
+        >
+          {isGameOver ? 'New Game' : 'Reset Game'}
+        </Button>
       </CardActions>
     </CardWithBackground>
   );
