@@ -16,7 +16,7 @@ describe('<Navbar />', () => {
       </ThemeProvider>,
     );
 
-    const text = await findByText('Find the State');
+    const text = await findByText('FTS');
     expect(text).toBeInTheDocument();
   });
 });
