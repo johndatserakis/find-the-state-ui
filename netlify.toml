@@ -2,7 +2,7 @@
 [build]
   publish = "build"
   # https://docs.netlify.com/configure-builds/file-based-configuration/#inject-environment-variable-values
-  command = "sed -i s/API_URL_PLACEHOLDER/$API_URL/g netlify.toml && yarn build"
+  command = "sed -i s/API_URL_PLACEHOLDER/$API_URL/g netlify.toml && yarn test && yarn build"
 
 # Redirects
 [[redirects]]
