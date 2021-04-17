@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import { AddRounded, CloseRounded, ReplayRounded } from '@material-ui/icons';
+import { ReplayRounded } from '@material-ui/icons';
 import { endGameFunc, gameStatusState, startGameFunc } from '../../../../recoil/game/game';
 import { GameStatus } from '../../../../recoil/game/types';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -12,25 +12,13 @@ export const ActionButton = () => {
   switch (gameStatus) {
     case GameStatus.UNPLAYED:
       return (
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          startIcon={<AddRounded />}
-          onClick={() => startGame(undefined)}
-        >
+        <Button size="small" color="primary" variant="contained" onClick={() => startGame(undefined)}>
           Start Game
         </Button>
       );
     case GameStatus.ACTIVE:
       return (
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          startIcon={<CloseRounded />}
-          onClick={() => endGame(undefined)}
-        >
+        <Button size="small" color="primary" variant="contained" onClick={() => endGame(undefined)}>
           End Game
         </Button>
       );

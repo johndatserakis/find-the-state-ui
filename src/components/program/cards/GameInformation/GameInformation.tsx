@@ -12,6 +12,7 @@ import { Streak } from './Streak';
 import { TOTAL_ITEM_COUNT } from '../../../../constants/game';
 import { useRecoilValue } from 'recoil';
 import Confetti from 'react-dom-confetti';
+import { GameUnplayedCardContent } from './GameUnplayedCardContent';
 
 export const GameInformation = () => {
   const availableItemsCount = useRecoilValue(availableItemsCountState);
@@ -19,11 +20,7 @@ export const GameInformation = () => {
   const currentPercentage = ((TOTAL_ITEM_COUNT - availableItemsCount) / TOTAL_ITEM_COUNT) * 100;
 
   if (gameStatus === GameStatus.UNPLAYED) {
-    return (
-      <CardWithBackground background={bluePurpleGradient}>
-        <ActionButton />
-      </CardWithBackground>
-    );
+    return <GameUnplayedCardContent />;
   }
 
   return (

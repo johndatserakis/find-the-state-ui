@@ -25,7 +25,7 @@ interface MapProps {
 export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps) => {
   const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
   const mapContainer = useRef<HTMLDivElement>(null);
-  const [lockMap, setLockMap] = useState(false);
+  const [lockMap, setLockMap] = useState(true);
   const [showGuessChoropleth, setShowGuessChoropleth] = useState(false);
   const [showLabels, setShowLabels] = useState(false);
 
@@ -149,6 +149,9 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
     fitBounds(map, USA_BOUNDS, DEFAULT_BOUNDS_PADDING);
 
     setMapboxMap(map);
+
+    // Because we want to start off with the map scrolling locked
+    setMapInteractionsStatus(map, false);
 
     return () => map.remove();
 
