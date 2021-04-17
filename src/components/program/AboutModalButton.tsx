@@ -47,7 +47,7 @@ export const AboutModalButton = () => {
 
           <DialogContentText>
             I figured the best way to do that would be to build a little game that would also help me educate myself
-            better on the geography of the U.S.A. - especially considering how many amazing states we have.
+            better on the geography of the U.S.A. and the amazing states we have.
           </DialogContentText>
 
           <DialogContentText>
@@ -76,16 +76,26 @@ export const AboutModalButton = () => {
           <Divider tight={false} />
 
           <DialogContentText>
+            <Box display="flex" justifyContent="center">
+              <a href="https://ko-fi.com/J3J14BTMT" target="_blank" rel="noreferrer">
+                <img
+                  style={{ border: '0', height: '36px' }}
+                  src="https://cdn.ko-fi.com/cdn/kofi1.png?v=2"
+                  alt="Buy Me a Coffee at ko-fi.com"
+                />
+              </a>
+            </Box>
+          </DialogContentText>
+
+          <Divider tight={false} />
+
+          <DialogContentText>
             <strong>Roadmap:</strong>
             <ul>
               <li>Add a system to save a user's best time to the backend</li>
               <li>
                 Perhaps expand the game and add other countries to the mix - maybe for a country like Canada it would be
                 about finding its provinces and territories
-              </li>
-              <li>
-                Take a look at the game structure in terms of start and reset and try to clean up some of that logic if
-                needed
               </li>
             </ul>
           </DialogContentText>

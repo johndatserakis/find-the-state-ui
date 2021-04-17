@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
-import { ItemToFind } from './cards/ItemToFind';
+import { ItemToFind } from './cards/ItemToFind/ItemToFind';
 import { ItemInformationContainer } from '../../containers/program/cards/ItemInformationContainer';
-import { GameInformation } from './cards/GameInformation';
+import { GameInformation } from './cards/GameInformation/GameInformation';
 import { pxToRem } from '../../utils/style';
 
 const Container = styled.div`

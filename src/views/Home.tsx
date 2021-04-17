@@ -2,7 +2,6 @@ import { Display } from '../components/program/Display';
 import { Container } from '@material-ui/core';
 import { Grid } from '../components/mui/Grid';
 import styled from 'styled-components/macro';
-import { useResetGameOnFirstLoad } from '../recoil/game/hooks/useResetGameOnFirstLoad';
 import { useProcessSelectedState } from '../recoil/game/hooks/useProcessSelectedState';
 import { MapContainer } from '../containers/program/MapContainer';
 import { DEFAULT_CONTAINER_MAX_WIDTH, DEFAULT_PROGRAM_BREAKPOINT } from '../constants/style';
@@ -19,7 +18,6 @@ const StyledContainer = styled(Container)`
 `;
 
 export const Home = () => {
-  useResetGameOnFirstLoad();
   useProcessSelectedState();
 
   return (

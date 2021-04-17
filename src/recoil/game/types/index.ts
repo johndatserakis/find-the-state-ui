@@ -8,3 +8,9 @@ export interface State {
   name: string;
   summary: string;
 }
+
+export enum GameStatus {
+  UNPLAYED = 'unplayed',
+  ACTIVE = 'active',
+  GAME_OVER = 'game-over',
+}

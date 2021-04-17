@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import { Map } from '../../components/common/Map/Map';
-import { guessesState, lastSelectionResultState, selectedItemState, targetItemState } from '../../recoil/game/game';
+import { gameStatusState, guessesState, selectedItemState, targetItemState } from '../../recoil/game/game';
 import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import { Skeleton } from '@material-ui/lab';
 import { pxToRem } from '../../utils/style';
@@ -9,6 +9,8 @@ import { colors } from '../../style/colors';
 import { Map as MapboxMap } from 'mapbox-gl';
 import { getFeatureFromSource } from '../../utils/map';
 import { FEATURE_STATE_GUESSES_KEY } from '../../constants/map';
+import { usePrevious } from 'react-use';
+import { GameStatus } from '../../recoil/game/types';
 
 const Container = styled.div`
   border: 1px solid ${colors.gray[200]};
@@ -44,8 +46,10 @@ export const MapContainer = () => {
   const setSelectedItem = useSetRecoilState(selectedItemState);
   const targetItem = useRecoilValue(targetItemState);
   const guesses = useRecoilValue(guessesState);
-  const lastSelectionResult = useRecoilValue(lastSelectionResultState);
   const resetGuesses = useResetRecoilState(guessesState);
+  const gameStatus = useRecoilValue(gameStatusState);
+  const prevGameStatus = usePrevious(gameStatus);
+  const isStartingNewGameFromGameOver = gameStatus === GameStatus.ACTIVE && prevGameStatus === GameStatus.GAME_OVER;
   const [loading, setLoading] = useState(true);
   const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
 
@@ -67,7 +71,7 @@ export const MapContainer = () => {
 
   // Clear all dynamically added feature-states when a new game is started
   useEffect(() => {
-    if (!mapboxMap || lastSelectionResult !== 'none') return;
+    if (!mapboxMap || !isStartingNewGameFromGameOver) return;
 
     for (const [key] of Object.entries(guesses)) {
       const feature = getFeatureFromSource(mapboxMap, SOURCE, { key: 'STATE_NAME', value: key });
@@ -78,7 +82,7 @@ export const MapContainer = () => {
     }
 
     resetGuesses();
-  }, [guesses, lastSelectionResult, mapboxMap, resetGuesses]);
+  }, [guesses, isStartingNewGameFromGameOver, mapboxMap, resetGuesses]);
 
   return (
     <Container>

@@ -4,7 +4,7 @@ import { FullSizeCard } from '../../mui/FullSizeCard';
 import styled from 'styled-components/macro';
 import { OpenInNewRounded } from '@material-ui/icons';
 import { pxToRem } from '../../../utils/style';
-import { State } from '../../../recoil/game/types';
+import { GameStatus, State } from '../../../recoil/game/types';
 import { colors } from '../../../style/colors';
 import { bluePurpleGradient } from '../../../style/program/colors';
 import { splitLongTextIntoParagraphs } from '../../../utils/text';
@@ -38,19 +38,24 @@ const StyledCardContentSkeleton = styled(CardContent)`
 
 interface ItemInformationProps {
   errored?: boolean;
-  isGameOver?: boolean;
+  gameStatus: GameStatus;
   loading?: boolean;
   state?: State;
 }
 
-export const ItemInformation = ({
-  errored = false,
-  isGameOver = false,
-  loading = false,
-  state,
-}: ItemInformationProps) => {
-  if (isGameOver) {
-    return <Alert severity="info">Game Over! Start a new game to play again.</Alert>;
+export const ItemInformation = ({ errored = false, gameStatus, loading = false, state }: ItemInformationProps) => {
+  const url = 'https://source.unsplash.com/300x100/?';
+
+  if (gameStatus === GameStatus.UNPLAYED) {
+    return (
+      <Alert severity="info">
+        Information about the state you are looking for will show up here once you get started.
+      </Alert>
+    );
+  }
+
+  if (gameStatus === GameStatus.GAME_OVER) {
+    return <Alert severity="info">Start a new game to play again.</Alert>;
   }
 
   if (errored) {
@@ -58,7 +63,7 @@ export const ItemInformation = ({
   }
 
   const { link = '', name = '', summary = '' } = state || {};
-  const image = `https://source.unsplash.com/300x100/?${name}`;
+  const image = `${url}${name}`;
   const summaryAsParagraphs = splitLongTextIntoParagraphs(summary);
 
   return (

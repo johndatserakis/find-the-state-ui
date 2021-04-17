@@ -1,19 +1,15 @@
 import { atom, selector } from 'recoil';
 import { getAvailableItems } from './utils';
-import { Items, LastSelectionResult } from './types';
+import { GameStatus, Items, LastSelectionResult } from './types';
 import { sample as _sample } from 'lodash';
-
-// TODO: Add another atom that holds the current state of the game - pending, active - perhaps that can help reduce
-// the overreliance on isGameOverState and lastSelectionResultState's "none"
 
 // Atoms
 
-export const isGameOverState = atom({
-  key: 'isGameOverState',
-  default: false,
+export const gameStatusState = atom<GameStatus>({
+  key: 'gameStatusState',
+  default: GameStatus.UNPLAYED,
 });
 
-// You can watch for 'none' to determine if a new game is being started
 export const lastSelectionResultState = atom<LastSelectionResult>({
   key: 'lastSelectionResultState',
   default: 'none',
@@ -58,15 +54,24 @@ export const availableItemsCountState = selector({
 
 // Functions
 
-export const resetGameFunc = selector({
-  key: 'resetGame',
+export const endGameFunc = selector({
+  key: 'endGameFunc',
   get: () => undefined,
   set: ({ set, reset }) => {
-    reset(isGameOverState);
+    set(gameStatusState, GameStatus.GAME_OVER);
+  },
+});
+
+export const startGameFunc = selector({
+  key: 'startGameFunc',
+  get: () => undefined,
+  set: ({ set, reset }) => {
     reset(selectedItemState);
     reset(streakState);
     reset(usedItemsState);
     reset(lastSelectionResultState);
+
+    set(gameStatusState, GameStatus.ACTIVE);
 
     const availableItems = getAvailableItems([]);
     const randomItem = _sample(availableItems);

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
+  gameStatusState,
   guessesState,
-  isGameOverState,
   lastSelectionResultState,
   selectedItemState,
   streakState,
@@ -11,18 +11,19 @@ import {
 } from '../game';
 import { getAvailableItems } from '../../game/utils';
 import { sample as _sample } from 'lodash';
+import { GameStatus } from '../../game/types';
 
 export const useProcessSelectedState = () => {
   const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState);
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
   const [usedItems, setUsedItems] = useRecoilState(usedItemsState);
-  const [isGameOver, setIsGameOver] = useRecoilState(isGameOverState);
+  const [gameStatus, setGameStatus] = useRecoilState(gameStatusState);
   const setStreak = useSetRecoilState(streakState);
   const setLastSelectionResult = useSetRecoilState(lastSelectionResultState);
   const [guesses, setGuesses] = useRecoilState(guessesState);
 
   useEffect(() => {
-    if (isGameOver) return;
+    if (gameStatus === GameStatus.GAME_OVER) return;
     if (!selectedItem) return;
     if (!targetItem) return;
 
@@ -47,7 +48,7 @@ export const useProcessSelectedState = () => {
     setUsedItems(newUsedItems);
 
     if (!randomItem) {
-      setIsGameOver(true);
+      setGameStatus(GameStatus.GAME_OVER);
       setSelectedItem(undefined);
       setTargetItem(undefined);
       return;
@@ -59,10 +60,10 @@ export const useProcessSelectedState = () => {
     // missing purposely: guesses
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    isGameOver,
+    gameStatus,
     selectedItem,
     setGuesses,
-    setIsGameOver,
+    setGameStatus,
     setLastSelectionResult,
     setSelectedItem,
     setStreak,
