@@ -61,7 +61,7 @@ export const CookieBanner = () => {
         opacity: '0.85',
       }}
     >
-      We use cookies to ensure you get the best experience.
+      We use cookies to improve your experience on this website.
     </CookieConsent>
   );
 };
