@@ -257,7 +257,7 @@ I found [favicon.io](https://favicon.io/) randomly. I dig it because it made usi
 ## Sound
 
 - Used [use-sound](https://github.com/joshwcomeau/use-sound) to play the music.
-- Got the music from [here](https://freemusicarchive.org/music/The_United_States_Army_Old_Guard_Fife_and_Drum_Corps/Celebrating_50_Years).
+- The music is from the [freemusicarchive](https://freemusicarchive.org/music/The_United_States_Army_Old_Guard_Fife_and_Drum_Corps/Celebrating_50_Years) - credit to the `The United States Army Old Guard Fife and Drum Corps`.
 
 ## Other Notes
 

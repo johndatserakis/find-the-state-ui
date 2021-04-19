@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/common/Navbar';
 import { Home } from './views/Home';
 import styled from 'styled-components/macro';
+import { CookieBanner } from './components/common/CookieBanner';
 
 const StyledContainer = styled.div`
   height: 100%;
@@ -17,6 +18,7 @@ export const App = () => {
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
+      <CookieBanner />
     </StyledContainer>
   );
 };
