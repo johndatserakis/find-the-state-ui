@@ -252,12 +252,12 @@ Was using `https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson` as my 
 
 ## Favicons
 
-I found [favicon.io](https://favicon.io/) randomly. I dig it because it made using an emoji as the favicon easy.
+I found [favicon.io](https://favicon.io/) from John Sorrentino randomly. I dig it because it made using an emoji as the favicon easy - will use it again.
 
 ## Sound
 
-- Used [use-sound](https://github.com/joshwcomeau/use-sound) to play the music.
-- The music is from the [freemusicarchive](https://freemusicarchive.org/music/The_United_States_Army_Old_Guard_Fife_and_Drum_Corps/Celebrating_50_Years) - credit to the `The United States Army Old Guard Fife and Drum Corps`.
+- Used [use-sound](https://github.com/joshwcomeau/use-sound) from Joshua Comeau to play the music. Dude killed it.
+- The music is from the [freemusicarchive](https://freemusicarchive.org/music/The_United_States_Army_Old_Guard_Fife_and_Drum_Corps/Celebrating_50_Years) - credit to the The United States Army Old Guard Fife and Drum Corps.
 
 ## Other Notes
 

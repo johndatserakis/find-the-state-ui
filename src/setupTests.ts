@@ -3,6 +3,9 @@ import '@testing-library/jest-dom';
 // @ts-ignore
 window.URL.createObjectURL = function () {};
 
+// @ts-ignore
+window.gtag = jest.fn();
+
 // resetMocks discussion: https://github.com/facebook/create-react-app/issues/9935
 jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
   GeolocateControl: jest.fn(),
