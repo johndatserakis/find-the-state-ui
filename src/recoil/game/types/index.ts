@@ -13,4 +13,5 @@ export enum GameStatus {
   UNPLAYED = 'unplayed',
   ACTIVE = 'active',
   GAME_OVER = 'game-over',
+  GAME_OVER_MANUAL_END_GAME = 'game-over-manual-end-game',
 }

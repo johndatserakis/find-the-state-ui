@@ -62,6 +62,14 @@ export const endGameFunc = selector({
   },
 });
 
+export const endGameManualFunc = selector({
+  key: 'endGameManualFunc',
+  get: () => undefined,
+  set: ({ set, reset }) => {
+    set(gameStatusState, GameStatus.GAME_OVER_MANUAL_END_GAME);
+  },
+});
+
 export const startGameFunc = selector({
   key: 'startGameFunc',
   get: () => undefined,

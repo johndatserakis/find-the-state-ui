@@ -11,7 +11,9 @@ export const Stopwatch = () => {
   const { timer, handlePause, handleReset, handleStart } = useTimer(0);
   const gameStatus = useRecoilValue(gameStatusState);
   const prevGameStatus = usePrevious(gameStatus);
-  const isStartingNewGameFromGameOver = gameStatus === GameStatus.ACTIVE && prevGameStatus === GameStatus.GAME_OVER;
+  const isPrevGameOver =
+    prevGameStatus === GameStatus.GAME_OVER || prevGameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
+  const isStartingNewGameFromGameOver = gameStatus === GameStatus.ACTIVE && isPrevGameOver;
   const formattedTime = formatTime(timer);
 
   // Note: The functions exported from the useTimer hook need to be thrown into some useCallbacks I believe,
@@ -31,7 +33,8 @@ export const Stopwatch = () => {
   }, []);
 
   useEffect(() => {
-    if (gameStatus === GameStatus.GAME_OVER) {
+    const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
+    if (isGameOver) {
       handlePause();
     }
 

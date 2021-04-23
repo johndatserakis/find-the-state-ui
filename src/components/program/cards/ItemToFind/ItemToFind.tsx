@@ -11,7 +11,8 @@ import { GameActiveCardContent } from './GameActiveCardContent';
 
 export const ItemToFind = () => {
   const gameStatus = useRecoilValue(gameStatusState);
-  const transitions = useTransition(gameStatus === GameStatus.GAME_OVER, slideUpInSlideUpOut);
+  const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
+  const transitions = useTransition(isGameOver, slideUpInSlideUpOut);
 
   if (gameStatus === GameStatus.UNPLAYED) {
     return null;

@@ -43,10 +43,12 @@ export const useProcessSelectedState = () => {
     setLastSelectionResult('correct');
 
     const newUsedItems = [...usedItems, selectedItem];
-    const availableItems = getAvailableItems(newUsedItems);
-    const randomItem = _sample(availableItems);
     setUsedItems(newUsedItems);
 
+    const availableItems = getAvailableItems(newUsedItems);
+    const randomItem = _sample(availableItems);
+
+    // Capture proper GameStatus.GAME_OVER (not from end button)
     if (!randomItem) {
       setGameStatus(GameStatus.GAME_OVER);
       setSelectedItem(undefined);
