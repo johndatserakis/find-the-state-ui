@@ -10,9 +10,9 @@ export const formatNumberToStopwatch = (timer: number) => {
 };
 
 export const formatStopwatchForDatabase = (timer: number) => {
-  return formatNumberToStopwatch(timer).replaceAll(' ', '');
+  return formatNumberToStopwatch(timer).replace(/ /g, '');
 };
 
 export const formatStopwatchFromDatabase = (stopwatchTime: string) => {
-  return stopwatchTime.replaceAll(':', ' : ');
+  return stopwatchTime.replace(/:/g, ' : ');
 };
