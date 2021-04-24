@@ -45,6 +45,7 @@ interface ItemInformationProps {
 
 export const ItemInformation = ({ errored = false, gameStatus, loading = false, state }: ItemInformationProps) => {
   const url = 'https://source.unsplash.com/300x100/?';
+  const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
 
   if (gameStatus === GameStatus.UNPLAYED) {
     return (
@@ -54,7 +55,7 @@ export const ItemInformation = ({ errored = false, gameStatus, loading = false, 
     );
   }
 
-  if (gameStatus === GameStatus.GAME_OVER) {
+  if (isGameOver) {
     return <Alert severity="info">Start a new game to play again.</Alert>;
   }
 

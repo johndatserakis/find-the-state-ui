@@ -6,12 +6,17 @@ import { GameStatus } from '../../../../recoil/game/types';
 export const GameStatusHeader = () => {
   const availableItemsCount = useRecoilValue(availableItemsCountState);
   const gameStatus = useRecoilValue(gameStatusState);
+  const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
 
-  return gameStatus === GameStatus.GAME_OVER ? (
-    <Typography variant="h6" align="center" gutterBottom>
-      <strong>Game Over</strong>
-    </Typography>
-  ) : (
+  if (isGameOver) {
+    return (
+      <Typography variant="h6" align="center" gutterBottom>
+        <strong>Game Over</strong>
+      </Typography>
+    );
+  }
+
+  return (
     <Typography variant="h6" align="center" gutterBottom>
       <strong>
         {availableItemsCount} State{availableItemsCount !== 1 ? 's' : ''} Left

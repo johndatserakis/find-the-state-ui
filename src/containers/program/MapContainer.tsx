@@ -49,7 +49,9 @@ export const MapContainer = () => {
   const resetGuesses = useResetRecoilState(guessesState);
   const gameStatus = useRecoilValue(gameStatusState);
   const prevGameStatus = usePrevious(gameStatus);
-  const isStartingNewGameFromGameOver = gameStatus === GameStatus.ACTIVE && prevGameStatus === GameStatus.GAME_OVER;
+  const isPrevGameOver =
+    prevGameStatus === GameStatus.GAME_OVER || prevGameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
+  const isStartingNewGameFromGameOver = gameStatus === GameStatus.ACTIVE && isPrevGameOver;
   const [loading, setLoading] = useState(true);
   const [mapboxMap, setMapboxMap] = useState<MapboxMap>();
 

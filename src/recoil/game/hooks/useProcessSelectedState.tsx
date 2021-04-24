@@ -21,9 +21,10 @@ export const useProcessSelectedState = () => {
   const setStreak = useSetRecoilState(streakState);
   const setLastSelectionResult = useSetRecoilState(lastSelectionResultState);
   const [guesses, setGuesses] = useRecoilState(guessesState);
+  const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
 
   useEffect(() => {
-    if (gameStatus === GameStatus.GAME_OVER) return;
+    if (isGameOver) return;
     if (!selectedItem) return;
     if (!targetItem) return;
 
