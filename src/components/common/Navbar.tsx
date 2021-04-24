@@ -6,6 +6,7 @@ import { Emoji } from './Emoji';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
 import { PlayMusicButton } from '../program/PlayMusicButton';
 import { AboutModalButton } from '../program/AboutModalButton';
+import { ScoreModalButton } from '../program/ScoreModalButton';
 
 const BackgroundColorContainer = styled.div`
   background: ${({ theme }) => theme.palette.background.default};
@@ -28,12 +29,11 @@ export const Navbar = () => {
           <Toolbar variant="dense">
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
-              item={
-                <Typography variant="h6">{matches ? <strong>Find the State</strong> : <strong>FTS</strong>}</Typography>
-              }
+              item={<Typography variant="h6">{matches ? <strong>Find the State</strong> : null}</Typography>}
             />
             <Box ml="auto">
               <AboutModalButton />
+              <ScoreModalButton />
               <PlayMusicButton />
               <Button
                 color="inherit"

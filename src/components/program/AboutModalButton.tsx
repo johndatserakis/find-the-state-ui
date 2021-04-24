@@ -1,48 +1,40 @@
 import { useState } from 'react';
 import { Info } from '@material-ui/icons';
-import { Box, Button, DialogActions, DialogContent, DialogContentText, DialogTitle, Link } from '@material-ui/core';
+import { Box, Button, DialogActions, DialogContent, DialogTitle, Link, Typography } from '@material-ui/core';
 import { CoffeeButton } from './CoffeeButton';
 import { Dialog } from '../mui/Dialog';
 
 export const AboutModalButton = () => {
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <>
-      <Button onClick={handleClickOpen}>
+      <Button onClick={() => setOpen(true)} title="About">
         <Info />
       </Button>
 
-      <Dialog open={open} onClose={handleClose} scroll="paper">
+      <Dialog open={open} onClose={() => setOpen(false)} scroll="paper">
         <DialogTitle>
           <Box display="flex" alignItems="center">
             <Info /> &nbsp; About
           </Box>
         </DialogTitle>
         <DialogContent dividers>
-          <DialogContentText>
+          <Typography variant="body1" gutterBottom>
             Hi there - thanks for checking out <strong>Find the State</strong>.
-          </DialogContentText>
+          </Typography>
 
-          <DialogContentText>
+          <Typography variant="body1" gutterBottom>
             The purpose of building this application was to learn a bit more about using Mapbox and creating map
             interactions for the web.
-          </DialogContentText>
+          </Typography>
 
-          <DialogContentText>
+          <Typography variant="body1" gutterBottom>
             I figured the best way to do that would be to build a little game that would also help me educate myself
             better on the geography of the U.S.A. and the amazing states we have.
-          </DialogContentText>
+          </Typography>
 
-          <DialogContentText>
+          <Typography variant="body1" gutterBottom>
             Both the{' '}
             <Link
               href="https://github.com/johndatserakis/find-the-state-ui"
@@ -63,16 +55,18 @@ export const AboutModalButton = () => {
             </Link>{' '}
             code are open-sourced - go ahead and take a look at the code that runs the site. The frontend is built using
             React and TypeScript and the backend is built using FastAPI with Python.
-          </DialogContentText>
+          </Typography>
 
           <Box display="flex" justifyContent="center" mt={4} mb={2}>
             <CoffeeButton />
           </Box>
 
-          <Box>
+          <Typography variant="body1" component={'div'} gutterBottom>
             <strong>Roadmap:</strong>
             <ul>
-              <li>Add an endpoint to save a user's best time to the backend</li>
+              <li>
+                <s>Add an endpoint to save a user's best time to the backend</s>
+              </li>
               <li>
                 Perhaps expand the game and add other countries to the mix - maybe for a country like Canada it would be
                 about finding its provinces and territories
@@ -82,10 +76,10 @@ export const AboutModalButton = () => {
                 Show more general information about a user's game - total wrong answers, longest streak, stuff like that
               </li>
             </ul>
-          </Box>
+          </Typography>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary" variant="contained">
+          <Button onClick={() => setOpen(false)} color="secondary" variant="contained">
             Done
           </Button>
         </DialogActions>

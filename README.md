@@ -2,7 +2,7 @@
 
 Find all the States in the contiguous USA on a map. Simple enough.
 
-- [Live URL](https://jolly-murdock-43b71d.netlify.app/)
+- [Live URL](https://find-the-state.netlify.app/)
 - [Frontend UI GitHub](https://github.com/johndatserakis/find-the-state-ui) - Built with TypeScript and React
 - [Backend API GitHub](https://github.com/johndatserakis/find-the-state-api) - Built with Python and FastAPI
 
@@ -35,7 +35,8 @@ yarn test
 
 ## Notes
 
-I used a few new libraries during the building of this project. I took some notes on things I needed to reference often.
+- There is a very rudimentary token "check" on the `score` `post` request. It provides no protection. Don't do something like this in production. Whenever I want to secure my API's I use a `JWT` token that a user receives after registering and logging in. That is out of scope for this project currently, but may be added in the future. I have another [open sourced API](https://github.com/johndatserakis/koa-vue-notes-api) that features this if you'd like to recreate [that flow](https://github.com/johndatserakis/koa-vue-notes-api#user-authentication-process). I'll probably get around to adding it to this app at some point - I just have to draw the line somewhere concerning the development of this project, ha.
+- I used a few new libraries during the building of this project. I took some notes below on things I needed to reference often.
 
 ## [Recoil](https://recoiljs.org/docs/introduction/installation)
 
@@ -175,6 +176,10 @@ const Container = styled.div`
 
 ### [Palette](https://material-ui.com/system/palette/#palette)
 
+### [DataGrid](https://material-ui.com/components/data-grid/#mit-version)
+
+- [DataGrid API](https://material-ui.com/api/data-grid/)
+
 ## CSS
 
 ### Sixteenths for rem spacing
@@ -269,4 +274,4 @@ This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(
 
 ## Screenshot
 
-[![Find the State](./src/assets/screenshots/find-the-state.jpg)](https://jolly-murdock-43b71d.netlify.app/)
+[![Find the State](./src/assets/screenshots/find-the-state.jpg)](https://find-the-state.netlify.app/)

@@ -1,4 +1,4 @@
-const GA_ID = 'G-NK7P4B42VF';
+const GA_ID = 'G-T6QXNFJRDR';
 
 interface GtagOpts {
   action: 'click' | 'submit';

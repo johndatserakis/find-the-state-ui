@@ -12,7 +12,7 @@ describe('<Navbar />', () => {
       </Wrapper>,
     );
 
-    const text = await findByText('FTS');
+    const text = await findByText('🔍');
     expect(text).toBeInTheDocument();
   });
 });
