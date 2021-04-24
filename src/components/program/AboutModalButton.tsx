@@ -68,6 +68,10 @@ export const AboutModalButton = () => {
                 <s>Add an endpoint to save a user's best time to the backend</s>
               </li>
               <li>
+                Add name personalization and highest streak to score-saving, along with the ability to opt-out of
+                score-saving.
+              </li>
+              <li>
                 Perhaps expand the game and add other countries to the mix - maybe for a country like Canada it would be
                 about finding its provinces and territories
               </li>

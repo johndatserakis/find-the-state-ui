@@ -33,10 +33,7 @@ yarn test
 - React-Spring
 - use-sound
 
-## Notes
-
-- There is a very rudimentary token "check" on the `score` `post` request. It provides no protection. Don't do something like this in production. Whenever I want to secure my API's I use a `JWT` token that a user receives after registering and logging in. That is out of scope for this project currently, but may be added in the future. I have another [open sourced API](https://github.com/johndatserakis/koa-vue-notes-api) that features this if you'd like to recreate [that flow](https://github.com/johndatserakis/koa-vue-notes-api#user-authentication-process). I'll probably get around to adding it to this app at some point - I just have to draw the line somewhere concerning the development of this project, ha.
-- I used a few new libraries during the building of this project. I took some notes below on things I needed to reference often.
+I used a few new libraries during the building of this project. I took some notes below on things I needed to reference often.
 
 ## [Recoil](https://recoiljs.org/docs/introduction/installation)
 
@@ -253,7 +250,8 @@ A tileset is a collection of raster or vector data broken up into a uniform grid
 
 ### Notes
 
-Was using `https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson` as my `states` `geojson` `source` before. Now importing it directly.
+- There is a very rudimentary token "check" on the `score` `post` request. It provides no protection. Don't do something like this in production. Whenever I want to secure my API's I use a `JWT` token that a user receives after registering and logging in. That is out of scope for this project currently, but may be added in the future. I have another [open sourced API](https://github.com/johndatserakis/koa-vue-notes-api) that features this if you'd like to recreate [that flow](https://github.com/johndatserakis/koa-vue-notes-api#user-authentication-process). I'll probably get around to adding it to this app at some point - I just have to draw the line somewhere concerning the development of this project, ha.
+- Was using `https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson` as my `states` `geojson` `source` before. Now importing it directly.
 
 ## Favicons
 

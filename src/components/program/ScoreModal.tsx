@@ -7,6 +7,23 @@ import { pxToRem } from '../../utils/style';
 import { formatStopwatchFromDatabase } from '../../utils/stopwatch';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 import { sortBy as _sortBy } from 'lodash';
+import { Typography } from '@material-ui/core';
+
+const NoRowsOverlayContainer = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+`;
+
+const NoRowsOverlay = () => (
+  <NoRowsOverlayContainer>
+    <Typography variant="body1" gutterBottom>
+      No scores found
+    </Typography>
+  </NoRowsOverlayContainer>
+);
 
 const DataGridContainer = styled.div`
   height: ${pxToRem(400)};
@@ -15,7 +32,7 @@ const DataGridContainer = styled.div`
   width: 100%;
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
-    min-width: ${pxToRem(400)};
+    min-width: ${pxToRem(500)};
   }
 `;
 
@@ -69,7 +86,7 @@ export const ScoreModal = () => {
 
   return (
     <DataGridContainer>
-      <DataGrid rows={scores} columns={columns} loading={loading} columnBuffer={0} />
+      <DataGrid components={{ NoRowsOverlay }} rows={scores} columns={columns} loading={loading} columnBuffer={0} />
     </DataGridContainer>
   );
 };
