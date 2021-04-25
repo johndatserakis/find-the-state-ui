@@ -14,7 +14,7 @@ export const get = async () => {
 
 export const post = async (score: string) => {
   const url = `/scores`;
-  const payload = { score, token: process.env.REACT_APP_AUTH_SECRET };
+  const payload = { score };
 
   try {
     await axios.post(url, payload);
