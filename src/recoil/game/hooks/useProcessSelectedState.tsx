@@ -28,6 +28,7 @@ export const useProcessSelectedState = () => {
   const [guesses, setGuesses] = useRecoilState(guessesState);
   const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getFormattedTimeDatabase = useRecoilCallback(({ snapshot }) => async () => {
     const timer = await snapshot.getPromise(timerState);
 
