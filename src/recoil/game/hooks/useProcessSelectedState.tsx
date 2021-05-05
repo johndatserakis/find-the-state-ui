@@ -22,8 +22,8 @@ export const useProcessSelectedState = () => {
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
   const [usedItems, setUsedItems] = useRecoilState(usedItemsState);
   const [gameStatus, setGameStatus] = useRecoilState(gameStatusState);
-  const [streak, setStreak] = useRecoilState(streakState);
-  const [streakHigh, setStreakHigh] = useRecoilState(streakHighState);
+  const setStreak = useSetRecoilState(streakState);
+  const setStreakHigh = useSetRecoilState(streakHighState);
   const setLastSelectionResult = useSetRecoilState(lastSelectionResultState);
   const [guesses, setGuesses] = useRecoilState(guessesState);
   const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
@@ -38,8 +38,6 @@ export const useProcessSelectedState = () => {
   useEffect(() => {
     // https://github.com/facebook/react/issues/14326#issuecomment-441680293
     async function processSelectedState() {
-      console.log('useProcessSelectedState');
-
       if (isGameOver) return;
       if (!selectedItem) return;
       if (!targetItem) return;
@@ -58,11 +56,11 @@ export const useProcessSelectedState = () => {
 
       setLastSelectionResult('correct');
 
-      // TODO: Take a look at what can be done about state data from recoil being one render late. I'd like to avoid
-      // having many excessive useEffects just to grab differences in a single value. The issue below is that I need the
-      // up-to-date `streak` to set the `streakHigh`, but my `streak` value is a render late here, that's why I have to
-      // use the `prevStreak` from the recoil setter. That's all fine, but the issue is componded when I need *that*
-      // value later as is the case here, for example, the API call to store the `streakHigh`.
+      /*
+        TODO: Take a look at what can be done about state data from recoil being one render late. I'd like to avoid having many excessive useEffects just to grab differences in a single value. The issue below is that I need the up-to-date `streak` to set the `streakHigh`, but my `streak` value is a render late here, that's why I have to use the `prevStreak` from the recoil setter. That's all fine, but the issue is componded when I need *that* value later as is the  case here, for example, the API call to store the `streakHigh`.
+
+        To add, I've tried using `useRecoilCallback` to retrieve the streakHigh, but it seems like because I'm updating that value in this very same useEffect, I still have the "one render late" problem. I do like the `getFormattedTimeDatabase` `useRecoilCallback` I'm able to use though, as that saves me from having this hook rerender each time the timer updates. I think that doesn't have the same issue as the streaks because I'm not setting the value in question during this useEffect.
+      */
 
       let newStreak: number = 0;
       let newStreakHigh: number = 0;
@@ -119,19 +117,18 @@ export const useProcessSelectedState = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     gameStatus,
+    isGameOver,
     selectedItem,
-    setGuesses,
     setGameStatus,
+    setGuesses,
     setLastSelectionResult,
     setSelectedItem,
     setStreak,
+    setStreakHigh,
     setTargetItem,
     setUsedItems,
     targetItem,
     usedItems,
-    isGameOver,
-    setStreakHigh,
-    streak,
-    streakHigh,
+    getFormattedTimeDatabase,
   ]);
 };
