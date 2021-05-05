@@ -90,7 +90,8 @@ export const useProcessSelectedState = () => {
 
       // Capture proper GameStatus.GAME_OVER (not from end button)
       if (!randomItem) {
-        const formattedTimeDatabase = await getFormattedTimeDatabase();
+        // const formattedTimeDatabase = await getFormattedTimeDatabase();
+        const formattedTimeDatabase = '00:03:00';
 
         try {
           postScore({
@@ -113,7 +114,7 @@ export const useProcessSelectedState = () => {
 
     processSelectedState();
 
-    // missing purposely: getFormattedTimeDatabase, guesses, setStreak, setStreakHigh
+    // missing purposely: getFormattedTimeDatabase, guesses
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     gameStatus,
@@ -123,6 +124,8 @@ export const useProcessSelectedState = () => {
     setGuesses,
     setLastSelectionResult,
     setSelectedItem,
+    setStreak,
+    setStreakHigh,
     setTargetItem,
     setUsedItems,
     targetItem,

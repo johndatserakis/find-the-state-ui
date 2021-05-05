@@ -29,7 +29,7 @@ export const Navbar = () => {
           <Toolbar variant="dense">
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
-              item={<Typography variant="h6">{matches ? <strong>Find the State</strong> : null}</Typography>}
+              item={<Typography variant="h6">{matches ? <strong>Find the State (BETA)</strong> : null}</Typography>}
             />
             <Box ml="auto">
               <AboutModal />
