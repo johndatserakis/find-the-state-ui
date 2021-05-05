@@ -113,7 +113,7 @@ export const useProcessSelectedState = () => {
 
     processSelectedState();
 
-    // missing purposely: getFormattedTimeDatabase, guesses
+    // missing purposely: getFormattedTimeDatabase, guesses, setStreak, setStreakHigh
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     gameStatus,
@@ -123,8 +123,6 @@ export const useProcessSelectedState = () => {
     setGuesses,
     setLastSelectionResult,
     setSelectedItem,
-    setStreak,
-    setStreakHigh,
     setTargetItem,
     setUsedItems,
     targetItem,
