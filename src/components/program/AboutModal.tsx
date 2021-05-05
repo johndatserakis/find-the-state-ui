@@ -4,7 +4,7 @@ import { Box, Button, DialogActions, DialogContent, DialogTitle, Link, Typograph
 import { CoffeeButton } from './CoffeeButton';
 import { Dialog } from '../mui/Dialog';
 
-export const AboutModalButton = () => {
+export const AboutModal = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -68,7 +68,7 @@ export const AboutModalButton = () => {
                 <s>Add an endpoint to save a user's best time to the backend</s>
               </li>
               <li>
-                Add name personalization and highest streak to score-saving, along with the ability to opt-out of
+                Add name personalization and <s>highest streak</s> to score-saving, along with the ability to opt-out of
                 score-saving.
               </li>
               <li>
@@ -77,7 +77,8 @@ export const AboutModalButton = () => {
               </li>
               <li>Show total count of wrong answers for each state when looking at the wrong answer choropleth</li>
               <li>
-                Show more general information about a user's game - total wrong answers, longest streak, stuff like that
+                Show more general information about a user's game - total wrong answers, <s>longest streak</s>, stuff
+                like that
               </li>
             </ul>
           </Typography>

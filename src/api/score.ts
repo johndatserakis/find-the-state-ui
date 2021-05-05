@@ -1,4 +1,4 @@
-import { Scores } from '../types/score';
+import { Score, Scores } from '../types/score';
 import { axios } from '../utils/axios';
 
 export const get = async () => {
@@ -12,9 +12,9 @@ export const get = async () => {
   }
 };
 
-export const post = async (score: string) => {
+export const post = async ({ score, streak_high }: Score) => {
   const url = `/scores`;
-  const payload = { score };
+  const payload = { score, streak_high };
 
   try {
     await axios.post(url, payload);

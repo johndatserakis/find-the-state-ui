@@ -3,10 +3,11 @@ import { useTransition } from 'react-spring';
 import { AnimationContainerNormalizer, TextAnimationContainer } from '../../../../utils/animation/components';
 import { slideUpInSlideDownOut } from '../../../../utils/animation/animations';
 import { useRecoilValue } from 'recoil';
-import { streakState } from '../../../../recoil/game/game';
+import { streakHighState, streakState } from '../../../../recoil/game/game';
 
 export const Streak = () => {
   const streak = useRecoilValue(streakState);
+  const streakHigh = useRecoilValue(streakHighState);
   const hasActiveStreak = streak > 0;
   const transitions = useTransition(hasActiveStreak, slideUpInSlideDownOut);
 
@@ -15,7 +16,7 @@ export const Streak = () => {
       item && (
         <AnimationContainerNormalizer>
           <TextAnimationContainer style={props}>
-            <Chip label={`Streak: ${streak}`} color="primary" size="small" />
+            <Chip label={`Streak: ${streak} / High Streak: ${streakHigh}`} color="primary" size="small" />
           </TextAnimationContainer>
         </AnimationContainerNormalizer>
       )

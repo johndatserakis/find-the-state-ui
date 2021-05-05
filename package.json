@@ -60,7 +60,7 @@
     "clearMocks": true,
     "resetMocks": false
   },
-  "name": "map-testing",
+  "name": "find-the-state-ui",
   "private": true,
   "scripts": {
     "build": "react-scripts build",

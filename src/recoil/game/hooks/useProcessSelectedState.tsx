@@ -1,27 +1,34 @@
 import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   gameStatusState,
   guessesState,
   lastSelectionResultState,
   selectedItemState,
   streakState,
+  streakHighState,
   targetItemState,
+  timerState,
   usedItemsState,
 } from '../game';
 import { getAvailableItems } from '../../game/utils';
 import { sample as _sample } from 'lodash';
 import { GameStatus } from '../../game/types';
+import { formatStopwatchForDatabase } from '../../../utils/stopwatch';
+import { post as postScore } from '../../../api/score';
 
 export const useProcessSelectedState = () => {
   const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState);
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
   const [usedItems, setUsedItems] = useRecoilState(usedItemsState);
   const [gameStatus, setGameStatus] = useRecoilState(gameStatusState);
-  const setStreak = useSetRecoilState(streakState);
+  const [streak, setStreak] = useRecoilState(streakState);
+  const [streakHigh, setStreakHigh] = useRecoilState(streakHighState);
   const setLastSelectionResult = useSetRecoilState(lastSelectionResultState);
   const [guesses, setGuesses] = useRecoilState(guessesState);
+  const timer = useRecoilValue(timerState);
   const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
+  const formattedTimeDatabase = formatStopwatchForDatabase(timer);
 
   useEffect(() => {
     if (isGameOver) return;
@@ -40,8 +47,33 @@ export const useProcessSelectedState = () => {
       return;
     }
 
-    setStreak((prevStreak) => prevStreak + 1);
     setLastSelectionResult('correct');
+
+    // TODO: Take a look at what can be done about state data from recoil being one render late. I'd like to avoid
+    // having many excessive useEffects just to grab differences in a single value. The issue below is that I need the
+    // up-to-date `streak` to set the `streakHigh`, but my `streak` value is a render late here, that's why I have to
+    // use the `prevStreak` from the recoil setter. That's all fine, but the issue is componded when I need *that*
+    // value later as is the case here, for example, the API call to store the `streakHigh`.
+
+    let newStreak: number = 0;
+    let newStreakHigh: number = 0;
+
+    setStreak((prevStreak) => {
+      const s = prevStreak + 1;
+      newStreak = s;
+
+      return s;
+    });
+
+    setStreakHigh((prevStreakHigh) => {
+      if (newStreak > prevStreakHigh) {
+        newStreakHigh = newStreak;
+        return newStreak;
+      }
+
+      newStreakHigh = prevStreakHigh;
+      return prevStreakHigh;
+    });
 
     const newUsedItems = [...usedItems, selectedItem];
     setUsedItems(newUsedItems);
@@ -51,6 +83,15 @@ export const useProcessSelectedState = () => {
 
     // Capture proper GameStatus.GAME_OVER (not from end button)
     if (!randomItem) {
+      try {
+        postScore({
+          score: formattedTimeDatabase,
+          streak_high: newStreakHigh,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+
       setGameStatus(GameStatus.GAME_OVER);
       setSelectedItem(undefined);
       setTargetItem(undefined);
@@ -74,5 +115,10 @@ export const useProcessSelectedState = () => {
     setUsedItems,
     targetItem,
     usedItems,
+    formattedTimeDatabase,
+    isGameOver,
+    setStreakHigh,
+    streak,
+    streakHigh,
   ]);
 };

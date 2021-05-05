@@ -5,7 +5,7 @@ import { IconWithItem } from '../mui/IconWithItem';
 import { Emoji } from './Emoji';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
 import { PlayMusicButton } from '../program/PlayMusicButton';
-import { AboutModalButton } from '../program/AboutModalButton';
+import { AboutModal } from '../program/AboutModal';
 import { ScoreModalButton } from '../program/ScoreModalButton';
 
 const BackgroundColorContainer = styled.div`
@@ -32,7 +32,7 @@ export const Navbar = () => {
               item={<Typography variant="h6">{matches ? <strong>Find the State</strong> : null}</Typography>}
             />
             <Box ml="auto">
-              <AboutModalButton />
+              <AboutModal />
               <ScoreModalButton />
               <PlayMusicButton />
               <Button

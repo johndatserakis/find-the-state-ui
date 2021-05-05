@@ -52,6 +52,11 @@ export const ScoreModal = () => {
       },
     },
     {
+      field: 'streak_high',
+      headerName: 'High Streak',
+      flex: 1,
+    },
+    {
       field: 'created_date',
       headerName: 'Date Submitted',
       flex: 1,
