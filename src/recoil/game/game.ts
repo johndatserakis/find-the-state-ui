@@ -40,19 +40,19 @@ export const streakHighState = atom({
   default: 0,
 });
 
-// Note: timer is reset in Stopwatch.tsx
 export const timerState = atom({
   key: 'timerState',
   default: 0,
 });
 
-// timerGameOver is reset in useProcessSelectedState in order to clear it out right away after saving to prevent dupes
+// timerGameOver is reset in useProcessSelectedState in order to clear it out right away after posting to API
+// to prevent dupes
 export const timerGameOverState = atom<number | undefined>({
   key: 'timerGameOverState',
   default: undefined,
 });
 
-// Note: guesses are reset in MapContainer.tsx currently due to the Map Choropleth connection
+// Note: guesses are reset in MapContainer currently due to the required Map Choropleth connection
 export const guessesState = atom<Record<string, number>>({
   key: 'guessesState',
   default: {},
@@ -96,6 +96,7 @@ export const startGameFunc = selector({
     reset(streakHighState);
     reset(usedItemsState);
     reset(lastSelectionResultState);
+    reset(timerState);
 
     set(gameStatusState, GameStatus.ACTIVE);
 

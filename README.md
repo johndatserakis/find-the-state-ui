@@ -33,7 +33,11 @@ yarn test
 - React-Spring
 - use-sound
 
-I used a few new libraries during the building of this project. I took some notes below on things I needed to reference often.
+I used a few new libraries during the building of this project. I took some notes below on things I needed to reference often, both new and old.
+
+## React
+
+- [Use async/await in useEffect response from Dan Abramov](https://github.com/facebook/react/issues/14326#issuecomment-472043812)
 
 ## [Recoil](https://recoiljs.org/docs/introduction/installation)
 

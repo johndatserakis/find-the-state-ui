@@ -101,8 +101,8 @@ export const useProcessSelectedState = () => {
     usedItems,
   ]);
 
+  // Putting this seperate to isolate the game over API call
   useEffect(() => {
-    // https://github.com/facebook/react/issues/14326#issuecomment-441680293
     async function post() {
       if (gameStatus !== GameStatus.GAME_OVER) return;
       if (timerGameOver === undefined) return;
