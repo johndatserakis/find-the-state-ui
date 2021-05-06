@@ -46,6 +46,12 @@ export const timerState = atom({
   default: 0,
 });
 
+// timerGameOver is reset in useProcessSelectedState in order to clear it out right away after saving to prevent dupes
+export const timerGameOverState = atom<number | undefined>({
+  key: 'timerGameOverState',
+  default: undefined,
+});
+
 // Note: guesses are reset in MapContainer.tsx currently due to the Map Choropleth connection
 export const guessesState = atom<Record<string, number>>({
   key: 'guessesState',

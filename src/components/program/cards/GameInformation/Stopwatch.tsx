@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import { useTimer } from '../../../../hooks/useTimer';
 import { formatNumberToStopwatch } from '../../../../utils/stopwatch';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { gameStatusState, timerState } from '../../../../recoil/game/game';
+import { gameStatusState, timerState, timerGameOverState } from '../../../../recoil/game/game';
 import { GameStatus } from '../../../../recoil/game/types';
 import { usePrevious } from 'react-use';
 
@@ -12,6 +12,7 @@ export const Stopwatch = () => {
   const gameStatus = useRecoilValue(gameStatusState);
   const prevGameStatus = usePrevious(gameStatus);
   const setTimer = useSetRecoilState(timerState);
+  const setTimerGameOver = useSetRecoilState(timerGameOverState);
   const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
   const isGameOverNotUserInitiated = gameStatus === GameStatus.GAME_OVER;
   const isPrevGameOver =
@@ -43,6 +44,10 @@ export const Stopwatch = () => {
     if (isStartingNewGameFromGameOver) {
       handleReset();
       handleStart();
+    }
+
+    if (isGameOverNotUserInitiated) {
+      setTimerGameOver(timer);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
