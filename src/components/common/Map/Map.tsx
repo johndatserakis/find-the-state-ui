@@ -9,6 +9,7 @@ import { CHOROPLETH_WRONG_ANSWERS_COLORS, FEATURE_STATE_GUESSES_KEY } from '../.
 // Seems to not like the .geojson filename, json works fine though
 // @ts-ignore
 import _states from '../../../data/states.geojson';
+import { useMediaQuery, useTheme } from '@material-ui/core';
 
 const MapContainer = styled.div`
   height: 100%;
@@ -28,6 +29,9 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
   const [lockMap, setLockMap] = useState(true);
   const [showGuessChoropleth, setShowGuessChoropleth] = useState(false);
   const [showLabels, setShowLabels] = useState(false);
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const logoPosition = isDesktop ? 'bottom-right' : 'top-left';
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -38,7 +42,7 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [DEFAULT_LNG, DEFAULT_LAT],
       zoom: DEFAULT_ZOOM,
-      logoPosition: 'bottom-right',
+      logoPosition,
     });
 
     map.addControl(new NavigationControl());

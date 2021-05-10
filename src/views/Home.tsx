@@ -1,5 +1,5 @@
 import { Display } from '../components/program/Display';
-import { Container } from '@material-ui/core';
+import { Container, useMediaQuery, useTheme } from '@material-ui/core';
 import { Grid } from '../components/mui/Grid';
 import styled from 'styled-components/macro';
 import { useProcessSelectedState } from '../recoil/game/hooks/useProcessSelectedState';
@@ -19,10 +19,13 @@ const StyledContainer = styled(Container)`
 
 export const Home = () => {
   useProcessSelectedState();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const spacing = isDesktop ? 2 : 0;
 
   return (
     <StyledContainer maxWidth={DEFAULT_CONTAINER_MAX_WIDTH}>
-      <Grid container spacing={2}>
+      <Grid container spacing={spacing}>
         <Grid item md={9}>
           <MapContainer />
         </Grid>

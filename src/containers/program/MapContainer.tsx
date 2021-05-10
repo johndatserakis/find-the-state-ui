@@ -11,6 +11,7 @@ import { getFeatureFromSource } from '../../utils/map';
 import { FEATURE_STATE_GUESSES_KEY } from '../../constants/map';
 import { usePrevious } from 'react-use';
 import { GameStatus } from '../../recoil/game/types';
+import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 
 const Container = styled.div`
   border: 1px solid ${colors.gray[200]};
@@ -21,6 +22,11 @@ const Container = styled.div`
   overflow: hidden;
   width: 100%;
   position: relative;
+  margin-bottom: ${pxToRem(16)};
+
+  @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
+    margin-bottom: 0;
+  }
 `;
 
 const MapWrapper = styled.div<{ isLoading: boolean }>`

@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, Theme, Toolbar, Typography, useMediaQuery, useTheme } from '@material-ui/core';
+import { AppBar, Box, Button, Container, Toolbar, Typography, useMediaQuery, useTheme } from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
 import styled from 'styled-components/macro';
 import { IconWithItem } from '../mui/IconWithItem';
@@ -19,8 +19,8 @@ const StyledAppBar = styled(AppBar)`
 `;
 
 export const Navbar = () => {
-  const theme: Theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <BackgroundColorContainer>
@@ -29,7 +29,7 @@ export const Navbar = () => {
           <Toolbar variant="dense">
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
-              item={<Typography variant="h6">{matches ? <strong>Find the State</strong> : null}</Typography>}
+              item={<Typography variant="h6">{isDesktop ? <strong>Find the State</strong> : null}</Typography>}
             />
             <Box ml="auto">
               <AboutModal />

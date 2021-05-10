@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import { pxToRem } from '../../../utils/style';
 import { Divider } from '../../mui/Divider';
 import { Legend } from './Legend';
+import { DEFAULT_PROGRAM_BREAKPOINT } from '../../../constants/style';
 
 const DisplayCard = styled(Card)`
   bottom: ${pxToRem(16)};
@@ -19,6 +20,10 @@ const DisplayCard = styled(Card)`
   transition: opacity 0.4s ease-in-out;
   width: auto;
   z-index: 1;
+
+  @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
+    max-width: ${pxToRem(310)};
+  }
 
   &:hover {
     opacity: 1;
@@ -80,7 +85,7 @@ export const Display = ({
             }
             label={
               <>
-                <Emoji symbol={lockMapIcon} label="Lock" /> Lock Map
+                <Emoji symbol={lockMapIcon} label="Lock" /> Prevent Scrolling
               </>
             }
           />
