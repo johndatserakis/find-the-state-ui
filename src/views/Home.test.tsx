@@ -18,7 +18,7 @@ describe('<Home />', () => {
     expect(ItemInformationText).toBeInTheDocument();
 
     const cheatText = await findByText('Cheat');
-    const lockMapText = await findByText('Lock Map');
+    const lockMapText = await findByText('Prevent Scrolling');
     const showWrongAnswersText = await findByText('Show Wrong Answers');
     expect(cheatText).toBeInTheDocument();
     expect(lockMapText).toBeInTheDocument();
