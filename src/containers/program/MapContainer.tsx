@@ -18,7 +18,7 @@ const Container = styled.div`
   border-radius: ${pxToRem(4)};
   box-shadow: ${({ theme }) => theme.shadows[3]};
   height: 100%;
-  min-height: 500px;
+  min-height: 450px;
   overflow: hidden;
   width: 100%;
   position: relative;
@@ -26,6 +26,7 @@ const Container = styled.div`
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
     margin-bottom: 0;
+    min-height: 500px;
   }
 `;
 

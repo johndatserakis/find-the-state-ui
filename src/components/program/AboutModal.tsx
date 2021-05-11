@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Info } from '@material-ui/icons';
-import { Box, Button, DialogActions, DialogContent, DialogTitle, Link, Typography } from '@material-ui/core';
+import { Box, Button, DialogActions, DialogContent, DialogTitle, Link, Tooltip, Typography } from '@material-ui/core';
 import { CoffeeButton } from './CoffeeButton';
 import { Dialog } from '../mui/Dialog';
 
@@ -9,9 +9,11 @@ export const AboutModal = () => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} title="About">
-        <Info />
-      </Button>
+      <Tooltip title="About" arrow>
+        <Button onClick={() => setOpen(true)}>
+          <Info />
+        </Button>
+      </Tooltip>
 
       <Dialog open={open} onClose={() => setOpen(false)} scroll="paper">
         <DialogTitle>

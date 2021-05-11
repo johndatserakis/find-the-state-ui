@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ScoreRounded } from '@material-ui/icons';
-import { Box, Button, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import { Box, Button, DialogActions, DialogContent, DialogTitle, Tooltip } from '@material-ui/core';
 import { ScoreModal } from './ScoreModal';
 import { Dialog } from '../mui/Dialog';
 
@@ -9,9 +9,11 @@ export const ScoreModalButton = () => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} title="Scores">
-        <ScoreRounded />
-      </Button>
+      <Tooltip title="High Scores" arrow>
+        <Button onClick={() => setOpen(true)}>
+          <ScoreRounded />
+        </Button>
+      </Tooltip>
 
       <Dialog open={open} onClose={() => setOpen(false)} scroll="paper">
         <DialogTitle>

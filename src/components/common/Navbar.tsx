@@ -1,4 +1,14 @@
-import { AppBar, Box, Button, Container, Toolbar, Typography, useMediaQuery, useTheme } from '@material-ui/core';
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Toolbar,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 import { GitHub } from '@material-ui/icons';
 import styled from 'styled-components/macro';
 import { IconWithItem } from '../mui/IconWithItem';
@@ -35,15 +45,16 @@ export const Navbar = () => {
               <AboutModal />
               <ScoreModalButton />
               <PlayMusicButton />
-              <Button
-                color="inherit"
-                href="https://github.com/johndatserakis/find-the-state-ui"
-                title="View on GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <GitHub />
-              </Button>
+              <Tooltip title="View on GitHub" arrow>
+                <Button
+                  color="inherit"
+                  href="https://github.com/johndatserakis/find-the-state-ui"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GitHub />
+                </Button>
+              </Tooltip>
             </Box>
           </Toolbar>
         </StyledAppBar>

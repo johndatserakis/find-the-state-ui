@@ -6,6 +6,7 @@ import nationalAnthem from '../../sounds/united-states-national-anthem.mp3';
 import marchFurDieArche from '../../sounds/bachs-march-fur-die-arche.mp3';
 import thePresidentsMarch from '../../sounds/the-presidents-march.mp3';
 import { sample as _sample } from 'lodash';
+import { Tooltip } from '@material-ui/core';
 
 const sounds = [nationalAnthem, marchFurDieArche, thePresidentsMarch];
 
@@ -26,8 +27,10 @@ export const PlayMusicButton = () => {
   };
 
   return (
-    <Button onClick={onClick} title="Play Music">
-      <Icon />
-    </Button>
+    <Tooltip title="Play Music" arrow>
+      <Button onClick={onClick}>
+        <Icon />
+      </Button>
+    </Tooltip>
   );
 };

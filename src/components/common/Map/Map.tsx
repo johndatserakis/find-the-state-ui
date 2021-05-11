@@ -164,6 +164,7 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
 
   useEffect(() => {
     if (!mapboxMap) return;
+    if (lockMap) return;
 
     fitBounds(mapboxMap, USA_BOUNDS, DEFAULT_BOUNDS_PADDING);
 
