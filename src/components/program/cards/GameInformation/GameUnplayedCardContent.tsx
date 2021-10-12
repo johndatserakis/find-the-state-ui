@@ -1,8 +1,8 @@
-import { ActionButton } from './ActionButton';
-import { bluePurpleGradient } from '../../../../style/program/colors';
-import { CardWithBackground } from '../../../mui/CardWithBackground';
+import { Box, Typography } from '@mui/material';
+import { bluePurpleGradient } from '../../../../styles/program/colors';
 import { Emoji } from '../../../common/Emoji';
-import { Box, Typography } from '@material-ui/core';
+import { CardWithBackground } from '../../../mui/CardWithBackground';
+import { ActionButton } from './ActionButton';
 
 export const GameUnplayedCardContent = () => (
   <CardWithBackground background={bluePurpleGradient}>

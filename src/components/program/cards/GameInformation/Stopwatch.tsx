@@ -1,9 +1,9 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import { useRecoilValue } from 'recoil';
+import { useGameStopwatch } from '../../../../hooks/useGameStopwatch';
+import { gameStatusState, timerState } from '../../../../recoil/game/game';
 import { GameStatus } from '../../../../recoil/game/types';
 import { formatNumberToStopwatch } from '../../../../utils/stopwatch';
-import { useRecoilValue } from 'recoil';
-import { gameStatusState, timerState } from '../../../../recoil/game/game';
-import { useGameStopwatch } from '../../../../hooks/useGameStopwatch';
 
 export const Stopwatch = () => {
   // We init this hook here instad of Home.tsx so it can adopt the lifecyle of this view.

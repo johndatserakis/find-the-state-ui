@@ -1,10 +1,10 @@
-import { Display } from '../components/program/Display';
-import { Container, useMediaQuery, useTheme } from '@material-ui/core';
+import { Container, useMediaQuery, useTheme } from '@mui/material';
+import styled from 'styled-components';
 import { Grid } from '../components/mui/Grid';
-import styled from 'styled-components/macro';
-import { useProcessSelectedState } from '../recoil/game/hooks/useProcessSelectedState';
-import { MapContainer } from '../containers/program/MapContainer';
+import { Display } from '../components/program/Display';
 import { DEFAULT_CONTAINER_MAX_WIDTH, DEFAULT_PROGRAM_BREAKPOINT } from '../constants/style';
+import { MapContainer } from '../containers/program/MapContainer';
+import { useProcessSelectedState } from '../recoil/game/hooks/useProcessSelectedState';
 import { pxToRem } from '../utils/style';
 
 const StyledContainer = styled(Container)`

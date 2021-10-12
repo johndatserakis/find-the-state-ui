@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { availableItemsCountState, gameStatusState } from '../../../../recoil/game/game';
 import { GameStatus } from '../../../../recoil/game/types';

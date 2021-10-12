@@ -1,18 +1,18 @@
-import { ActionButton } from './ActionButton';
+import { Box, CardActions } from '@mui/material';
+import { useRecoilValue } from 'recoil';
+import { TOTAL_ITEM_COUNT } from '../../../../constants/game';
 import { availableItemsCountState, gameStatusState } from '../../../../recoil/game/game';
-import { bluePurpleGradient } from '../../../../style/program/colors';
-import { Box, CardActions } from '@material-ui/core';
-import { CardWithBackground } from '../../../mui/CardWithBackground';
-import { confettiConfig } from '../../../../configs/confetti';
 import { GameStatus } from '../../../../recoil/game/types';
-import { GameStatusHeader } from './GameStatusHeader';
+import { bluePurpleGradient } from '../../../../styles/program/colors';
+import { CardWithBackground } from '../../../mui/CardWithBackground';
 import { LinearProgressWithLabel } from '../../../mui/LinearProgressWithLabel';
+import { ActionButton } from './ActionButton';
+// import { confettiConfig } from '../../../../configs/confetti';
+import { GameStatusHeader } from './GameStatusHeader';
+import { GameUnplayedCardContent } from './GameUnplayedCardContent';
 import { Stopwatch } from './Stopwatch';
 import { Streak } from './Streak';
-import { TOTAL_ITEM_COUNT } from '../../../../constants/game';
-import { useRecoilValue } from 'recoil';
-import Confetti from 'react-dom-confetti';
-import { GameUnplayedCardContent } from './GameUnplayedCardContent';
+// import Confetti from 'react-dom-confetti';
 
 export const GameInformation = () => {
   const availableItemsCount = useRecoilValue(availableItemsCountState);
@@ -26,7 +26,10 @@ export const GameInformation = () => {
   return (
     <CardWithBackground background={bluePurpleGradient}>
       <Box display="flex" alignItems="center" justifyContent="center">
-        <Confetti active={gameStatus === GameStatus.GAME_OVER} config={confettiConfig} />
+        {/* <Confetti
+          active={gameStatus === GameStatus.GAME_OVER}
+          config={confettiConfig}
+        /> */}
       </Box>
       <Box mt={2} mb={3} width="100%">
         <Streak />

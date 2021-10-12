@@ -1,5 +1,5 @@
-import { axios } from '../utils/axios';
 import { State } from '../recoil/game/types';
+import { axios } from '../utils/axios';
 
 export const get = async (state: string) => {
   const url = `/states/name/${state}`;
@@ -8,6 +8,7 @@ export const get = async (state: string) => {
     const { data } = await axios.get<State>(url);
     return data;
   } catch (error) {
+    // @ts-ignore
     return new Error(error.message || error);
   }
 };

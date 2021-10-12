@@ -1,9 +1,9 @@
-import { Chip } from '@material-ui/core';
+import { Chip } from '@mui/material';
 import { useTransition } from 'react-spring';
-import { AnimationContainerNormalizer, TextAnimationContainer } from '../../../../utils/animation/components';
-import { slideUpInSlideDownOut } from '../../../../utils/animation/animations';
 import { useRecoilValue } from 'recoil';
 import { streakHighState, streakState } from '../../../../recoil/game/game';
+import { slideUpInSlideDownOut } from '../../../../utils/animation/animations';
+import { AnimationContainerNormalizer, TextAnimationContainer } from '../../../../utils/animation/components';
 
 export const Streak = () => {
   const streak = useRecoilValue(streakState);

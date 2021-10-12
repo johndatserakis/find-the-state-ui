@@ -1,8 +1,8 @@
 // https://material-ui.com/components/progress/#LinearWithValueLabel.tsx
 
-import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
+import LinearProgress, { LinearProgressProps } from '@mui/material/LinearProgress';
+import Typography from '@mui/material/Typography';
 
 export const LinearProgressWithLabel = (props: LinearProgressProps & { value: number }) => {
   return (

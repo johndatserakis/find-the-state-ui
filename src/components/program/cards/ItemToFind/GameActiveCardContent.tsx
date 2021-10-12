@@ -1,11 +1,11 @@
+import { Typography } from '@mui/material';
+import { useTransition } from 'react-spring';
+import { useRecoilValue } from 'recoil';
+import { lastSelectionResultState, targetItemState } from '../../../../recoil/game/game';
+import { slideRightInSlideRightOut } from '../../../../utils/animation/animations';
 import { AnimationContainerNormalizer, TextAnimationContainer } from '../../../../utils/animation/components';
 import { CardWithBackgroundContent } from '../../../mui/CardWithBackground';
-import { lastSelectionResultState, targetItemState } from '../../../../recoil/game/game';
 import { SelectionResult } from './SelectionResult';
-import { slideRightInSlideRightOut } from '../../../../utils/animation/animations';
-import { Typography } from '@material-ui/core';
-import { useRecoilValue } from 'recoil';
-import { useTransition } from 'react-spring';
 
 export const GameActiveCardContent = () => {
   const targetItem = useRecoilValue(targetItemState);

@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components/macro';
-import { Map } from '../../components/common/Map/Map';
-import { gameStatusState, guessesState, selectedItemState, targetItemState } from '../../recoil/game/game';
-import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
-import { Skeleton } from '@material-ui/lab';
-import { pxToRem } from '../../utils/style';
-import { colors } from '../../style/colors';
+import { Skeleton } from '@mui/material';
 import { Map as MapboxMap } from 'mapbox-gl';
-import { getFeatureFromSource } from '../../utils/map';
-import { FEATURE_STATE_GUESSES_KEY } from '../../constants/map';
 import { usePrevious } from 'react-use';
-import { GameStatus } from '../../recoil/game/types';
+import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
+import styled from 'styled-components';
+import { Map } from '../../components/common/Map/Map';
+import { FEATURE_STATE_GUESSES_KEY } from '../../constants/map';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
+import { gameStatusState, guessesState, selectedItemState, targetItemState } from '../../recoil/game/game';
+import { GameStatus } from '../../recoil/game/types';
+import { colors } from '../../styles/colors';
+import { theme } from '../../styles/theme';
+import { getFeatureFromSource } from '../../utils/map';
+import { pxToRem } from '../../utils/style';
 
 const Container = styled.div`
   border: 1px solid ${colors.gray[200]};
   border-radius: ${pxToRem(4)};
-  box-shadow: ${({ theme }) => theme.shadows[3]};
+  box-shadow: ${theme.shadows[3]};
   height: 100%;
   min-height: 450px;
   overflow: hidden;
@@ -71,7 +72,10 @@ export const MapContainer = () => {
   useEffect(() => {
     if (!mapboxMap || !targetItem) return;
 
-    const feature = getFeatureFromSource(mapboxMap, SOURCE, { key: 'STATE_NAME', value: targetItem });
+    const feature = getFeatureFromSource(mapboxMap, SOURCE, {
+      key: 'STATE_NAME',
+      value: targetItem,
+    });
     if (!feature) return;
 
     const { id } = feature;
@@ -83,7 +87,10 @@ export const MapContainer = () => {
     if (!mapboxMap || !isStartingNewGameFromGameOver) return;
 
     for (const [key] of Object.entries(guesses)) {
-      const feature = getFeatureFromSource(mapboxMap, SOURCE, { key: 'STATE_NAME', value: key });
+      const feature = getFeatureFromSource(mapboxMap, SOURCE, {
+        key: 'STATE_NAME',
+        value: key,
+      });
       if (!feature) continue;
 
       const { id } = feature;
@@ -95,7 +102,7 @@ export const MapContainer = () => {
 
   return (
     <Container>
-      <StyledSkeleton animation="wave" variant="rect" />
+      <StyledSkeleton animation="wave" />
       <MapWrapper isLoading={loading}>
         <Map onLoad={onLoad} onClick={(item) => setSelectedItem(item)} resetBoundsOnThisValueChange={targetItem} />
       </MapWrapper>

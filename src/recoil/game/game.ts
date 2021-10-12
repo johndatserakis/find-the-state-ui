@@ -1,7 +1,7 @@
-import { atom, selector } from 'recoil';
-import { getAvailableItems } from './utils';
-import { GameStatus, Items, LastSelectionResult } from './types';
 import { sample as _sample } from 'lodash';
+import { atom, selector } from 'recoil';
+import { GameStatus, Items, LastSelectionResult } from './types';
+import { getAvailableItems } from './utils';
 
 // Atoms
 
@@ -65,7 +65,7 @@ export const availableItemsCountState = selector({
   get: ({ get }) => {
     const usedItems = get(usedItemsState);
     const availableItems = getAvailableItems(usedItems);
-    return availableItems.length;
+    return (availableItems || []).length;
   },
 });
 
@@ -74,7 +74,7 @@ export const availableItemsCountState = selector({
 export const endGameFunc = selector({
   key: 'endGameFunc',
   get: () => undefined,
-  set: ({ set, reset }) => {
+  set: ({ set }) => {
     set(gameStatusState, GameStatus.GAME_OVER);
   },
 });
@@ -82,7 +82,7 @@ export const endGameFunc = selector({
 export const endGameManualFunc = selector({
   key: 'endGameManualFunc',
   get: () => undefined,
-  set: ({ set, reset }) => {
+  set: ({ set }) => {
     set(gameStatusState, GameStatus.GAME_OVER_MANUAL_END_GAME);
   },
 });

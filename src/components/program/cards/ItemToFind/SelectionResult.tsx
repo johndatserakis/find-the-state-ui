@@ -1,11 +1,11 @@
+import { CheckCircleOutlineRounded, HighlightOffRounded, Map } from '@mui/icons-material';
+import { Chip } from '@mui/material';
 import { animated, useSpring } from 'react-spring';
-import { CheckCircleOutlineRounded, HighlightOffRounded, Map } from '@material-ui/icons';
-import { Chip } from '@material-ui/core';
-import { colors } from '../../../../style/colors';
+import styled from 'styled-components';
 import { LastSelectionResult } from '../../../../recoil/game/types';
-import { pxToRem } from '../../../../utils/style';
-import styled from 'styled-components/macro';
+import { colors } from '../../../../styles/colors';
 import { shakeLeftRight } from '../../../../utils/animation/animations';
+import { pxToRem } from '../../../../utils/style';
 
 const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
   background: ${({ result, theme }) =>

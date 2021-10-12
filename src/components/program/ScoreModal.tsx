@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { get as getScores } from '../../api/score';
-import { Scores } from '../../types/score';
-import { DataGrid, GridColDef } from '@material-ui/data-grid';
-import styled from 'styled-components/macro';
-import { pxToRem } from '../../utils/style';
-import { formatStopwatchFromDatabase } from '../../utils/stopwatch';
-import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
+import { Typography } from '@mui/material';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { sortBy as _sortBy } from 'lodash';
-import { Typography } from '@material-ui/core';
+import styled from 'styled-components';
+import { get as getScores } from '../../api/score';
+import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
+import { Scores } from '../../types/score';
+import { formatStopwatchFromDatabase } from '../../utils/stopwatch';
+import { pxToRem } from '../../utils/style';
 
 const NoRowsOverlayContainer = styled.div`
   align-items: center;

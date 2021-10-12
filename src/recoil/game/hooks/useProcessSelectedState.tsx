@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
+import { sample as _sample } from 'lodash';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { post as postScore } from '../../../api/score';
+import { formatStopwatchForDatabase } from '../../../utils/stopwatch';
+import { GameStatus } from '../../game/types';
+import { getAvailableItems } from '../../game/utils';
 import {
   gameStatusState,
   guessesState,
@@ -11,11 +16,6 @@ import {
   timerGameOverState,
   usedItemsState,
 } from '../game';
-import { getAvailableItems } from '../../game/utils';
-import { sample as _sample } from 'lodash';
-import { GameStatus } from '../../game/types';
-import { formatStopwatchForDatabase } from '../../../utils/stopwatch';
-import { post as postScore } from '../../../api/score';
 
 export const useProcessSelectedState = () => {
   const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState);
@@ -49,7 +49,7 @@ export const useProcessSelectedState = () => {
 
     setLastSelectionResult('correct');
 
-    let newStreak: number = 0;
+    let newStreak = 0;
 
     setStreak((prevStreak) => {
       const s = prevStreak + 1;

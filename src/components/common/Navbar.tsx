@@ -1,31 +1,22 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Toolbar,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@material-ui/core';
-import { GitHub } from '@material-ui/icons';
-import styled from 'styled-components/macro';
-import { IconWithItem } from '../mui/IconWithItem';
-import { Emoji } from './Emoji';
+import { GitHub } from '@mui/icons-material';
+import { AppBar, Box, Button, Container, Toolbar, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
+import styled from 'styled-components';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
-import { PlayMusicButton } from '../program/PlayMusicButton';
+import { theme } from '../../styles/theme';
+import { IconWithItem } from '../mui/IconWithItem';
 import { AboutModal } from '../program/AboutModal';
+import { PlayMusicButton } from '../program/PlayMusicButton';
 import { ScoreModalButton } from '../program/ScoreModalButton';
+import { Emoji } from './Emoji';
 
 const BackgroundColorContainer = styled.div`
-  background: ${({ theme }) => theme.palette.background.default};
-  color: ${({ theme }) => theme.palette.text.primary};
+  background: ${theme.palette.background.default};
+  color: ${theme.palette.text.primary};
 `;
 
 const StyledAppBar = styled(AppBar)`
-  background: ${({ theme }) => theme.palette.background.default};
-  color: ${({ theme }) => theme.palette.text.primary};
+  background: ${theme.palette.background.default};
+  color: ${theme.palette.text.primary};
 `;
 
 export const Navbar = () => {

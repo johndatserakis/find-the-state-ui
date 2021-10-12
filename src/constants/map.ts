@@ -1,5 +1,5 @@
 import { LngLatBoundsLike, LngLatLike } from 'mapbox-gl';
-import { colors } from '../style/colors';
+import { colors } from '../styles/colors';
 
 export const DEFAULT_LNG = -96.1222;
 export const DEFAULT_LAT = 38.9832;

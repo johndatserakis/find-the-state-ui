@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ScoreRounded } from '@material-ui/icons';
-import { Box, Button, DialogActions, DialogContent, DialogTitle, Tooltip } from '@material-ui/core';
-import { ScoreModal } from './ScoreModal';
+import { ScoreRounded } from '@mui/icons-material';
+import { Box, Button, DialogActions, DialogContent, DialogTitle, Tooltip } from '@mui/material';
 import { Dialog } from '../mui/Dialog';
+import { ScoreModal } from './ScoreModal';
 
 export const ScoreModalButton = () => {
   const [open, setOpen] = useState(false);

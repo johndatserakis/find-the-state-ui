@@ -1,14 +1,15 @@
-import { Card, FormControl, FormControlLabel, Switch } from '@material-ui/core';
-import { Emoji } from '../Emoji';
-import styled from 'styled-components/macro';
+import { Card, FormControl, FormControlLabel, Switch } from '@mui/material';
+import styled from 'styled-components';
+import { DEFAULT_PROGRAM_BREAKPOINT } from '../../../constants/style';
+import { theme } from '../../../styles/theme';
 import { pxToRem } from '../../../utils/style';
 import { Divider } from '../../mui/Divider';
+import { Emoji } from '../Emoji';
 import { Legend } from './Legend';
-import { DEFAULT_PROGRAM_BREAKPOINT } from '../../../constants/style';
 
 const DisplayCard = styled(Card)`
   bottom: ${pxToRem(16)};
-  box-shadow: ${({ theme }) => theme.shadows[3]};
+  box-shadow: ${theme.shadows[3]};
   display: flex;
   flex-direction: column;
   height: auto;

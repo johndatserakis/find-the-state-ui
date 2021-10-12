@@ -1,13 +1,13 @@
-import { Button, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
-import { Alert, Skeleton } from '@material-ui/lab';
-import { FullSizeCard } from '../../mui/FullSizeCard';
-import styled from 'styled-components/macro';
-import { OpenInNewRounded } from '@material-ui/icons';
-import { pxToRem } from '../../../utils/style';
+import { OpenInNewRounded } from '@mui/icons-material';
+import { Alert, Button, CardActions, CardContent, CardMedia, Skeleton, Typography } from '@mui/material';
+import { uniqueId as _uniqueId } from 'lodash';
+import styled from 'styled-components';
 import { GameStatus, State } from '../../../recoil/game/types';
-import { colors } from '../../../style/colors';
-import { bluePurpleGradient } from '../../../style/program/colors';
+import { colors } from '../../../styles/colors';
+import { bluePurpleGradient } from '../../../styles/program/colors';
+import { pxToRem } from '../../../utils/style';
 import { splitLongTextIntoParagraphs } from '../../../utils/text';
+import { FullSizeCard } from '../../mui/FullSizeCard';
 
 const StyledCard = styled(FullSizeCard)`
   overflow: auto;
@@ -89,7 +89,7 @@ export const ItemInformation = ({ errored = false, gameStatus, loading = false, 
         <CardContent>
           {summaryAsParagraphs.map((para) => {
             return (
-              <Typography variant="body2" color="textSecondary" component="p" gutterBottom>
+              <Typography color="textSecondary" component="p" gutterBottom key={_uniqueId()} variant="body2">
                 {para} <br /> <br />
               </Typography>
             );

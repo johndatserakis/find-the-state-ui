@@ -1,9 +1,9 @@
-import { Box, Typography } from '@material-ui/core';
-import { CardWithBackgroundContent } from '../../../mui/CardWithBackground';
-import { Emoji } from '../../../common/Emoji';
-import { GameStatus } from '../../../../recoil/game/types';
+import { Box, Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { gameStatusState } from '../../../../recoil/game/game';
+import { GameStatus } from '../../../../recoil/game/types';
+import { Emoji } from '../../../common/Emoji';
+import { CardWithBackgroundContent } from '../../../mui/CardWithBackground';
 
 export const GameOverCardContent = () => {
   const gameStatus = useRecoilValue(gameStatusState);

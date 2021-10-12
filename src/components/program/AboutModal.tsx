@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-import { Info } from '@material-ui/icons';
-import { Box, Button, DialogActions, DialogContent, DialogTitle, Link, Tooltip, Typography } from '@material-ui/core';
-import { CoffeeButton } from './CoffeeButton';
+import { Info } from '@mui/icons-material';
+import { Box, Button, DialogActions, DialogContent, DialogTitle, Link, Tooltip, Typography } from '@mui/material';
 import { Dialog } from '../mui/Dialog';
+import { CoffeeButton } from './CoffeeButton';
 
 export const AboutModal = () => {
   const [open, setOpen] = useState(false);

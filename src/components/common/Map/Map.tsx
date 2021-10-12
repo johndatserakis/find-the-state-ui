@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { Map as MapboxMap, NavigationControl } from 'mapbox-gl';
-import styled from 'styled-components/macro';
-import { getTopFeatureAtMouseEvent, fitBounds, setMapInteractionsStatus } from '../../../utils/map';
-import { colors } from '../../../style/colors';
-import { DEFAULT_LNG, DEFAULT_LAT, DEFAULT_BOUNDS_PADDING, DEFAULT_ZOOM, USA_BOUNDS } from '../../../constants/map';
-import { Display } from './Display';
-import { CHOROPLETH_WRONG_ANSWERS_COLORS, FEATURE_STATE_GUESSES_KEY } from '../../../constants/map';
+import styled from 'styled-components';
 // Seems to not like the .geojson filename, json works fine though
 // @ts-ignore
-import _states from '../../../data/states.geojson';
-import { useMediaQuery, useTheme } from '@material-ui/core';
+import _states from '../../../../public/data/states.geojson';
+import { DEFAULT_LNG, DEFAULT_LAT, DEFAULT_BOUNDS_PADDING, DEFAULT_ZOOM, USA_BOUNDS } from '../../../constants/map';
+import { CHOROPLETH_WRONG_ANSWERS_COLORS, FEATURE_STATE_GUESSES_KEY } from '../../../constants/map';
+import { colors } from '../../../styles/colors';
+import { getTopFeatureAtMouseEvent, fitBounds, setMapInteractionsStatus } from '../../../utils/map';
+import { Display } from './Display';
 
 const MapContainer = styled.div`
   height: 100%;
@@ -37,7 +37,7 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
     if (!mapContainer.current) return;
 
     const map = new MapboxMap({
-      accessToken: process.env.REACT_APP_MAPBOX_TOKEN,
+      accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [DEFAULT_LNG, DEFAULT_LAT],

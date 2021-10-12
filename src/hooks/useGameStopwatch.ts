@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useTimer } from './useTimer';
+import { usePrevious } from 'react-use';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { gameStatusState, timerState, timerGameOverState } from '../recoil/game/game';
 import { GameStatus } from '../recoil/game/types';
-import { usePrevious } from 'react-use';
+import { useTimer } from './useTimer';
 
 export const useGameStopwatch = () => {
   const { timer, handlePause, handleReset, handleStart } = useTimer(0);

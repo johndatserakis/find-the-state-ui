@@ -1,4 +1,5 @@
-import { Link } from '@material-ui/core';
+/* eslint-disable @next/next/no-img-element */
+import { Link } from '@mui/material';
 
 export const CoffeeButton = () => {
   return (

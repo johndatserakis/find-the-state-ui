@@ -1,8 +1,8 @@
-import styled from 'styled-components/macro';
-import { ItemToFind } from './cards/ItemToFind/ItemToFind';
+import styled from 'styled-components';
 import { ItemInformationContainer } from '../../containers/program/cards/ItemInformationContainer';
-import { GameInformation } from './cards/GameInformation/GameInformation';
 import { pxToRem } from '../../utils/style';
+import { GameInformation } from './cards/GameInformation/GameInformation';
+import { ItemToFind } from './cards/ItemToFind/ItemToFind';
 
 const Container = styled.div`
   display: flex;

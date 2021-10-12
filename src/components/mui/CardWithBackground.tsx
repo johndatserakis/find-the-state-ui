@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { CardContent } from '@material-ui/core';
-import { FullSizeCard } from './FullSizeCard';
-import styled from 'styled-components/macro';
-import { colors } from '../../style/colors';
+import { CardContent } from '@mui/material';
+import styled from 'styled-components';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
+import { colors } from '../../styles/colors';
+import { FullSizeCard } from './FullSizeCard';
 
 const StyledFullSizeCard = styled(FullSizeCard)`
   position: relative;

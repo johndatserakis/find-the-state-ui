@@ -1,7 +1,9 @@
-import { Typography } from '@material-ui/core';
-import styled from 'styled-components/macro';
-import { pxToRem } from '../../../utils/style';
+import { Typography } from '@mui/material';
+import { uniqueId as _uniqueId } from 'lodash';
+import styled from 'styled-components';
 import { CHOROPLETH_WRONG_ANSWERS_COLORS } from '../../../constants/map';
+import { theme } from '../../../styles/theme';
+import { pxToRem } from '../../../utils/style';
 
 const LegendContainer = styled.div`
   display: flex;
@@ -18,7 +20,7 @@ const LegendColorContainer = styled.div`
 `;
 
 const LegendTextContainer = styled.div`
-  color: ${({ theme }) => theme.palette.text.secondary};
+  color: ${theme.palette.text.secondary};
   display: flex;
   justify-content: space-between;
   margin-bottom: ${pxToRem(2)};
@@ -46,7 +48,7 @@ export const Legend = () => {
       </Typography>
       <LegendColorContainer>
         {CHOROPLETH_WRONG_ANSWERS_COLORS.map((c) => {
-          return <LegendColorBlock color={c} />;
+          return <LegendColorBlock key={_uniqueId()} color={c} />;
         })}
       </LegendColorContainer>
       <LegendTextContainer>
