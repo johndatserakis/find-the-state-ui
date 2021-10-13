@@ -1,18 +1,16 @@
 import { Box, CardActions } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { TOTAL_ITEM_COUNT } from '../../../../constants/game';
-import { availableItemsCountState, gameStatusState } from '../../../../recoil/game/game';
-import { GameStatus } from '../../../../recoil/game/types';
+import { availableItemsCountState, gameStatusState } from '../../../../recoil/game';
+import { GameStatus } from '../../../../recoil/types';
 import { bluePurpleGradient } from '../../../../styles/program/colors';
 import { CardWithBackground } from '../../../mui/CardWithBackground';
 import { LinearProgressWithLabel } from '../../../mui/LinearProgressWithLabel';
 import { ActionButton } from './ActionButton';
-// import { confettiConfig } from '../../../../configs/confetti';
 import { GameStatusHeader } from './GameStatusHeader';
 import { GameUnplayedCardContent } from './GameUnplayedCardContent';
 import { Stopwatch } from './Stopwatch';
 import { Streak } from './Streak';
-// import Confetti from 'react-dom-confetti';
 
 export const GameInformation = () => {
   const availableItemsCount = useRecoilValue(availableItemsCountState);
@@ -25,12 +23,7 @@ export const GameInformation = () => {
 
   return (
     <CardWithBackground background={bluePurpleGradient}>
-      <Box display="flex" alignItems="center" justifyContent="center">
-        {/* <Confetti
-          active={gameStatus === GameStatus.GAME_OVER}
-          config={confettiConfig}
-        /> */}
-      </Box>
+      <Box display="flex" alignItems="center" justifyContent="center"></Box>
       <Box mt={2} mb={3} width="100%">
         <Streak />
       </Box>

@@ -1,5 +1,5 @@
 import { GitHub } from '@mui/icons-material';
-import { AppBar, Box, Button, Container, Toolbar, Tooltip, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { AppBar, Box, Button, Container, Toolbar, Tooltip, Typography, useMediaQuery } from '@mui/material';
 import styled from 'styled-components';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
 import { theme } from '../../styles/theme';
@@ -20,7 +20,6 @@ const StyledAppBar = styled(AppBar)`
 `;
 
 export const Navbar = () => {
-  const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (

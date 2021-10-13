@@ -10,7 +10,7 @@ export const ScoreModalButton = () => {
   return (
     <>
       <Tooltip title="High Scores" arrow>
-        <Button onClick={() => setOpen(true)}>
+        <Button color="black" onClick={() => setOpen(true)}>
           <ScoreRounded />
         </Button>
       </Tooltip>

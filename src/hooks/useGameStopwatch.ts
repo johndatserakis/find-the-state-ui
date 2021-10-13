@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { usePrevious } from 'react-use';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { gameStatusState, timerState, timerGameOverState } from '../recoil/game/game';
-import { GameStatus } from '../recoil/game/types';
+import { gameStatusState, timerState, timerGameOverState } from '../recoil/game';
+import { GameStatus } from '../recoil/types';
 import { useTimer } from './useTimer';
 
 export const useGameStopwatch = () => {

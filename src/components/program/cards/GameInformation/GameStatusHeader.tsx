@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
-import { availableItemsCountState, gameStatusState } from '../../../../recoil/game/game';
-import { GameStatus } from '../../../../recoil/game/types';
+import { availableItemsCountState, gameStatusState } from '../../../../recoil/game';
+import { GameStatus } from '../../../../recoil/types';
 
 export const GameStatusHeader = () => {
   const availableItemsCount = useRecoilValue(availableItemsCountState);

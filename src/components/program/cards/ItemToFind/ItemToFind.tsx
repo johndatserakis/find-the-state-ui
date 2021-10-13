@@ -1,7 +1,7 @@
 import { useTransition } from 'react-spring';
 import { useRecoilValue } from 'recoil';
-import { gameStatusState } from '../../../../recoil/game/game';
-import { GameStatus } from '../../../../recoil/game/types';
+import { gameStatusState } from '../../../../recoil/game';
+import { GameStatus } from '../../../../recoil/types';
 import { bluePurpleGradient } from '../../../../styles/program/colors';
 import { slideUpInSlideUpOut } from '../../../../utils/animation/animations';
 import { ContentAnimationContainer } from '../../../../utils/animation/components';

@@ -2,7 +2,7 @@ import { CheckCircleOutlineRounded, HighlightOffRounded, Map } from '@mui/icons-
 import { Chip } from '@mui/material';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import { LastSelectionResult } from '../../../../recoil/game/types';
+import { LastSelectionResult } from '../../../../recoil/types';
 import { colors } from '../../../../styles/colors';
 import { shakeLeftRight } from '../../../../utils/animation/animations';
 import { pxToRem } from '../../../../utils/style';

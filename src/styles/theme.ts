@@ -29,16 +29,32 @@ const fonts = [
   '"Segoe UI Symbol"',
 ].join(',');
 
+// Add new `color` option for Buttons and other components. Add `palettes` entry below in `theme`
+// https://mui.com/customization/palette/#adding-new-colors
+declare module '@mui/material/styles' {
+  interface Palette {
+    black: Palette['primary'];
+  }
+
+  // Allow configuration using `createTheme`
+  interface PaletteOptions {
+    black?: PaletteOptions['primary'];
+  }
+}
+
+// Update the Button's color prop options
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    black: true;
+  }
+}
+
+// Default theme options: https://mui.com/customization/default-theme/
 export const theme = createTheme({
   components: {
     MuiButton: {
       styleOverrides: {
         disableElevation: true,
-      },
-    },
-    MuiButtonBase: {
-      defaultProps: {
-        disableRipple: true,
       },
     },
     MuiCssBaseline: {
@@ -65,11 +81,14 @@ export const theme = createTheme({
       },
     },
   },
-  typography: {
-    fontFamily: fonts,
-    fontSize: 16,
-  },
   palette: {
+    background: {
+      default: colors.offWhite,
+    },
+    black: {
+      main: colors.black,
+      contrastText: colors.white,
+    },
     primary: {
       main: colors.purple[500],
     },
@@ -79,5 +98,9 @@ export const theme = createTheme({
     text: {
       primary: colors.black,
     },
+  },
+  typography: {
+    fontFamily: fonts,
+    fontSize: 16,
   },
 });

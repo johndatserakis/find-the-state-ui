@@ -12,9 +12,10 @@ const sounds = [nationalAnthem, marchFurDieArche, thePresidentsMarch];
 
 export const PlayMusicButton = () => {
   const [sound, setSound] = useState(_sample(sounds));
+  const [isPlaying, setIsPlaying] = useState(false);
   // Undocumented loop feature https://github.com/joshwcomeau/use-sound/issues/26#issuecomment-643389102
   // @ts-ignore
-  const [play, { isPlaying, stop }] = useSound(sound, {
+  const [play, { stop }] = useSound(sound, {
     interrupt: false,
     loop: true,
   });
@@ -24,13 +25,15 @@ export const PlayMusicButton = () => {
     if (isPlaying) {
       stop();
       setSound(_sample(sounds));
+      setIsPlaying(false);
     } else {
       play();
+      setIsPlaying(true);
     }
   };
 
   return (
-    <Tooltip title="Play Music" arrow>
+    <Tooltip color="black" title="Play Music" arrow>
       <Button onClick={onClick}>
         <Icon />
       </Button>

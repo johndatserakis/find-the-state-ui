@@ -5,6 +5,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
 
+  .icon {
+    margin-top: ${pxToRem(1)};
+  }
+
   .icon-left {
     margin-right: ${pxToRem(6)};
   }
@@ -23,8 +27,8 @@ interface IconWithItemProps {
 export const IconWithItem = ({ iconLeft, iconRight, item }: IconWithItemProps) => {
   return (
     <Container>
-      <span className="icon-left">{iconLeft && iconLeft}</span> {item}{' '}
-      <span className="icon-right">{iconRight && iconRight}</span>
+      <span className="icon icon-left">{iconLeft && iconLeft}</span> {item}{' '}
+      <span className="icon icon-right">{iconRight && iconRight}</span>
     </Container>
   );
 };

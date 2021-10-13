@@ -1,5 +1,5 @@
 import { selector } from 'recoil';
-import { get as getState } from '../../../api/state';
+import { get as getState } from '../../api/state';
 import { targetItemState } from '../game';
 
 export const currentState = selector({

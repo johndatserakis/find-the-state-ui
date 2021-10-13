@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
-import { gameStatusState } from '../../../../recoil/game/game';
-import { GameStatus } from '../../../../recoil/game/types';
+import { gameStatusState } from '../../../../recoil/game';
+import { GameStatus } from '../../../../recoil/types';
 import { Emoji } from '../../../common/Emoji';
 import { CardWithBackgroundContent } from '../../../mui/CardWithBackground';
 

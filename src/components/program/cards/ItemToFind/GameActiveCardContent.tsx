@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { useTransition } from 'react-spring';
 import { useRecoilValue } from 'recoil';
-import { lastSelectionResultState, targetItemState } from '../../../../recoil/game/game';
+import { lastSelectionResultState, targetItemState } from '../../../../recoil/game';
 import { slideRightInSlideRightOut } from '../../../../utils/animation/animations';
 import { AnimationContainerNormalizer, TextAnimationContainer } from '../../../../utils/animation/components';
 import { CardWithBackgroundContent } from '../../../mui/CardWithBackground';

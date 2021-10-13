@@ -11,7 +11,7 @@ export const AboutModal = () => {
   return (
     <>
       <Tooltip title="About" arrow>
-        <Button onClick={() => setOpen(true)}>
+        <Button color="black" onClick={() => setOpen(true)}>
           <Info />
         </Button>
       </Tooltip>

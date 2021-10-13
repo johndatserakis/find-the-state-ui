@@ -1,8 +1,8 @@
 import { ReplayRounded } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { endGameManualFunc, gameStatusState, startGameFunc } from '../../../../recoil/game/game';
-import { GameStatus } from '../../../../recoil/game/types';
+import { endGameManualFunc, gameStatusState, startGameFunc } from '../../../../recoil/game';
+import { GameStatus } from '../../../../recoil/types';
 import { event } from '../../../../utils/gtag';
 
 export const ActionButton = () => {

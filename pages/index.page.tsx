@@ -5,9 +5,9 @@ import { CookieBanner } from '../src/components/common/CookieBanner';
 import { Navbar } from '../src/components/common/Navbar';
 import { Grid } from '../src/components/mui/Grid';
 import { Display } from '../src/components/program/Display';
-// import { useProcessSelectedState } from '../src/recoil/game/hooks/useProcessSelectedState';
 import { DEFAULT_CONTAINER_MAX_WIDTH, DEFAULT_PROGRAM_BREAKPOINT } from '../src/constants/style';
 import { MapContainer } from '../src/containers/program/MapContainer';
+import { GameLoop } from '../src/recoil/components/GameLoop';
 import { theme } from '../src/styles/theme';
 import { pxToRem } from '../src/utils/style';
 
@@ -27,12 +27,12 @@ const StyledContainer = styled(Container)`
 `;
 
 export default function Home() {
-  // useProcessSelectedState();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const spacing = isDesktop ? 2 : 0;
 
   return (
     <RecoilRoot>
+      <GameLoop />
       <MainStyledContainer>
         <Navbar />
         <StyledContainer maxWidth={DEFAULT_CONTAINER_MAX_WIDTH}>

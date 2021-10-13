@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { sample as _sample } from 'lodash';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { post as postScore } from '../../../api/score';
-import { formatStopwatchForDatabase } from '../../../utils/stopwatch';
-import { GameStatus } from '../../game/types';
-import { getAvailableItems } from '../../game/utils';
+import { post as postScore } from '../../api/score';
+import { formatStopwatchForDatabase } from '../../utils/stopwatch';
 import {
   gameStatusState,
   guessesState,
@@ -16,8 +14,10 @@ import {
   timerGameOverState,
   usedItemsState,
 } from '../game';
+import { GameStatus } from '../types';
+import { getAvailableItems } from '../utils';
 
-export const useProcessSelectedState = () => {
+export const GameLoop = () => {
   const [selectedItem, setSelectedItem] = useRecoilState(selectedItemState);
   const [targetItem, setTargetItem] = useRecoilState(targetItemState);
   const [usedItems, setUsedItems] = useRecoilState(usedItemsState);
@@ -30,11 +30,13 @@ export const useProcessSelectedState = () => {
   const resetTimerGameOver = useResetRecoilState(timerGameOverState);
   const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
 
+  // Main game loop
   useEffect(() => {
     if (isGameOver) return;
     if (!selectedItem) return;
     if (!targetItem) return;
 
+    // Wrong guess
     if (selectedItem !== targetItem) {
       setStreak(0);
       setLastSelectionResult('incorrect');
@@ -83,7 +85,7 @@ export const useProcessSelectedState = () => {
     setSelectedItem(undefined);
     setTargetItem(randomItem);
 
-    // missing purposely: guesses
+    // Missing purposely: guesses
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     gameStatus,
@@ -116,11 +118,11 @@ export const useProcessSelectedState = () => {
         });
 
         resetTimerGameOver();
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     }
 
     post();
   }, [gameStatus, resetTimerGameOver, streakHigh, timerGameOver]);
+
+  return <></>;
 };

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import { Map as MapboxMap, NavigationControl } from 'mapbox-gl';
 import styled from 'styled-components';
 // Seems to not like the .geojson filename, json works fine though
@@ -8,6 +8,7 @@ import _states from '../../../../public/data/states.geojson';
 import { DEFAULT_LNG, DEFAULT_LAT, DEFAULT_BOUNDS_PADDING, DEFAULT_ZOOM, USA_BOUNDS } from '../../../constants/map';
 import { CHOROPLETH_WRONG_ANSWERS_COLORS, FEATURE_STATE_GUESSES_KEY } from '../../../constants/map';
 import { colors } from '../../../styles/colors';
+import { theme } from '../../../styles/theme';
 import { getTopFeatureAtMouseEvent, fitBounds, setMapInteractionsStatus } from '../../../utils/map';
 import { Display } from './Display';
 
@@ -29,7 +30,6 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
   const [lockMap, setLockMap] = useState(true);
   const [showGuessChoropleth, setShowGuessChoropleth] = useState(false);
   const [showLabels, setShowLabels] = useState(false);
-  const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const logoPosition = isDesktop ? 'bottom-right' : 'top-left';
 

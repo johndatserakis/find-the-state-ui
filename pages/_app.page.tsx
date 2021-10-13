@@ -7,8 +7,8 @@ import { theme } from '../src/styles/theme';
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StyledEngineProvider injectFirst>
-      <CssBaseline />
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
     </StyledEngineProvider>

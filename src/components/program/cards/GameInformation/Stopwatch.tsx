@@ -1,8 +1,8 @@
 import { Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { useGameStopwatch } from '../../../../hooks/useGameStopwatch';
-import { gameStatusState, timerState } from '../../../../recoil/game/game';
-import { GameStatus } from '../../../../recoil/game/types';
+import { gameStatusState, timerState } from '../../../../recoil/game';
+import { GameStatus } from '../../../../recoil/types';
 import { formatNumberToStopwatch } from '../../../../utils/stopwatch';
 
 export const Stopwatch = () => {
