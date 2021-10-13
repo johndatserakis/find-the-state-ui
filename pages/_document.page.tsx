@@ -7,10 +7,23 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* Basic settings */}
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+          {/* Fallback Title and Description */}
+          {/* eslint-disable */}
+          <title>Find the State</title>
+          {/* eslint-enable */}
+          <meta name="description" content="Find all the States in the contiguous USA on a map. Simple enough." />
+
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
 
+          {/* Manifest */}
           <link rel="manifest" href="/manifest.json" />
+
+          <link rel="apple-touch-icon" href="/logo192.png" />
 
           {/* Font */}
           <link
@@ -34,6 +47,31 @@ export default class MyDocument extends Document {
                 });
               `,
             }}
+          />
+
+          {/* Mapbox CSS */}
+          <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet" />
+
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content="@johndatserakis" />
+          <meta name="twitter:creator" content="@johndatserakis" />
+          <meta name="twitter:title" content="Find the State" />
+          <meta
+            name="twitter:description"
+            content="Find all the States in the contiguous USA on a map. Simple enough."
+          />
+          <meta name="twitter:image" content="/social.png" />
+          <meta name="twitter:image:alt" content="Find the State Logo" />
+
+          {/* Facebook */}
+          <meta property="og:image" content="/social.png" />
+          <meta property="og:url" content="https://find-the-state.netlify.app/" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Find the State" />
+          <meta
+            property="og:description"
+            content="Find all the States in the contiguous USA on a map. Simple enough."
           />
         </Head>
         <body>
