@@ -1,4 +1,4 @@
-const GA_ID = 'G-T6QXNFJRDR';
+const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 
 interface GtagOpts {
   action: 'click' | 'submit';
