@@ -1,13 +1,12 @@
 import { Typography } from '@mui/material';
-import { useRecoilValue } from 'recoil';
-import { availableItemsCountState, gameStatusState } from '../../../../recoil/game';
-import { GameStatus } from '../../../../recoil/types';
+import { AvailableItemsCount, IsGameOver } from '../../../../types/game';
 
-export const GameStatusHeader = () => {
-  const availableItemsCount = useRecoilValue(availableItemsCountState);
-  const gameStatus = useRecoilValue(gameStatusState);
-  const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
+interface GameStatusHeaderProps {
+  availableItemsCount: AvailableItemsCount;
+  isGameOver: IsGameOver;
+}
 
+export const GameStatusHeader = ({ availableItemsCount, isGameOver }: GameStatusHeaderProps) => {
   if (isGameOver) {
     return (
       <Typography variant="h6" align="center" gutterBottom>

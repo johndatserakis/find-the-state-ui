@@ -1,4 +1,4 @@
-import { State } from '../recoil/types';
+import { State } from '../types/game';
 import { axios } from '../utils/axios';
 
 export const get = async (state: string) => {

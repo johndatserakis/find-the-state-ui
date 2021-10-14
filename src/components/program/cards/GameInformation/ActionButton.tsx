@@ -1,17 +1,17 @@
 import { ReplayRounded } from '@mui/icons-material';
 import { Button } from '@mui/material';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { endGameManualFunc, gameStatusState, startGameFunc } from '../../../../recoil/game';
-import { GameStatus } from '../../../../recoil/types';
+import { GameStatus } from '../../../../types/game';
 import { event } from '../../../../utils/gtag';
 
-export const ActionButton = () => {
-  const gameStatus = useRecoilValue(gameStatusState);
-  const endGameManual = useSetRecoilState(endGameManualFunc);
-  const startGame = useSetRecoilState(startGameFunc);
+interface ActionButtonProps {
+  endGameManual: () => void;
+  gameStatus: GameStatus;
+  startGame: () => void;
+}
 
+export const ActionButton = ({ endGameManual, gameStatus, startGame }: ActionButtonProps) => {
   const onClickFromUnplayed = () => {
-    startGame(undefined);
+    startGame();
     event({
       action: 'click',
       category: 'Start new game from unplayed',
@@ -20,7 +20,7 @@ export const ActionButton = () => {
   };
 
   const onClickFromActiveGame = () => {
-    endGameManual(undefined);
+    endGameManual();
     event({
       action: 'click',
       category: 'End game from active',
@@ -29,7 +29,7 @@ export const ActionButton = () => {
   };
 
   const onClickFromGameOver = () => {
-    startGame(undefined);
+    startGame();
     event({
       action: 'click',
       category: 'Start new game from game over',
@@ -65,7 +65,6 @@ export const ActionButton = () => {
     case GameStatus.GAME_OVER_MANUAL_END_GAME:
       return (
         <Button
-          // sx={{ bgcolor: theme.palette.primary.main }}
           color="success"
           size="small"
           variant="contained"

@@ -2,15 +2,13 @@ import { useEffect, useState } from 'react';
 import { Skeleton } from '@mui/material';
 import { Map as MapboxMap } from 'mapbox-gl';
 import { usePrevious } from 'react-use';
-import { useRecoilValue, useSetRecoilState, useResetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { Map } from '../../components/common/Map/Map';
 import { FEATURE_STATE_GUESSES_KEY } from '../../constants/map';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
-import { gameStatusState, guessesState, selectedItemState, targetItemState } from '../../recoil/game';
-import { GameStatus } from '../../recoil/types';
 import { colors } from '../../styles/colors';
 import { theme } from '../../styles/theme';
+import { GameStatus, Guesses, SelectedItem, TargetItem } from '../../types/game';
 import { getFeatureFromSource } from '../../utils/map';
 import { pxToRem } from '../../utils/style';
 
@@ -50,12 +48,15 @@ const StyledSkeleton = styled(Skeleton)`
 
 const SOURCE = 'states';
 
-export const MapContainer = () => {
-  const setSelectedItem = useSetRecoilState(selectedItemState);
-  const targetItem = useRecoilValue(targetItemState);
-  const guesses = useRecoilValue(guessesState);
-  const resetGuesses = useResetRecoilState(guessesState);
-  const gameStatus = useRecoilValue(gameStatusState);
+interface MapContainerProps {
+  gameStatus: GameStatus;
+  guesses: Guesses;
+  setGuesses: (guesses: Guesses) => void;
+  setSelectedItem: (item: SelectedItem) => void;
+  targetItem: TargetItem;
+}
+
+export const MapContainer = ({ gameStatus, guesses, setGuesses, setSelectedItem, targetItem }: MapContainerProps) => {
   const prevGameStatus = usePrevious(gameStatus);
   const isPrevGameOver =
     prevGameStatus === GameStatus.GAME_OVER || prevGameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
@@ -97,8 +98,8 @@ export const MapContainer = () => {
       mapboxMap.setFeatureState({ id, source: SOURCE }, { [FEATURE_STATE_GUESSES_KEY]: 0 });
     }
 
-    resetGuesses();
-  }, [guesses, isStartingNewGameFromGameOver, mapboxMap, resetGuesses]);
+    setGuesses({});
+  }, [guesses, isStartingNewGameFromGameOver, mapboxMap, setGuesses]);
 
   return (
     <Container>

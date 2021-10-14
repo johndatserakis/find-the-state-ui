@@ -1,16 +1,20 @@
 import { Typography } from '@mui/material';
-import { useRecoilValue } from 'recoil';
 import { useGameStopwatch } from '../../../../hooks/useGameStopwatch';
-import { gameStatusState, timerState } from '../../../../recoil/game';
-import { GameStatus } from '../../../../recoil/types';
+import { GameStatus, IsGameOver, Timer } from '../../../../types/game';
 import { formatNumberToStopwatch } from '../../../../utils/stopwatch';
 
-export const Stopwatch = () => {
-  // We init this hook here instad of Home.tsx so it can adopt the lifecyle of this view.
-  useGameStopwatch();
+interface StopwatchProps {
+  gameStatus: GameStatus;
+  isGameOver: IsGameOver;
+  setTimer: (time: number) => void;
+  setTimerGameOver: (time: number) => void;
+  timer: Timer;
+}
 
-  const gameStatus = useRecoilValue(gameStatusState);
-  const timer = useRecoilValue(timerState);
+export const Stopwatch = ({ gameStatus, isGameOver, setTimer, setTimerGameOver, timer }: StopwatchProps) => {
+  // Init this hook here instad of the main page so it can adopt the lifecyle of this view
+  useGameStopwatch({ gameStatus, isGameOver, setTimer, setTimerGameOver });
+
   const formattedTime = formatNumberToStopwatch(timer);
   const isGameOverNotUserInitiated = gameStatus === GameStatus.GAME_OVER;
 

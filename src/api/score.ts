@@ -1,4 +1,4 @@
-import { Score, Scores } from '../types/score';
+import { Score, Scores } from '../types/game';
 import { axios } from '../utils/axios';
 
 export const get = async () => {

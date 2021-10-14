@@ -5,7 +5,7 @@ import { sortBy as _sortBy } from 'lodash';
 import styled from 'styled-components';
 import { get as getScores } from '../../api/score';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
-import { Scores } from '../../types/score';
+import { Scores } from '../../types/game';
 import { formatStopwatchFromDatabase } from '../../utils/stopwatch';
 import { pxToRem } from '../../utils/style';
 

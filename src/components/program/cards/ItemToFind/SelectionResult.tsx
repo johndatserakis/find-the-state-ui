@@ -1,10 +1,8 @@
 import { CheckCircleOutlineRounded, HighlightOffRounded, Map } from '@mui/icons-material';
 import { Chip } from '@mui/material';
-import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import { LastSelectionResult } from '../../../../recoil/types';
 import { colors } from '../../../../styles/colors';
-import { shakeLeftRight } from '../../../../utils/animation/animations';
+import { LastSelectionResult } from '../../../../types/game';
 import { pxToRem } from '../../../../utils/style';
 
 const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
@@ -27,23 +25,12 @@ interface SelectionResultProps {
 }
 
 export const SelectionResult = ({ result }: SelectionResultProps) => {
-  const { springNumber } = useSpring({
-    from: { springNumber: 0 },
-    springNumber: result === 'incorrect' ? 1 : 0,
-    reset: true, // https://stackoverflow.com/a/63972073/8014660
-    config: { duration: 1000 },
-  });
-
   switch (result) {
     case 'none':
       return <StyledChip result={result} icon={<Map />} label="Go ahead and take a guess." />;
     case 'correct':
       return <StyledChip result={result} icon={<CheckCircleOutlineRounded />} label="That's the one!" />;
     case 'incorrect':
-      return (
-        <animated.div style={shakeLeftRight(springNumber)}>
-          <StyledChip result={result} icon={<HighlightOffRounded />} label="Hmm, that's not it." />
-        </animated.div>
-      );
+      return <StyledChip result={result} icon={<HighlightOffRounded />} label="Hmm, that's not it." />;
   }
 };
