@@ -4,6 +4,7 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
 import HeadNext from 'next/head';
 import { theme } from '../src/styles/theme';
+import '../src/styles/global.css';
 
 const Head = () => (
   <HeadNext>
