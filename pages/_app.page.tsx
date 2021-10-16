@@ -10,26 +10,15 @@ const Head = () => (
     {/* Basic settings */}
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <meta name="theme-color" content={theme.palette.primary.main} />
 
     {/* Fallback Title and Description */}
     {/* eslint-disable */}
     <title>Find the State</title>
     {/* eslint-enable */}
     <meta name="description" content="Find all the States in the contiguous USA on a map. Simple enough." />
-
-    {/* PWA primary color */}
-    <meta name="theme-color" content={theme.palette.primary.main} />
-
-    {/* Manifest */}
-    <link rel="manifest" href="/manifest.json" />
-
-    <link rel="apple-touch-icon" href="/logo192.png" />
-
-    {/* Font */}
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;700&display=swap"
-    />
 
     {/* Global Site Tag (gtag.js) - Google Analytics */}
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`} />

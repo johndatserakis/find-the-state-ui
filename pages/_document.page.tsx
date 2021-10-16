@@ -5,7 +5,13 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          {/* Font */}
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;500;700&display=swap"
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />
