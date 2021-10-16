@@ -1,9 +1,19 @@
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import styled from 'styled-components';
 import { bluePurpleGradient } from '../../../../styles/program/colors';
 import { GameStatus, IsGameOver, LastSelectionResult, TargetItem } from '../../../../types/game';
 import { Emoji } from '../../../common/Emoji';
-import { CardWithBackground, CardWithBackgroundContent } from '../../../mui/CardWithBackground';
+import { CardWithBackground } from '../../../mui/CardWithBackground';
 import { SelectionResult } from './SelectionResult';
+
+const Container = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+  width: 100%;
+`;
 
 interface ItemToFindProps {
   gameStatus: GameStatus;
@@ -17,27 +27,23 @@ export const ItemToFind = ({ isGameOver, gameStatus, lastSelectionResult, target
     return null;
   }
 
-  const icon = isGameOver ? '🎉' : '🗺';
-
   return (
     <CardWithBackground background={bluePurpleGradient}>
       {isGameOver ? (
-        <CardWithBackgroundContent>
-          <Box display="flex" flexDirection="column" alignItems="center">
-            <Typography variant="h1" gutterBottom={isGameOver}>
-              <Emoji symbol={icon} label="Celebration" />
-            </Typography>
-            {isGameOver && <Typography variant="subtitle1">Nice Job!</Typography>}
-          </Box>
-        </CardWithBackgroundContent>
+        <Container>
+          <Typography variant="h1">
+            <Emoji symbol={'🎉'} label="Celebration" />
+          </Typography>
+          <Typography variant="subtitle1">Nice Job!</Typography>
+        </Container>
       ) : (
-        <CardWithBackgroundContent>
+        <Container>
           <Typography variant="subtitle1">Find this state:</Typography>
           <Typography variant="h4">
             <strong>{targetItem}</strong>
           </Typography>
           <SelectionResult result={lastSelectionResult} />
-        </CardWithBackgroundContent>
+        </Container>
       )}
     </CardWithBackground>
   );

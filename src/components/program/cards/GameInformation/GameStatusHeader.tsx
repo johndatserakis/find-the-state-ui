@@ -9,14 +9,14 @@ interface GameStatusHeaderProps {
 export const GameStatusHeader = ({ availableItemsCount, isGameOver }: GameStatusHeaderProps) => {
   if (isGameOver) {
     return (
-      <Typography variant="h6" align="center" gutterBottom>
+      <Typography align="center" variant="h6">
         <strong>Game Over</strong>
       </Typography>
     );
   }
 
   return (
-    <Typography variant="h6" align="center" gutterBottom>
+    <Typography align="center" variant="h6">
       <strong>
         {availableItemsCount} State{availableItemsCount !== 1 ? 's' : ''} Left
       </strong>

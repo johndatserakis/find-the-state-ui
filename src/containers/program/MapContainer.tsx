@@ -13,15 +13,15 @@ import { getFeatureFromSource } from '../../utils/map';
 import { pxToRem } from '../../utils/style';
 
 const Container = styled.div`
-  border: 1px solid ${colors.gray[200]};
   border-radius: ${pxToRem(4)};
+  border: 1px solid ${colors.gray[100]};
   box-shadow: ${theme.shadows[3]};
   height: 100%;
+  margin-bottom: ${pxToRem(16)};
   min-height: 450px;
   overflow: hidden;
-  width: 100%;
   position: relative;
-  margin-bottom: ${pxToRem(16)};
+  width: 100%;
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
     margin-bottom: 0;
@@ -30,15 +30,15 @@ const Container = styled.div`
 `;
 
 const MapWrapper = styled.div<{ isLoading: boolean }>`
-  position: absolute;
-  top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: ${(props) => (props.isLoading ? 0 : 1)};
   height: 100%;
-  width: 100%;
+  left: 0;
+  opacity: ${(props) => (props.isLoading ? 0 : 1)};
+  position: absolute;
+  right: 0;
+  top: 0;
   transition: opacity 1s linear;
+  width: 100%;
 `;
 
 const StyledSkeleton = styled(Skeleton)`

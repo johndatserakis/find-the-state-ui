@@ -1,13 +1,33 @@
-import { Box, CardActions, Chip, Typography } from '@mui/material';
+import { Chip, Typography } from '@mui/material';
+import styled from 'styled-components';
 import { TOTAL_ITEM_COUNT } from '../../../../constants/game';
 import { bluePurpleGradient } from '../../../../styles/program/colors';
 import { AvailableItemsCount, GameStatus, IsGameOver, Streak, StreakHigh, Timer } from '../../../../types/game';
+import { pxToRem } from '../../../../utils/style';
 import { Emoji } from '../../../common/Emoji';
 import { CardWithBackground } from '../../../mui/CardWithBackground';
 import { LinearProgressWithLabel } from '../../../mui/LinearProgressWithLabel';
 import { ActionButton } from './ActionButton';
 import { GameStatusHeader } from './GameStatusHeader';
 import { Stopwatch } from './Stopwatch';
+
+const Container = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+  width: 100%;
+`;
+
+const UnplayedContainer = styled(Container)`
+  justify-content: center;
+`;
+
+const LinearProgressWithLabelContainer = styled.div`
+  max-width: ${pxToRem(300)};
+  width: 100%;
+`;
 
 interface GameInformationProps {
   availableItemsCount: AvailableItemsCount;
@@ -41,32 +61,27 @@ export const GameInformation = ({
   if (gameStatus === GameStatus.UNPLAYED) {
     return (
       <CardWithBackground background={bluePurpleGradient}>
-        <Box display="flex" flexDirection="column" alignItems="center" justifyContent="space-around">
+        <UnplayedContainer>
           <Typography variant="h1" component="h3" gutterBottom>
             <Emoji symbol="🗺" label="Map" />
           </Typography>
           <ActionButton {...actionButtonProps} />
-        </Box>
+        </UnplayedContainer>
       </CardWithBackground>
     );
   }
 
   return (
     <CardWithBackground background={bluePurpleGradient}>
-      <Box display="flex" alignItems="center" justifyContent="center"></Box>
-      <Box mt={2} mb={3} width="100%">
+      <Container>
         <Chip label={`Streak: ${streak} / High Streak: ${streakHigh}`} color="primary" size="small" />
-      </Box>
-      <GameStatusHeader availableItemsCount={availableItemsCount} isGameOver={isGameOver} />
-      <Box mb={1} width="100%" display="flex" alignItems="center">
-        <Box width="100%">
-          <Stopwatch {...stopwatchProps} />
-        </Box>
-        <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
-      </Box>
-      <CardActions>
+        <GameStatusHeader availableItemsCount={availableItemsCount} isGameOver={isGameOver} />
+        <Stopwatch {...stopwatchProps} />
+        <LinearProgressWithLabelContainer>
+          <LinearProgressWithLabel variant="determinate" value={currentPercentage} />
+        </LinearProgressWithLabelContainer>
         <ActionButton {...actionButtonProps} />
-      </CardActions>
+      </Container>
     </CardWithBackground>
   );
 };

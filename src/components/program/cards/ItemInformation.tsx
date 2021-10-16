@@ -1,9 +1,10 @@
 import { OpenInNewRounded } from '@mui/icons-material';
-import { Alert, Button, CardActions, CardContent, CardMedia, Skeleton, Typography } from '@mui/material';
+import { Alert, Button, CardContent, CardMedia, Skeleton, Typography } from '@mui/material';
 import { uniqueId as _uniqueId } from 'lodash';
 import styled from 'styled-components';
 import { colors } from '../../../styles/colors';
 import { bluePurpleGradient } from '../../../styles/program/colors';
+import { theme } from '../../../styles/theme';
 import { GameStatus, State } from '../../../types/game';
 import { pxToRem } from '../../../utils/style';
 import { splitLongTextIntoParagraphs } from '../../../utils/text';
@@ -14,13 +15,17 @@ const StyledCard = styled(FullSizeCard)`
   position: relative;
 `;
 
+const StyledAlert = styled(Alert)`
+  box-shadow: ${theme.shadows[2]};
+`;
+
 const HeaderOverlay = styled(Typography)`
   color: white;
   font-weight: bold;
   left: ${pxToRem(16)};
   position: absolute;
-  top: ${pxToRem(48)};
   text-shadow: 2px 2px 1px ${colors.gray['800']};
+  top: ${pxToRem(48)};
 ` as typeof Typography;
 
 const StyledCardMedia = styled(CardMedia)`
@@ -49,18 +54,20 @@ export const ItemInformation = ({ errored = false, gameStatus, loading = false, 
 
   if (gameStatus === GameStatus.UNPLAYED) {
     return (
-      <Alert severity="info">
+      <StyledAlert severity="info">
         Information about the state you are looking for will show up here once you get started.
-      </Alert>
+      </StyledAlert>
     );
   }
 
   if (isGameOver) {
-    return <Alert severity="info">Start a new game to play again.</Alert>;
+    return <StyledAlert severity="info">Start a new game to play again.</StyledAlert>;
   }
 
   if (errored) {
-    return <Alert severity="error">There was an error getting the State information. Please try again.</Alert>;
+    return (
+      <StyledAlert severity="error">There was an error getting the State information. Please try again.</StyledAlert>
+    );
   }
 
   const { link = '', name = '', summary = '' } = state || {};
@@ -98,21 +105,19 @@ export const ItemInformation = ({ errored = false, gameStatus, loading = false, 
       )}
 
       {!loading && (
-        <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            variant="contained"
-            endIcon={<OpenInNewRounded />}
-            fullWidth
-            href={link}
-            title="View on Wikipedia"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Wikipedia
-          </Button>
-        </CardActions>
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+          endIcon={<OpenInNewRounded />}
+          fullWidth
+          href={link}
+          title="View on Wikipedia"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Wikipedia
+        </Button>
       )}
     </StyledCard>
   );

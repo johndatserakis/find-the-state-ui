@@ -53,11 +53,11 @@ export const ActionButton = ({ endGameManual, gameStatus, startGame }: ActionBut
     case GameStatus.GAME_OVER:
       return (
         <Button
-          size="small"
           color="primary"
-          variant="contained"
-          startIcon={<ReplayRounded />}
           onClick={onClickFromGameOver}
+          size="small"
+          startIcon={<ReplayRounded />}
+          variant="contained"
         >
           Start New Game
         </Button>
@@ -65,11 +65,11 @@ export const ActionButton = ({ endGameManual, gameStatus, startGame }: ActionBut
     case GameStatus.GAME_OVER_MANUAL_END_GAME:
       return (
         <Button
-          color="success"
-          size="small"
-          variant="contained"
-          startIcon={<ReplayRounded />}
+          color="primary"
           onClick={onClickFromGameOver}
+          size="small"
+          startIcon={<ReplayRounded />}
+          variant="contained"
         >
           Start New Game
         </Button>

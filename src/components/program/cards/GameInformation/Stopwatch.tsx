@@ -20,7 +20,7 @@ export const Stopwatch = ({ gameStatus, isGameOver, setTimer, setTimerGameOver, 
 
   if (gameStatus === GameStatus.ACTIVE) {
     return (
-      <Typography variant="body1" align="center" gutterBottom>
+      <Typography align="center" variant="body1" width="auto">
         ⏱ {formattedTime}
       </Typography>
     );
@@ -28,7 +28,7 @@ export const Stopwatch = ({ gameStatus, isGameOver, setTimer, setTimerGameOver, 
 
   if (isGameOverNotUserInitiated) {
     return (
-      <Typography variant="body1" align="center" gutterBottom>
+      <Typography align="center" variant="body1" width="auto">
         ✅{' '}
         <strong>
           <em>{formattedTime}</em>
@@ -38,7 +38,7 @@ export const Stopwatch = ({ gameStatus, isGameOver, setTimer, setTimerGameOver, 
   }
 
   return (
-    <Typography variant="body1" align="center" gutterBottom>
+    <Typography align="center" variant="body1" width="auto">
       {formattedTime}
     </Typography>
   );

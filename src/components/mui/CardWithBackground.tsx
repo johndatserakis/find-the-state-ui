@@ -6,9 +6,9 @@ import { colors } from '../../styles/colors';
 import { FullSizeCard } from './FullSizeCard';
 
 const StyledFullSizeCard = styled(FullSizeCard)`
-  position: relative;
   // TODO: Look into needing to set a height for mobile because of the absolutley positioned content below
   height: 300px;
+  position: relative;
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
     height: 100%;
@@ -31,17 +31,17 @@ export const CardWithBackgroundContent = styled(CardContent)`
   height: 100%;
   justify-content: space-evenly;
   left: 0;
+  overflow: auto;
   position: absolute;
   right: 0;
   top: 0;
   width: 100%;
   will-change: transform, opacity;
-  overflow: auto;
 `;
 
 interface CardWithGradientBackgroundProps {
-  children?: ReactNode;
   background: string;
+  children?: ReactNode;
 }
 
 export const CardWithBackground = ({ children, background }: CardWithGradientBackgroundProps) => {

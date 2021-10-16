@@ -1,4 +1,6 @@
+// TODO: Remove this
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useState } from 'react';
 import { Container, useMediaQuery } from '@mui/material';
 import { sample as _sample } from 'lodash';
@@ -34,7 +36,7 @@ const MainContainer = styled.div`
 
 const ContentContainer = styled(Container)`
   height: 100%;
-  padding: ${pxToRem(8)} 0;
+  padding: ${pxToRem(8)};
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
     height: 93vh;

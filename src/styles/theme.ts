@@ -89,11 +89,17 @@ export const theme = createTheme({
       main: colors.black,
       contrastText: colors.white,
     },
+    error: {
+      main: colors.red[500],
+    },
     primary: {
       main: colors.purple[500],
     },
     secondary: {
       main: colors.purple[600],
+    },
+    success: {
+      main: colors.green[500],
     },
     text: {
       primary: colors.black,
