@@ -5,6 +5,4 @@ declare global {
   }
 }
 
-window.gtag = '';
-
 export {};
