@@ -1,0 +1,19 @@
+# https://www.netlify.com/blog/2021/05/04/migrating-an-existing-next.js-project-to-netlify/
+
+# Global build settings
+[build]
+  publish = "out"
+  # https://docs.netlify.com/configure-builds/file-based-configuration/#inject-environment-variable-values
+  command = "sed -i s/API_URL_PLACEHOLDER/$API_URL/g netlify.toml && yarn test && yarn build:static"
+
+# Redirects
+[[redirects]]
+  from = "/api/v1/*"
+  to = "API_URL_PLACEHOLDER/api/v1/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

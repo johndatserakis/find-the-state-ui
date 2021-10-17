@@ -18,7 +18,7 @@ yarn
 yarn dev
 
 # Build
-yarn build
+yarn build:static
 
 # Run unit tests
 yarn test:unit

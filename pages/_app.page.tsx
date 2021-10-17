@@ -16,9 +16,7 @@ const Head = () => (
     <meta name="theme-color" content={theme.palette.primary.main} />
 
     {/* Fallback Title and Description */}
-    {/* eslint-disable */}
     <title>Find the State</title>
-    {/* eslint-enable */}
     <meta name="description" content="Find all the States in the contiguous USA on a map. Simple enough." />
 
     {/* Global Site Tag (gtag.js) - Google Analytics */}

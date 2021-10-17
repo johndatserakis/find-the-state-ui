@@ -1,4 +1,16 @@
 {
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
@@ -48,6 +60,7 @@
   "name": "find-the-state-ui",
   "private": true,
   "scripts": {
+    "build:static": "NODE_OPTIONS=--max_old_space_size=8192 next build && next export",
     "build": "NODE_OPTIONS=--max_old_space_size=8192 next build",
     "cypress:open": "cypress open",
     "cypress:open:headless": "cypress run --headless",

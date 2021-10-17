@@ -2,6 +2,7 @@
 module.exports = {
   pageExtensions: ['page.tsx'],
   reactStrictMode: true,
+  target: 'serverless',
   webpack: (config) => {
     // https://stackoverflow.com/a/68610114/8014660
     config.module.rules.push({
