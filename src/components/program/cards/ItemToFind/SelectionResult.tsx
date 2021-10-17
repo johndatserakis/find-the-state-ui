@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { colors } from '../../../../styles/colors';
 import { theme } from '../../../../styles/theme';
 import { LastSelectionResult } from '../../../../types/game';
-import { pxToRem } from '../../../../utils/style';
 
 const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
   background: ${({ result }) =>
@@ -12,9 +11,6 @@ const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
     (result === 'incorrect' && theme.palette.error.main) ||
     theme.palette.success.main};
   color: ${colors.white};
-
-  // Need this due to the "incorrect" animation movement
-  margin-top: ${({ result }) => (result === 'incorrect' ? pxToRem(-6) : '')};
 
   svg {
     color: ${colors.white} !important;

@@ -30,5 +30,4 @@ export type Streak = number;
 export type StreakHigh = number;
 export type TargetItem = string | undefined;
 export type Timer = number;
-export type TimerGameOver = number | undefined;
 export type AvailableItemsCount = number;

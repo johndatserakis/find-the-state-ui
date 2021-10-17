@@ -7,14 +7,12 @@ interface UseGameStopwatchProps {
   gameStatus: GameStatus;
   isGameOver: IsGameOver;
   setTimer: (time: number) => void;
-  setTimerGameOver: (time: number) => void;
 }
 
-export const useGameStopwatch = ({ gameStatus, isGameOver, setTimer, setTimerGameOver }: UseGameStopwatchProps) => {
+export const useGameStopwatch = ({ gameStatus, isGameOver, setTimer }: UseGameStopwatchProps) => {
   const { timer, handlePause, handleReset, handleStart } = useTimer(0);
   const prevGameStatus = usePrevious(gameStatus);
 
-  const isGameOverNotUserInitiated = gameStatus === GameStatus.GAME_OVER;
   const isPrevGameOver =
     prevGameStatus === GameStatus.GAME_OVER || prevGameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
   const isStartingNewGameFromGameOver = gameStatus === GameStatus.ACTIVE && isPrevGameOver;
@@ -44,10 +42,6 @@ export const useGameStopwatch = ({ gameStatus, isGameOver, setTimer, setTimerGam
     if (isStartingNewGameFromGameOver) {
       handleReset();
       handleStart();
-    }
-
-    if (isGameOverNotUserInitiated) {
-      setTimerGameOver(timer);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

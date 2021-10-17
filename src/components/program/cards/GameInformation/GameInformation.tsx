@@ -35,7 +35,6 @@ interface GameInformationProps {
   gameStatus: GameStatus;
   isGameOver: IsGameOver;
   setTimer: (time: number) => void;
-  setTimerGameOver: (time: number) => void;
   startGame: () => void;
   streak: Streak;
   streakHigh: StreakHigh;
@@ -48,7 +47,6 @@ export const GameInformation = ({
   gameStatus,
   isGameOver,
   setTimer,
-  setTimerGameOver,
   startGame,
   streak,
   streakHigh,
@@ -56,7 +54,7 @@ export const GameInformation = ({
 }: GameInformationProps) => {
   const currentPercentage = ((TOTAL_ITEM_COUNT - availableItemsCount) / TOTAL_ITEM_COUNT) * 100;
   const actionButtonProps = { endGameManual, gameStatus, startGame };
-  const stopwatchProps = { gameStatus, isGameOver, setTimer, setTimerGameOver, timer };
+  const stopwatchProps = { gameStatus, isGameOver, setTimer, timer };
 
   if (gameStatus === GameStatus.UNPLAYED) {
     return (

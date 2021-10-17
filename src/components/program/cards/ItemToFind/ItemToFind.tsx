@@ -27,14 +27,18 @@ export const ItemToFind = ({ isGameOver, gameStatus, lastSelectionResult, target
     return null;
   }
 
+  const icon = gameStatus === GameStatus.GAME_OVER ? '🎉' : '🗺';
+
   return (
     <CardWithBackground background={bluePurpleGradient}>
       {isGameOver ? (
         <Container>
           <Typography variant="h1">
-            <Emoji symbol={'🎉'} label="Celebration" />
+            <Emoji symbol={icon} label="Celebration" />
           </Typography>
-          <Typography variant="subtitle1">Nice Job!</Typography>
+          {gameStatus !== GameStatus.GAME_OVER_MANUAL_END_GAME && (
+            <Typography variant="subtitle1">Nice Job!</Typography>
+          )}
         </Container>
       ) : (
         <Container>

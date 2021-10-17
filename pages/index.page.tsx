@@ -1,10 +1,8 @@
-// TODO: Remove this
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, useMediaQuery } from '@mui/material';
 import { sample as _sample } from 'lodash';
 import styled from 'styled-components';
+import { post as postScore } from '../src/api/score';
 import { CookieBanner } from '../src/components/common/CookieBanner';
 import { Navbar } from '../src/components/common/Navbar';
 import { Grid } from '../src/components/mui/Grid';
@@ -24,9 +22,9 @@ import {
   StreakHigh,
   TargetItem,
   Timer,
-  TimerGameOver,
 } from '../src/types/game';
 import { getAvailableItems } from '../src/utils/game';
+import { formatStopwatchForDatabase } from '../src/utils/stopwatch';
 import { pxToRem } from '../src/utils/style';
 
 const MainContainer = styled.div`
@@ -54,6 +52,19 @@ const CardsContainer = styled.div`
   }
 `;
 
+async function postFinalScore(timer: Timer, streakHigh: StreakHigh) {
+  const formattedTimeDatabase = formatStopwatchForDatabase(timer);
+
+  try {
+    await postScore({
+      score: formattedTimeDatabase,
+      streak_high: streakHigh,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export default function Home() {
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const spacing = isDesktop ? 2 : 0;
@@ -66,15 +77,14 @@ export default function Home() {
   const [streak, setStreak] = useState<Streak>(0);
   const [streakHigh, setStreakHigh] = useState<StreakHigh>(0);
   const [timer, setTimer] = useState<Timer>(0);
-  const [timerGameOver, setTimerGameOver] = useState<TimerGameOver>();
   const [guesses, setGuesses] = useState<Guesses>({});
 
   const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
+  const isGameOverNotUserInitiated = gameStatus === GameStatus.GAME_OVER;
 
   const availableItems = getAvailableItems(usedItems);
   const availableItemsCount = (availableItems || []).length;
 
-  const endGame = () => setGameStatus(GameStatus.GAME_OVER);
   const endGameManual = () => setGameStatus(GameStatus.GAME_OVER_MANUAL_END_GAME);
 
   const startGame = () => {
@@ -88,10 +98,73 @@ export default function Home() {
 
     const availableItems = getAvailableItems([]);
     const randomItem = _sample(availableItems);
-    if (randomItem) {
-      setTargetItem(randomItem);
-    }
+
+    if (!randomItem) return;
+
+    setTargetItem(randomItem);
   };
+
+  // Main game loop. Runs on each seconds tick of timer.
+  useEffect(() => {
+    if (gameStatus !== GameStatus.ACTIVE) return;
+    if (!selectedItem) return;
+    if (!targetItem) return;
+
+    // Incorrect guess
+    if (selectedItem !== targetItem) {
+      setStreak(0);
+      setLastSelectionResult('incorrect');
+
+      const currentGuesses = { ...guesses };
+      const guessCountForCurrentTarget = currentGuesses[targetItem] || 0;
+      currentGuesses[targetItem] = guessCountForCurrentTarget + 1;
+      setGuesses(currentGuesses);
+
+      return;
+    }
+
+    setLastSelectionResult('correct');
+
+    // Abuse the prev value callback to allow streakHigh to use the new streak value
+    setStreak((prevStreak) => {
+      const newStreak = prevStreak + 1;
+
+      setStreakHigh((prevStreakHigh) => {
+        if (newStreak > prevStreakHigh) {
+          return newStreak;
+        }
+
+        return prevStreakHigh;
+      });
+
+      return newStreak;
+    });
+
+    const newUsedItems = [...usedItems, selectedItem];
+    setUsedItems(newUsedItems);
+
+    const availableItems = getAvailableItems(newUsedItems);
+    const randomItem = _sample(availableItems);
+
+    // Capture proper GameStatus.GAME_OVER (not from end button)
+    if (!randomItem) {
+      setGameStatus(GameStatus.GAME_OVER);
+      setSelectedItem(undefined);
+      setTargetItem(undefined);
+
+      return;
+    }
+
+    setSelectedItem(undefined);
+    setTargetItem(randomItem);
+  }, [gameStatus, guesses, selectedItem, streak, streakHigh, targetItem, timer, usedItems]);
+
+  // Look out for a real game over situation
+  useEffect(() => {
+    if (!isGameOverNotUserInitiated) return;
+
+    postFinalScore(timer, streakHigh);
+  }, [gameStatus, isGameOverNotUserInitiated, streakHigh, timer]);
 
   return (
     <MainContainer>
@@ -121,7 +194,6 @@ export default function Home() {
                 gameStatus={gameStatus}
                 isGameOver={isGameOver}
                 setTimer={setTimer}
-                setTimerGameOver={setTimerGameOver}
                 startGame={startGame}
                 streak={streak}
                 streakHigh={streakHigh}
