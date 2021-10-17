@@ -31,13 +31,13 @@ const MainContainer = styled.div`
 
 const ContentContainer = styled.div`
   display: grid;
-  gap: 1rem;
+  gap: ${pxToRem(12)};
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   height: 100%;
   margin: 0 auto;
   max-width: ${DEFAULT_CONTAINER_MAX_WIDTH}px;
-  padding: ${pxToRem(8)};
+  padding: ${pxToRem(8)} ${pxToRem(16)} ${pxToRem(16)};
   width: 100%;
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
@@ -50,14 +50,12 @@ const ContentContainer = styled.div`
 const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: ${pxToRem(10)};
   height: 100%;
   overflow: auto;
   width: 100%;
 
-  > div:not(:last-child) {
-    margin-bottom: ${pxToRem(12)} !important;
-  }
-
+  // Need this to allow the shadow of the last child to breathe
   > div:last-child {
     margin-bottom: ${pxToRem(2)} !important;
   }

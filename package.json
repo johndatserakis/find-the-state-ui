@@ -63,7 +63,7 @@
     "test:e2e:headless": "start-server-and-test start http://localhost:3000 cypress:open:headless",
     "test:unit:watch": "jest --watch",
     "test:unit": "jest",
-    "test": "yarn test:unit"
+    "test": "yarn test:unit && test:e2e:headless"
   },
   "version": "0.1.0"
 }

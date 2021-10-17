@@ -47,7 +47,7 @@ export const Navbar = () => {
               <PlayMusicButton />
               <Tooltip title="View on GitHub" arrow>
                 <Button
-                  color="inherit"
+                  color="black"
                   href="https://github.com/johndatserakis/find-the-state-ui"
                   target="_blank"
                   rel="noopener noreferrer"
