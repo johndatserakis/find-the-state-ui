@@ -5,9 +5,10 @@ import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 import { colors } from '../../styles/colors';
 import { FullSizeCard } from './FullSizeCard';
 
-const StyledFullSizeCard = styled(FullSizeCard)`
+export const StyledFullSizeCard = styled(FullSizeCard)`
   // TODO: Look into needing to set a height for mobile because of the absolutley positioned content below
   height: 300px;
+  overflow: auto;
   position: relative;
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {

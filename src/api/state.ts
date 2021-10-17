@@ -1,14 +1,18 @@
-import { State } from '../types/game';
-import { axios } from '../utils/axios';
+import useSWR from 'swr';
+import { ReturnedData } from '../types/api';
+import { State, TargetItem } from '../types/game';
+import { fetcher } from '../utils/api';
 
-export const get = async (state: string) => {
-  const url = `/states/name/${state}`;
+export const useGetState = (targetItem: TargetItem): ReturnedData<State> => {
+  const shouldFetch = targetItem !== undefined;
 
-  try {
-    const { data } = await axios.get<State>(url);
-    return data;
-  } catch (error) {
-    // @ts-ignore
-    return new Error(error.message || error);
-  }
+  const url = `/states/name/${targetItem}`;
+  const { data, error } = useSWR<State>(shouldFetch ? url : null, fetcher);
+
+  return {
+    data,
+    loading: !error && !data,
+    error,
+    errored: !data && error,
+  };
 };

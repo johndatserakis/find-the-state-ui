@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { sortBy as _sortBy } from 'lodash';
 import styled from 'styled-components';
-import { get as getScores } from '../../api/score';
+import { useGetScores } from '../../api/score';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
-import { Scores } from '../../types/game';
 import { formatStopwatchFromDatabase } from '../../utils/stopwatch';
 import { pxToRem } from '../../utils/style';
 
@@ -37,8 +35,8 @@ const DataGridContainer = styled.div`
 `;
 
 export const ScoreModal = () => {
-  const [scores, setScores] = useState<Scores>([]);
-  const [loading, setLoading] = useState(false);
+  const { data, loading } = useGetScores();
+  const scores = data !== undefined ? _sortBy(data, 'created_date').reverse() : [];
 
   const columns: GridColDef[] = [
     {
@@ -67,27 +65,6 @@ export const ScoreModal = () => {
       },
     },
   ];
-
-  useEffect(() => {
-    // https://github.com/facebook/react/issues/14326#issuecomment-441680293
-    async function fetch() {
-      setLoading(true);
-
-      try {
-        // TODO: Create a TypeGuard for all my API calls as there's a `Value | Error` issue with my usage.
-        const s = await getScores();
-        const castedScores = s as Scores;
-        const sortedScores = _sortBy(castedScores, 'score');
-        setScores(sortedScores);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetch();
-  }, []);
 
   return (
     <DataGridContainer>

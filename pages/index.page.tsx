@@ -42,7 +42,7 @@ const ContentContainer = styled.div`
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1r 1fr 1fr;
+    grid-template-rows: 1fr;
     height: 93vh;
   }
 `;
@@ -51,10 +51,15 @@ const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: auto;
   width: 100%;
 
   > div:not(:last-child) {
     margin-bottom: ${pxToRem(12)} !important;
+  }
+
+  > div:last-child {
+    margin-bottom: ${pxToRem(2)} !important;
   }
 `;
 
@@ -198,7 +203,7 @@ export default function Home() {
             streakHigh={streakHigh}
             timer={timer}
           />
-          <ItemInformationContainer gameStatus={gameStatus} targetItem={targetItem} />
+          <ItemInformationContainer gameStatus={gameStatus} isGameOver={isGameOver} targetItem={targetItem} />
         </CardsContainer>
       </ContentContainer>
       <CookieBanner />

@@ -5,18 +5,15 @@ import styled from 'styled-components';
 import { colors } from '../../../styles/colors';
 import { bluePurpleGradient } from '../../../styles/program/colors';
 import { theme } from '../../../styles/theme';
-import { GameStatus, State } from '../../../types/game';
+import { GameStatus, IsGameOver, State } from '../../../types/game';
 import { pxToRem } from '../../../utils/style';
 import { splitLongTextIntoParagraphs } from '../../../utils/text';
-import { FullSizeCard } from '../../mui/FullSizeCard';
-
-const StyledCard = styled(FullSizeCard)`
-  overflow: auto;
-  position: relative;
-`;
+import { StyledFullSizeCard } from '../../mui/CardWithBackground';
 
 const StyledAlert = styled(Alert)`
-  box-shadow: ${theme.shadows[2]};
+  align-items: center;
+  box-shadow: ${theme.shadows[1]};
+  height: 100%;
 `;
 
 const HeaderOverlay = styled(Typography)`
@@ -30,10 +27,11 @@ const HeaderOverlay = styled(Typography)`
 
 const StyledCardMedia = styled(CardMedia)`
   background: ${bluePurpleGradient};
+  height: ${pxToRem(100)};
 ` as typeof CardMedia;
 
 const StyledCardMediaSkeleton = styled(Skeleton)`
-  height: 180px;
+  height: ${pxToRem(180)};
   margin-top: ${pxToRem(-50)};
 `;
 
@@ -56,75 +54,67 @@ export const ItemInformation = ({
   loading = false,
   state,
 }: ItemInformationProps) => {
-  const url = 'https://source.unsplash.com/300x100/?';
+  const IMAGE_URL = 'https://source.unsplash.com/300x100/?';
 
   if (gameStatus === GameStatus.UNPLAYED) {
-    return (
-      <StyledAlert severity="info">
-        Information about the state you are looking for will show up here once you get started.
-      </StyledAlert>
-    );
+    return null;
   }
 
   if (isGameOver) {
-    return <StyledAlert severity="info">Start a new game to play again.</StyledAlert>;
+    return null;
   }
 
-  if (errored) {
+  if (errored || !state) {
     return (
-      <StyledAlert severity="error">There was an error getting the State information. Please try again.</StyledAlert>
+      <StyledFullSizeCard>
+        <StyledAlert severity="error">There was an error getting the State information. Please try again.</StyledAlert>
+      </StyledFullSizeCard>
     );
   }
 
-  const { link = '', name = '', summary = '' } = state || {};
-  const image = `${url}${name}`;
-  const summaryAsParagraphs = splitLongTextIntoParagraphs(summary);
-
-  return (
-    <StyledCard>
-      {loading ? (
+  if (loading) {
+    return (
+      <StyledFullSizeCard>
         <StyledCardMediaSkeleton />
-      ) : (
-        <StyledCardMedia component="img" alt={name} height="100" image={image} title={name} />
-      )}
-
-      <HeaderOverlay gutterBottom variant="h5" component="h2">
-        {name}
-      </HeaderOverlay>
-
-      {loading ? (
         <StyledCardContentSkeleton>
           <Skeleton />
           <Skeleton />
           <Skeleton />
         </StyledCardContentSkeleton>
-      ) : (
-        <CardContent>
-          {summaryAsParagraphs.map((para) => {
-            return (
-              <Typography color="textSecondary" component="p" gutterBottom key={_uniqueId()} variant="body2">
-                {para} <br /> <br />
-              </Typography>
-            );
-          })}
-        </CardContent>
-      )}
+      </StyledFullSizeCard>
+    );
+  }
 
-      {!loading && (
-        <Button
-          size="small"
-          color="primary"
-          variant="contained"
-          endIcon={<OpenInNewRounded />}
-          fullWidth
-          href={link}
-          title="View on Wikipedia"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Wikipedia
-        </Button>
-      )}
-    </StyledCard>
+  const { link = '', name = '', summary = '' } = state;
+  const image = `${IMAGE_URL}${name}`;
+  const summaryAsParagraphs = splitLongTextIntoParagraphs(summary);
+
+  return (
+    <StyledFullSizeCard>
+      <StyledCardMedia component="img" alt={name} height="100" image={image} title={name} />
+      <HeaderOverlay gutterBottom variant="h5" component="h2">
+        {name}
+      </HeaderOverlay>
+      <CardContent>
+        {summaryAsParagraphs.map((para) => (
+          <Typography color="textSecondary" component="p" gutterBottom key={_uniqueId()} variant="body2">
+            {para} <br /> <br />
+          </Typography>
+        ))}
+      </CardContent>
+      <Button
+        size="small"
+        color="primary"
+        variant="contained"
+        endIcon={<OpenInNewRounded />}
+        fullWidth
+        href={link}
+        title="View on Wikipedia"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Wikipedia
+      </Button>
+    </StyledFullSizeCard>
   );
 };
