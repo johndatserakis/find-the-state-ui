@@ -3,16 +3,17 @@ import { Skeleton } from '@mui/material';
 import { Map as MapboxMap } from 'mapbox-gl';
 import { usePrevious } from 'react-use';
 import styled from 'styled-components';
-import { Map } from '../../components/common/Map/Map';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 import { colors } from '../../styles/colors';
 import { theme } from '../../styles/theme';
 import { pxToRem } from '../../utils/style';
+import { Map } from '../components/Map/Map';
 import { FEATURE_STATE_GUESSES_KEY } from '../constants/map';
 import { GameStatus, Guesses, SelectedItem, TargetItem } from '../types/game';
 import { getFeatureFromSource } from '../utils/map';
 
 const Container = styled.div`
+  background: ${colors.offWhite};
   border-radius: ${pxToRem(4)};
   border: 1px solid ${colors.gray[100]};
   box-shadow: ${theme.shadows[3]};
@@ -37,12 +38,13 @@ const MapWrapper = styled.div<{ isLoading: boolean }>`
   position: absolute;
   right: 0;
   top: 0;
-  transition: opacity 1s linear;
+  transition: opacity 0.5s linear;
   width: 100%;
 `;
 
 const StyledSkeleton = styled(Skeleton)`
   height: 100%;
+  transform: scale(1);
   width: 100%;
 `;
 

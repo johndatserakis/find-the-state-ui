@@ -1,10 +1,10 @@
 import { Card, FormControl, FormControlLabel, Switch } from '@mui/material';
 import styled from 'styled-components';
+import { Emoji } from '../../../components/common/Emoji';
+import { Divider } from '../../../components/mui/Divider';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../../constants/style';
 import { theme } from '../../../styles/theme';
 import { pxToRem } from '../../../utils/style';
-import { Divider } from '../../mui/Divider';
-import { Emoji } from '../Emoji';
 import { Legend } from './Legend';
 
 const DisplayCard = styled(Card)`
