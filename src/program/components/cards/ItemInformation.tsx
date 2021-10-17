@@ -2,13 +2,13 @@ import { OpenInNewRounded } from '@mui/icons-material';
 import { Alert, Button, CardContent, CardMedia, Skeleton, Typography } from '@mui/material';
 import { uniqueId as _uniqueId } from 'lodash';
 import styled from 'styled-components';
+import { StyledFullSizeCard } from '../../../components/mui/CardWithBackground';
 import { colors } from '../../../styles/colors';
-import { bluePurpleGradient } from '../../../styles/program/colors';
 import { theme } from '../../../styles/theme';
-import { GameStatus, IsGameOver, State } from '../../../types/game';
 import { pxToRem } from '../../../utils/style';
 import { splitLongTextIntoParagraphs } from '../../../utils/text';
-import { StyledFullSizeCard } from '../../mui/CardWithBackground';
+import { bluePurpleGradient } from '../../styles/colors';
+import { GameStatus, IsGameOver, State } from '../../types/game';
 
 const StyledAlert = styled(Alert)`
   align-items: center;

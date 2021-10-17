@@ -1,7 +1,7 @@
 import { ReplayRounded } from '@mui/icons-material';
 import { Button } from '@mui/material';
-import { GameStatus } from '../../../../types/game';
 import { event } from '../../../../utils/gtag';
+import { GameStatus } from '../../../types/game';
 
 interface ActionButtonProps {
   endGameManual: () => void;

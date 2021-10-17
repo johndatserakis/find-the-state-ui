@@ -1,8 +1,8 @@
 import useSWR from 'swr';
-import { axios } from '../library/axios';
-import { ReturnedData } from '../types/api';
+import { axios } from '../../library/axios';
+import { ReturnedData } from '../../types/api';
+import { fetcher, parseError } from '../../utils/api';
 import { Score, Scores } from '../types/game';
-import { fetcher, parseError } from '../utils/api';
 
 export const useGetScores = (): ReturnedData<Scores> => {
   const url = `/scores`;

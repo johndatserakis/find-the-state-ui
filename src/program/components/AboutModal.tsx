@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Info } from '@mui/icons-material';
 import { Box, Button, DialogActions, DialogContent, DialogTitle, Link, Tooltip, Typography } from '@mui/material';
-import { Dialog } from '../mui/Dialog';
+import { Dialog } from '../../components/mui/Dialog';
 import { CoffeeButton } from './CoffeeButton';
 
 export const AboutModal = () => {

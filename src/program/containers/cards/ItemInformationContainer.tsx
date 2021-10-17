@@ -1,6 +1,6 @@
-import { useGetState } from '../../../api/state';
-import { ItemInformation } from '../../../components/program/cards/ItemInformation';
-import { GameStatus, IsGameOver, TargetItem } from '../../../types/game';
+import { useGetState } from '../../api/state';
+import { ItemInformation } from '../../components/cards/ItemInformation';
+import { GameStatus, IsGameOver, TargetItem } from '../../types/game';
 
 interface ItemInformationContainerProps {
   gameStatus: GameStatus;

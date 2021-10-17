@@ -1,12 +1,12 @@
 import { Chip, Typography } from '@mui/material';
 import styled from 'styled-components';
+import { Emoji } from '../../../../components/common/Emoji';
+import { CardWithBackground } from '../../../../components/mui/CardWithBackground';
+import { LinearProgressWithLabel } from '../../../../components/mui/LinearProgressWithLabel';
 import { TOTAL_ITEM_COUNT } from '../../../../constants/game';
-import { bluePurpleGradient } from '../../../../styles/program/colors';
-import { AvailableItemsCount, GameStatus, IsGameOver, Streak, StreakHigh, Timer } from '../../../../types/game';
 import { pxToRem } from '../../../../utils/style';
-import { Emoji } from '../../../common/Emoji';
-import { CardWithBackground } from '../../../mui/CardWithBackground';
-import { LinearProgressWithLabel } from '../../../mui/LinearProgressWithLabel';
+import { bluePurpleGradient } from '../../../styles/colors';
+import { AvailableItemsCount, GameStatus, IsGameOver, Streak, StreakHigh, Timer } from '../../../types/game';
 import { ActionButton } from './ActionButton';
 import { GameStatusHeader } from './GameStatusHeader';
 import { Stopwatch } from './Stopwatch';

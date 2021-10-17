@@ -2,11 +2,11 @@ import { GitHub } from '@mui/icons-material';
 import { AppBar, Box, Button, Toolbar, Tooltip, Typography, useMediaQuery } from '@mui/material';
 import styled from 'styled-components';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
+import { AboutModal } from '../../program/components/AboutModal';
+import { PlayMusicButton } from '../../program/components/PlayMusicButton';
+import { ScoreModalButton } from '../../program/components/ScoreModalButton';
 import { theme } from '../../styles/theme';
 import { IconWithItem } from '../mui/IconWithItem';
-import { AboutModal } from '../program/AboutModal';
-import { PlayMusicButton } from '../program/PlayMusicButton';
-import { ScoreModalButton } from '../program/ScoreModalButton';
 import { Emoji } from './Emoji';
 
 const Container = styled.div`

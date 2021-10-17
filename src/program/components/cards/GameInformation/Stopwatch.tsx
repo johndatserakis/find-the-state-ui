@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { useGameStopwatch } from '../../../../hooks/useGameStopwatch';
-import { GameStatus, IsGameOver, Timer } from '../../../../types/game';
 import { formatNumberToStopwatch } from '../../../../utils/stopwatch';
+import { GameStatus, IsGameOver, Timer } from '../../../types/game';
 
 interface StopwatchProps {
   gameStatus: GameStatus;

@@ -2,10 +2,10 @@ import { Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { sortBy as _sortBy } from 'lodash';
 import styled from 'styled-components';
-import { useGetScores } from '../../api/score';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 import { formatStopwatchFromDatabase } from '../../utils/stopwatch';
 import { pxToRem } from '../../utils/style';
+import { useGetScores } from '../api/score';
 
 const NoRowsOverlayContainer = styled.div`
   align-items: center;

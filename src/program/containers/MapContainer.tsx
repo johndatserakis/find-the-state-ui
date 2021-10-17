@@ -4,13 +4,13 @@ import { Map as MapboxMap } from 'mapbox-gl';
 import { usePrevious } from 'react-use';
 import styled from 'styled-components';
 import { Map } from '../../components/common/Map/Map';
-import { FEATURE_STATE_GUESSES_KEY } from '../../constants/map';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 import { colors } from '../../styles/colors';
 import { theme } from '../../styles/theme';
-import { GameStatus, Guesses, SelectedItem, TargetItem } from '../../types/game';
-import { getFeatureFromSource } from '../../utils/map';
 import { pxToRem } from '../../utils/style';
+import { FEATURE_STATE_GUESSES_KEY } from '../constants/map';
+import { GameStatus, Guesses, SelectedItem, TargetItem } from '../types/game';
+import { getFeatureFromSource } from '../utils/map';
 
 const Container = styled.div`
   border-radius: ${pxToRem(4)};

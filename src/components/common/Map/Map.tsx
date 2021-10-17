@@ -5,11 +5,17 @@ import styled from 'styled-components';
 // Seems to not like the .geojson filename, json works fine though
 // @ts-ignore
 import _states from '../../../../public/data/states.geojson';
-import { DEFAULT_LNG, DEFAULT_LAT, DEFAULT_BOUNDS_PADDING, DEFAULT_ZOOM, USA_BOUNDS } from '../../../constants/map';
-import { CHOROPLETH_WRONG_ANSWERS_COLORS, FEATURE_STATE_GUESSES_KEY } from '../../../constants/map';
+import {
+  DEFAULT_LNG,
+  DEFAULT_LAT,
+  DEFAULT_BOUNDS_PADDING,
+  DEFAULT_ZOOM,
+  USA_BOUNDS,
+} from '../../../program/constants/map';
+import { CHOROPLETH_WRONG_ANSWERS_COLORS, FEATURE_STATE_GUESSES_KEY } from '../../../program/constants/map';
+import { getTopFeatureAtMouseEvent, fitBounds, setMapInteractionsStatus } from '../../../program/utils/map';
 import { colors } from '../../../styles/colors';
 import { theme } from '../../../styles/theme';
-import { getTopFeatureAtMouseEvent, fitBounds, setMapInteractionsStatus } from '../../../utils/map';
 import { Display } from './Display';
 
 const MapContainer = styled.div`

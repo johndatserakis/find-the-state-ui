@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { AvailableItemsCount, IsGameOver } from '../../../../types/game';
+import { AvailableItemsCount, IsGameOver } from '../../../types/game';
 
 interface GameStatusHeaderProps {
   availableItemsCount: AvailableItemsCount;

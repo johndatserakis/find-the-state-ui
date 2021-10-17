@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { uniqueId as _uniqueId } from 'lodash';
 import styled from 'styled-components';
-import { CHOROPLETH_WRONG_ANSWERS_COLORS } from '../../../constants/map';
+import { CHOROPLETH_WRONG_ANSWERS_COLORS } from '../../../program/constants/map';
 import { theme } from '../../../styles/theme';
 import { pxToRem } from '../../../utils/style';
 

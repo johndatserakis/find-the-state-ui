@@ -3,7 +3,7 @@ import { Chip } from '@mui/material';
 import styled from 'styled-components';
 import { colors } from '../../../../styles/colors';
 import { theme } from '../../../../styles/theme';
-import { LastSelectionResult } from '../../../../types/game';
+import { LastSelectionResult } from '../../../types/game';
 
 const StyledChip = styled(Chip)<{ result: LastSelectionResult }>`
   background: ${({ result }) =>

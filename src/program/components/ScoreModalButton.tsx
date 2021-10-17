@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ScoreRounded } from '@mui/icons-material';
 import { Box, Button, DialogActions, DialogContent, DialogTitle, Tooltip } from '@mui/material';
-import { Dialog } from '../mui/Dialog';
+import { Dialog } from '../../components/mui/Dialog';
 import { ScoreModal } from './ScoreModal';
 
 export const ScoreModalButton = () => {

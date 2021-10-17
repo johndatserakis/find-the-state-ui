@@ -1,9 +1,9 @@
 import { Typography } from '@mui/material';
 import styled from 'styled-components';
-import { bluePurpleGradient } from '../../../../styles/program/colors';
-import { GameStatus, IsGameOver, LastSelectionResult, TargetItem } from '../../../../types/game';
-import { Emoji } from '../../../common/Emoji';
-import { CardWithBackground } from '../../../mui/CardWithBackground';
+import { Emoji } from '../../../../components/common/Emoji';
+import { CardWithBackground } from '../../../../components/mui/CardWithBackground';
+import { bluePurpleGradient } from '../../../styles/colors';
+import { GameStatus, IsGameOver, LastSelectionResult, TargetItem } from '../../../types/game';
 import { SelectionResult } from './SelectionResult';
 
 const Container = styled.div`

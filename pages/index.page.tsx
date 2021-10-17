@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { sample as _sample } from 'lodash';
 import styled from 'styled-components';
-import { post as postScore } from '../src/api/score';
 import { CookieBanner } from '../src/components/common/CookieBanner';
 import { Navbar } from '../src/components/common/Navbar';
-import { GameInformation } from '../src/components/program/cards/GameInformation/GameInformation';
-import { ItemToFind } from '../src/components/program/cards/ItemToFind/ItemToFind';
 import { DEFAULT_CONTAINER_MAX_WIDTH, DEFAULT_PROGRAM_BREAKPOINT } from '../src/constants/style';
-import { ItemInformationContainer } from '../src/containers/program/cards/ItemInformationContainer';
-import { MapContainer } from '../src/containers/program/MapContainer';
+import { post as postScore } from '../src/program/api/score';
+import { GameInformation } from '../src/program/components/cards/GameInformation/GameInformation';
+import { ItemToFind } from '../src/program/components/cards/ItemToFind/ItemToFind';
+import { ItemInformationContainer } from '../src/program/containers/cards/ItemInformationContainer';
+import { MapContainer } from '../src/program/containers/MapContainer';
 import {
   GameStatus,
   Guesses,
@@ -19,8 +19,8 @@ import {
   StreakHigh,
   TargetItem,
   Timer,
-} from '../src/types/game';
-import { getAvailableItems } from '../src/utils/game';
+} from '../src/program/types/game';
+import { getAvailableItems } from '../src/program/utils/game';
 import { formatStopwatchForDatabase } from '../src/utils/stopwatch';
 import { pxToRem } from '../src/utils/style';
 

@@ -1,7 +1,7 @@
 import useSWR from 'swr';
-import { ReturnedData } from '../types/api';
+import { ReturnedData } from '../../types/api';
+import { fetcher } from '../../utils/api';
 import { State, TargetItem } from '../types/game';
-import { fetcher } from '../utils/api';
 
 export const useGetState = (targetItem: TargetItem): ReturnedData<State> => {
   const shouldFetch = targetItem !== undefined;

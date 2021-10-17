@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { usePrevious } from 'react-use';
-import { GameStatus, IsGameOver } from '../types/game';
+import { GameStatus, IsGameOver } from '../program/types/game';
 import { useTimer } from './useTimer';
 
 interface UseGameStopwatchProps {
