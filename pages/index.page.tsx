@@ -199,7 +199,7 @@ export default function Home() {
                 streakHigh={streakHigh}
                 timer={timer}
               />
-              <ItemInformationContainer gameStatus={gameStatus} targetItem={targetItem} />
+              <ItemInformationContainer gameStatus={gameStatus} isGameOver={isGameOver} targetItem={targetItem} />
             </CardsContainer>
           </Grid>
         </Grid>
