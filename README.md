@@ -115,7 +115,7 @@ I found [favicon.io](https://favicon.io/) from John Sorrentino randomly. I dig i
 
 ## Screenshot
 
-Used [screely](https://www.screely.com/) for the screenshot. Very simple to use.
+Used [screely](https://www.screely.com/) for the screenshot. Very simple to use and export.
 
 ## Sound
 
