@@ -1,14 +1,15 @@
 import { ReactNode } from 'react';
-import { CardContent } from '@material-ui/core';
-import { FullSizeCard } from './FullSizeCard';
-import styled from 'styled-components/macro';
-import { colors } from '../../style/colors';
+import { CardContent } from '@mui/material';
+import styled from 'styled-components';
 import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
+import { colors } from '../../styles/colors';
+import { FullSizeCard } from './FullSizeCard';
 
-const StyledFullSizeCard = styled(FullSizeCard)`
-  position: relative;
+export const StyledFullSizeCard = styled(FullSizeCard)`
   // TODO: Look into needing to set a height for mobile because of the absolutley positioned content below
   height: 300px;
+  overflow: auto;
+  position: relative;
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
     height: 100%;
@@ -31,17 +32,17 @@ export const CardWithBackgroundContent = styled(CardContent)`
   height: 100%;
   justify-content: space-evenly;
   left: 0;
+  overflow: auto;
   position: absolute;
   right: 0;
   top: 0;
   width: 100%;
   will-change: transform, opacity;
-  overflow: auto;
 `;
 
 interface CardWithGradientBackgroundProps {
-  children?: ReactNode;
   background: string;
+  children?: ReactNode;
 }
 
 export const CardWithBackground = ({ children, background }: CardWithGradientBackgroundProps) => {

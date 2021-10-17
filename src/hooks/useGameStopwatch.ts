@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
-import { useTimer } from './useTimer';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { gameStatusState, timerState, timerGameOverState } from '../recoil/game/game';
-import { GameStatus } from '../recoil/game/types';
 import { usePrevious } from 'react-use';
+import { GameStatus, IsGameOver } from '../program/types/game';
+import { useTimer } from './useTimer';
 
-export const useGameStopwatch = () => {
+interface UseGameStopwatchProps {
+  gameStatus: GameStatus;
+  isGameOver: IsGameOver;
+  setTimer: (time: number) => void;
+}
+
+export const useGameStopwatch = ({ gameStatus, isGameOver, setTimer }: UseGameStopwatchProps) => {
   const { timer, handlePause, handleReset, handleStart } = useTimer(0);
-  const gameStatus = useRecoilValue(gameStatusState);
   const prevGameStatus = usePrevious(gameStatus);
-  const setTimer = useSetRecoilState(timerState);
-  const setTimerGameOver = useSetRecoilState(timerGameOverState);
-  const isGameOver = gameStatus === GameStatus.GAME_OVER || gameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
-  const isGameOverNotUserInitiated = gameStatus === GameStatus.GAME_OVER;
+
   const isPrevGameOver =
     prevGameStatus === GameStatus.GAME_OVER || prevGameStatus === GameStatus.GAME_OVER_MANUAL_END_GAME;
   const isStartingNewGameFromGameOver = gameStatus === GameStatus.ACTIVE && isPrevGameOver;
@@ -42,10 +42,6 @@ export const useGameStopwatch = () => {
     if (isStartingNewGameFromGameOver) {
       handleReset();
       handleStart();
-    }
-
-    if (isGameOverNotUserInitiated) {
-      setTimerGameOver(timer);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

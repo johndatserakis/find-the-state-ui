@@ -5,9 +5,10 @@ TODO: Look into error: Warning: findDOMNode is deprecated in StrictMode. findDOM
 */
 
 import { forwardRef, ReactNode } from 'react';
-import { Dialog as MuiDialog, DialogProps as MuiDialogProps, Slide, SlideProps } from '@material-ui/core';
+import { Dialog as MuiDialog, DialogProps as MuiDialogProps, Slide, SlideProps } from '@mui/material';
 
 // https://github.com/mui-org/material-ui/issues/17542#issuecomment-663845119
+// eslint-disable-next-line react/display-name
 const Transition = forwardRef<unknown, SlideProps>((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 interface DialogProps extends MuiDialogProps {

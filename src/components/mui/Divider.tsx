@@ -1,5 +1,5 @@
-import { Divider as MuiDivider } from '@material-ui/core';
-import styled from 'styled-components/macro';
+import { Divider as MuiDivider } from '@mui/material';
+import styled from 'styled-components';
 import { pxToRem } from '../../utils/style';
 
 interface DividerProps {

@@ -1,10 +1,11 @@
-import CookieConsent from 'react-cookie-consent';
-import { disable, enable } from '../../utils/gtag';
-import { Button, useMediaQuery, useTheme } from '@material-ui/core';
-import { colors } from '../../style/colors';
-import { useCookie } from 'react-use';
 import { useEffect } from 'react';
-import styled from 'styled-components/macro';
+import { Button, useMediaQuery } from '@mui/material';
+import CookieConsent from 'react-cookie-consent';
+import { useCookie } from 'react-use';
+import styled from 'styled-components';
+import { colors } from '../../styles/colors';
+import { theme } from '../../styles/theme';
+import { disable, enable } from '../../utils/gtag';
 
 const COOKIE_NAME = 'find-the-state-banner';
 
@@ -17,7 +18,7 @@ const Container = styled.div`
   .button-wrapper {
     width: 100%;
 
-    ${({ theme }) => theme.breakpoints.up('sm')} {
+    ${theme.breakpoints.up('sm')} {
       width: auto;
     }
   }
@@ -26,7 +27,6 @@ const Container = styled.div`
 export const CookieBanner = () => {
   // CookieConsent handles the actual setting of the cookie - we're just grabbing this to check it ourselves
   const [value] = useCookie(COOKIE_NAME);
-  const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   // The main logic is in the actual decline handling, but we still need to make sure to enable/disable on iniital load

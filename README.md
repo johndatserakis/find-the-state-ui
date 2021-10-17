@@ -1,9 +1,11 @@
 # Find the State UI
 
+[![Find the State](./public/screenshots/find-the-state.jpg)](https://find-the-state.netlify.app/)
+
 Find all the States in the contiguous USA on a map. Simple enough.
 
 - [Live URL](https://find-the-state.netlify.app/)
-- [Frontend UI GitHub](https://github.com/johndatserakis/find-the-state-ui) - Built with TypeScript and React
+- [Frontend UI GitHub](https://github.com/johndatserakis/find-the-state-ui) - Built with TypeScript, React, and Next.js
 - [Backend API GitHub](https://github.com/johndatserakis/find-the-state-api) - Built with Python and FastAPI
 
 ## Run
@@ -12,13 +14,22 @@ Find all the States in the contiguous USA on a map. Simple enough.
 # Install deps
 yarn
 
-# Run
-yarn start
+# Run locally
+yarn dev
 
 # Build
-yarn build
+yarn build:static
 
-# Run tests
+# Run unit tests
+yarn test:unit
+
+# Run e2e tests
+yarn test:e2e
+
+# Run headless e2e tests
+yarn test:e2e:headless
+
+# Run all tests
 yarn test
 ```
 
@@ -26,197 +37,39 @@ yarn test
 
 - React
 - TypeScript
+- Next.js
 - Material-UI
-- Recoil
 - Styled-Components
 - Mapbox
-- React-Spring
 - use-sound
+- useSWR
 
 I used a few new libraries during the building of this project. I took some notes below on things I needed to reference often, both new and old.
 
-## React
-
-- [Use async/await in useEffect response from Dan Abramov](https://github.com/facebook/react/issues/14326#issuecomment-472043812)
-
-## [Recoil](https://recoiljs.org/docs/introduction/installation)
-
-<details>
-<summary>Notes</summary>
-
-### Basics
-
-Info from the docs:
-
-#### [atoms](https://recoiljs.org/docs/api-reference/core/atom)
-
-An atom represents state in Recoil. The atom() function returns a writeable RecoilState object.
-
-Most often, you'll use the following hooks to interact with atoms:
-
-- `useRecoilState`: Use this hook when you intend on both reading and writing to the atom. This hook subscribes the component to the atom.
-- `useRecoilValue`: Use this hook when you intend on only reading the atom. This hook subscribes the component to the atom.
-- `useSetRecoilState`: Use this hook when you intend on only writing to the atom.
-- `useResetRecoilState`: Use this hook to reset an atom to its default value.
-- For rare cases where you need to read an atom's value without subscribing to the component, see `useRecoilCallback`.
-
-```tsx
-import { atom, useRecoilState } from 'recoil';
-
-const counter = atom({
-  key: 'myCounter',
-  default: 0,
-});
-
-function Counter() {
-  const [count, setCount] = useRecoilState(counter);
-  const incrementByOne = () => setCount(count + 1);
-
-  return (
-    <div>
-      Count: {count}
-      <br />
-      <button onClick={incrementByOne}>Increment</button>
-    </div>
-  );
-}
-```
-
-#### [selector](https://recoiljs.org/docs/api-reference/core/selector)
-
-Selectors represent a function, or derived state in Recoil. You can think of them as similar to an "idempotent" or "pure function" without side-effects that always returns the same value for a given set of dependency values. If only a get function is provided, the selector is read-only and returns a RecoilValueReadOnly object. If a set is also provided, it returns a writeable RecoilState object.
-
-```tsx
-import {atom, selector, useRecoilState, DefaultValue} from 'recoil';
-
-const tempFahrenheit = atom({
-  key: 'tempFahrenheit',
-  default: 32,
-});
-
-const tempCelsius = selector({
-  key: 'tempCelsius',
-  get: ({get}) => ((get(tempFahrenheit) - 32) * 5) / 9,
-  set: ({set}, newValue) =>
-    set(
-      tempFahrenheit,
-      newValue instanceof DefaultValue ? newValue : (newValue * 9) / 5 + 32
-    ),
-});
-
-function TempCelsius() {
-  const [tempF, setTempF] = useRecoilState(tempFahrenheit);
-  const [tempC, setTempC] = useRecoilState(tempCelsius);
-  const resetTemp = useResetRecoilState(tempCelsius);
-
-  const addTenCelsius = () => setTempC(tempC + 10);
-  const addTenFahrenheit = () => setTempF(tempF + 10);
-  const reset = () => resetTemp();
-
-  return (
-    <div>
-      Temp (Celsius): {tempC}
-      <br />
-      Temp (Fahrenheit): {tempF}
-      <br />
-      <button onClick={addTenCelsius}>Add 10 Celsius</button>
-      <br />
-      <button onClick={addTenFahrenheit}>Add 10 Fahrenheit</button>
-      <br />
-      <button onClick={reset}>>Reset</button>
-    </div>
-  );
-}
-```
-
-</details>
-
-## [MUI](https://material-ui.com/components/box/)
+## MUI
 
 - [Material Design Library docs](https://material.io/components)
 
-### [Default Breakpoints](https://material-ui.com/customization/breakpoints/)
+### [Typography Components](https://mui.com/components/typography/#component)
 
-Using `md` `960` as main breakpoint. But using `xl` for breakpoint in container.
+### [Default Theme Object](https://mui.com/customization/default-theme/?expand-path=$.typography#explore)
 
-- xs, extra-small: 0px
-- sm, small: 600px
-- md, medium: 960px
-- lg, large: 1280px
-- xl, extra-large: 1920px
+### [Icon List](https://mui.com/components/material-icons/)
 
-### [Container](https://material-ui.com/components/container/)
+### [Palette](https://mui.com/system/palette/#palette)
 
-Make sure all base content is wrapped in a `Container` and use a consistent maxWidth across the app.
+### [DataGrid](https://mui.com/components/data-grid/#mit-version)
 
-```tsx
-<Container maxWidth="xl">...</Container>
-```
+- [DataGrid API](https://mui.com/api/data-grid/)
 
-### [Grid](https://material-ui.com/components/grid/)
-
-For some reason the main `Grid` from MUI doesn't come with a full height and width. Import the `Grid` from `'./components/mui/Grid'` to get that added by default.
-
-### [Access MUI styles in Styled-Components](https://material-ui.com/guides/interoperability/#theme)
-
-```tsx
-const Container = styled.div`
-  background-color: ${({ theme }) => theme.palette.primary.main};
-  box-shadow: ${({ theme }) => theme.shadows[3]};
-  color: ${({ theme }) => theme.palette.text.primary}; // primary font color
-  color: ${({ theme }) => theme.palette.text.secondary}; // muted font color
-  background: ${({ theme }) => theme.palette.background.default}; // page background color
-`;
-```
-
-### [Typography Components](https://material-ui.com/components/typography/#component)
-
-### [Default Theme Object](https://material-ui.com/customization/default-theme/?expand-path=$.typography#explore)
-
-### [Icon List](https://material-ui.com/components/material-icons/)
-
-### [Palette](https://material-ui.com/system/palette/#palette)
-
-### [DataGrid](https://material-ui.com/components/data-grid/#mit-version)
-
-- [DataGrid API](https://material-ui.com/api/data-grid/)
-
-## CSS
-
-### Sixteenths for rem spacing
-
-```bash
-16/16 - 1
-15/16 - 0.9375
-14/16 - 0.875
-13/16 - 0.8125
-12/16 - 0.75
-11/16 - 0.6875
-10/16 - 0.625
-9/16 - 0.5625
-8/16 - 0.5
-7/16 - 0.4375
-6/16 - 0.375
-5/16 - 0.3125
-4/16 - 0.25
-3/16 - 0.1875
-2/16 - 0.125
-1/16 - 0.0625
-```
-
-## [React Spring](https://www.react-spring.io/docs/hooks/basics)
-
-- There's an issue with the documentation for `useTransition` mentioned [here](https://github.com/pmndrs/react-spring/issues/1052#issuecomment-805398650)
-- Concerning casting in `from`: [comment](https://github.com/microsoft/TypeScript/issues/11465#issuecomment-252453037)
-
-## [Mapbox / Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/api/)
+## Mapbox / Mapbox GL JS
 
 - [API reference](https://docs.mapbox.com/mapbox-gl-js/api/)
 - [Examples](https://docs.mapbox.com/mapbox-gl-js/example/)
 - [Mapbox terminology explanation](https://stackoverflow.com/a/66379033/8014660)
 - [Good info on how to style a Choropleth](https://dev.to/laney/mapbox-how-to-conditionally-style-features-based-on-covid-19-data-h78)
 
-### Basics
+### Mapbox Basics
 
 #### Sources
 
@@ -256,9 +109,13 @@ A tileset is a collection of raster or vector data broken up into a uniform grid
 
 - Was using `https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson` as my `states` `geojson` `source` before. Now importing it directly.
 
-## Favicons
+## Favicon
 
 I found [favicon.io](https://favicon.io/) from John Sorrentino randomly. I dig it because it made using an emoji as the favicon easy - will use it again.
+
+## Screenshot
+
+Used [screely](https://www.screely.com/) for the screenshot. Very simple to use and export.
 
 ## Sound
 
@@ -267,12 +124,8 @@ I found [favicon.io](https://favicon.io/) from John Sorrentino randomly. I dig i
 
 ## Other Notes
 
-This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) playing.
+This project was made with The Libertines "Don't Look Back Into the Sun - EP" [(Apple Music)](https://music.apple.com/gb/album/dont-look-back-into-the-sun-ep/259850329) [(Spotify)](https://open.spotify.com/album/4p8bvIgDBZ7eLvuflo6YhI?highlight=spotify:track:4KspXoCVJXGY1VrvEe1Hdm) playing on repeat.
 
 ## License
 
 [MIT](http://opensource.org/licenses/MIT)
-
-## Screenshot
-
-[![Find the State](./src/assets/screenshots/find-the-state.jpg)](https://find-the-state.netlify.app/)

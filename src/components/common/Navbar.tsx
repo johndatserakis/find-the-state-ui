@@ -1,45 +1,45 @@
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  Toolbar,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@material-ui/core';
-import { GitHub } from '@material-ui/icons';
-import styled from 'styled-components/macro';
+import { GitHub } from '@mui/icons-material';
+import { AppBar, Box, Button, Toolbar, Tooltip, Typography, useMediaQuery } from '@mui/material';
+import styled from 'styled-components';
+import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
+import { AboutModal } from '../../program/components/AboutModal';
+import { PlayMusicButton } from '../../program/components/PlayMusicButton';
+import { ScoreModalButton } from '../../program/components/ScoreModalButton';
+import { theme } from '../../styles/theme';
 import { IconWithItem } from '../mui/IconWithItem';
 import { Emoji } from './Emoji';
-import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
-import { PlayMusicButton } from '../program/PlayMusicButton';
-import { AboutModal } from '../program/AboutModal';
-import { ScoreModalButton } from '../program/ScoreModalButton';
+
+const Container = styled.div`
+  margin: 0 auto;
+  max-width: ${DEFAULT_CONTAINER_MAX_WIDTH}px;
+  width: 100%;
+`;
 
 const BackgroundColorContainer = styled.div`
-  background: ${({ theme }) => theme.palette.background.default};
-  color: ${({ theme }) => theme.palette.text.primary};
+  background: ${theme.palette.background.default};
+  color: ${theme.palette.text.primary};
 `;
 
 const StyledAppBar = styled(AppBar)`
-  background: ${({ theme }) => theme.palette.background.default};
-  color: ${({ theme }) => theme.palette.text.primary};
+  background: ${theme.palette.background.default};
+  color: ${theme.palette.text.primary};
 `;
 
 export const Navbar = () => {
-  const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <BackgroundColorContainer>
-      <Container maxWidth={DEFAULT_CONTAINER_MAX_WIDTH}>
+      <Container>
         <StyledAppBar position="static" elevation={0}>
           <Toolbar variant="dense">
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
-              item={<Typography variant="h6">{isDesktop ? <strong>Find the State</strong> : null}</Typography>}
+              item={
+                <Typography component="h1" variant="h6">
+                  {isDesktop ? <strong>Find the State</strong> : null}
+                </Typography>
+              }
             />
             <Box ml="auto">
               <AboutModal />
@@ -47,7 +47,7 @@ export const Navbar = () => {
               <PlayMusicButton />
               <Tooltip title="View on GitHub" arrow>
                 <Button
-                  color="inherit"
+                  color="black"
                   href="https://github.com/johndatserakis/find-the-state-ui"
                   target="_blank"
                   rel="noopener noreferrer"
