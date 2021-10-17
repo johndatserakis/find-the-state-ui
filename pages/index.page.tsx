@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Container, useMediaQuery } from '@mui/material';
 import { sample as _sample } from 'lodash';
 import styled from 'styled-components';
 import { post as postScore } from '../src/api/score';
 import { CookieBanner } from '../src/components/common/CookieBanner';
 import { Navbar } from '../src/components/common/Navbar';
-import { Grid } from '../src/components/mui/Grid';
 import { GameInformation } from '../src/components/program/cards/GameInformation/GameInformation';
 import { ItemToFind } from '../src/components/program/cards/ItemToFind/ItemToFind';
 import { DEFAULT_CONTAINER_MAX_WIDTH, DEFAULT_PROGRAM_BREAKPOINT } from '../src/constants/style';
 import { ItemInformationContainer } from '../src/containers/program/cards/ItemInformationContainer';
 import { MapContainer } from '../src/containers/program/MapContainer';
-import { theme } from '../src/styles/theme';
 import {
   GameStatus,
   Guesses,
@@ -32,11 +29,20 @@ const MainContainer = styled.div`
   width: 100%;
 `;
 
-const ContentContainer = styled(Container)`
+const ContentContainer = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   height: 100%;
+  margin: 0 auto;
+  max-width: ${DEFAULT_CONTAINER_MAX_WIDTH}px;
   padding: ${pxToRem(8)};
+  width: 100%;
 
   @media (min-width: ${DEFAULT_PROGRAM_BREAKPOINT}px) {
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1r 1fr 1fr;
     height: 93vh;
   }
 `;
@@ -66,9 +72,6 @@ async function postFinalScore(timer: Timer, streakHigh: StreakHigh) {
 }
 
 export default function Home() {
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
-  const spacing = isDesktop ? 2 : 0;
-
   const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.UNPLAYED);
   const [lastSelectionResult, setLastSelectionResult] = useState<LastSelectionResult>('none');
   const [targetItem, setTargetItem] = useState<TargetItem>();
@@ -169,40 +172,34 @@ export default function Home() {
   return (
     <MainContainer>
       <Navbar />
-      <ContentContainer maxWidth={DEFAULT_CONTAINER_MAX_WIDTH}>
-        <Grid container spacing={spacing}>
-          <Grid item md={9}>
-            <MapContainer
-              gameStatus={gameStatus}
-              guesses={guesses}
-              setGuesses={setGuesses}
-              setSelectedItem={setSelectedItem}
-              targetItem={targetItem}
-            />
-          </Grid>
-          <Grid item md={3}>
-            <CardsContainer>
-              <ItemToFind
-                gameStatus={gameStatus}
-                isGameOver={isGameOver}
-                lastSelectionResult={lastSelectionResult}
-                targetItem={targetItem}
-              />
-              <GameInformation
-                availableItemsCount={availableItemsCount}
-                endGameManual={endGameManual}
-                gameStatus={gameStatus}
-                isGameOver={isGameOver}
-                setTimer={setTimer}
-                startGame={startGame}
-                streak={streak}
-                streakHigh={streakHigh}
-                timer={timer}
-              />
-              <ItemInformationContainer gameStatus={gameStatus} isGameOver={isGameOver} targetItem={targetItem} />
-            </CardsContainer>
-          </Grid>
-        </Grid>
+      <ContentContainer>
+        <MapContainer
+          gameStatus={gameStatus}
+          guesses={guesses}
+          setGuesses={setGuesses}
+          setSelectedItem={setSelectedItem}
+          targetItem={targetItem}
+        />
+        <CardsContainer>
+          <ItemToFind
+            gameStatus={gameStatus}
+            isGameOver={isGameOver}
+            lastSelectionResult={lastSelectionResult}
+            targetItem={targetItem}
+          />
+          <GameInformation
+            availableItemsCount={availableItemsCount}
+            endGameManual={endGameManual}
+            gameStatus={gameStatus}
+            isGameOver={isGameOver}
+            setTimer={setTimer}
+            startGame={startGame}
+            streak={streak}
+            streakHigh={streakHigh}
+            timer={timer}
+          />
+          <ItemInformationContainer gameStatus={gameStatus} targetItem={targetItem} />
+        </CardsContainer>
       </ContentContainer>
       <CookieBanner />
     </MainContainer>

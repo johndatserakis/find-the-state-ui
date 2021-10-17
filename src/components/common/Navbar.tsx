@@ -1,5 +1,5 @@
 import { GitHub } from '@mui/icons-material';
-import { AppBar, Box, Button, Container, Toolbar, Tooltip, Typography, useMediaQuery } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Tooltip, Typography, useMediaQuery } from '@mui/material';
 import styled from 'styled-components';
 import { DEFAULT_CONTAINER_MAX_WIDTH } from '../../constants/style';
 import { theme } from '../../styles/theme';
@@ -8,6 +8,12 @@ import { AboutModal } from '../program/AboutModal';
 import { PlayMusicButton } from '../program/PlayMusicButton';
 import { ScoreModalButton } from '../program/ScoreModalButton';
 import { Emoji } from './Emoji';
+
+const Container = styled.div`
+  margin: 0 auto;
+  max-width: ${DEFAULT_CONTAINER_MAX_WIDTH}px;
+  width: 100%;
+`;
 
 const BackgroundColorContainer = styled.div`
   background: ${theme.palette.background.default};
@@ -24,7 +30,7 @@ export const Navbar = () => {
 
   return (
     <BackgroundColorContainer>
-      <Container maxWidth={DEFAULT_CONTAINER_MAX_WIDTH}>
+      <Container>
         <StyledAppBar position="static" elevation={0}>
           <Toolbar variant="dense">
             <IconWithItem
