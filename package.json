@@ -31,6 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "babel-jest": "^27.2.5",
     "babel-plugin-styled-components": "^1.13.2",
+    "cypress": "^8.6.0",
     "eslint": "^7.23.0",
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "^8.3.0",
@@ -41,12 +42,15 @@
     "lint-staged": "^11.2.3",
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
+    "start-server-and-test": "^1.14.0",
     "typescript": "4.4.3"
   },
   "name": "find-the-state-ui",
   "private": true,
   "scripts": {
     "build": "NODE_OPTIONS=--max_old_space_size=8192 next build",
+    "cypress:open": "cypress open",
+    "cypress:open:headless": "cypress run --headless",
     "dev": "NODE_OPTIONS=--max_old_space_size=8192 next dev",
     "kill-dev-app": "npx kill-port 3000",
     "lint:fix": "next lint --fix",
@@ -55,8 +59,11 @@
     "prettier:app": "npx prettier --write '{pages/**/*,src/**/*}'",
     "prettier": "yarn prettier:all",
     "start": "NODE_OPTIONS=--max_old_space_size=8192 next start",
-    "test:watch": "jest --watch",
-    "test": "jest"
+    "test:e2e": "yarn build && start-server-and-test start http://localhost:3000 cypress:open",
+    "test:e2e:headless": "start-server-and-test start http://localhost:3000 cypress:open:headless",
+    "test:unit:watch": "jest --watch",
+    "test:unit": "jest",
+    "test": "yarn test:unit"
   },
   "version": "0.1.0"
 }
