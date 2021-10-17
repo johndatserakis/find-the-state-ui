@@ -1,12 +1,13 @@
 import { waitFor } from '@testing-library/react';
-import { renderComponent } from '../test-utils/render';
+import { renderComponent } from '../jest-test-utils/render';
 import Home from './index.page';
+import '@testing-library/jest-dom';
 
 describe('Home', () => {
-  it('renders a heading', async () => {
+  it('renders the main navbar icon', async () => {
     const { getByText } = renderComponent({ component: <Home /> });
 
-    const header = await waitFor(() => getByText(/Find the State/i));
+    const header = await waitFor(() => getByText(/🔍/i));
 
     expect(header).toBeInTheDocument();
   });
