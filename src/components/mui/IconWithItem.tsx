@@ -21,13 +21,14 @@ const Container = styled.div`
 interface IconWithItemProps {
   iconLeft?: JSX.Element;
   iconRight?: JSX.Element;
-  item: JSX.Element;
+  item: JSX.Element | null;
 }
 
 export const IconWithItem = ({ iconLeft, iconRight, item }: IconWithItemProps) => {
   return (
     <Container>
-      <span className="icon icon-left">{iconLeft && iconLeft}</span> {item}{' '}
+      <span className="icon icon-left">{iconLeft && iconLeft}</span> {item}
+      {item != null ? ' ' : ''}
       <span className="icon icon-right">{iconRight && iconRight}</span>
     </Container>
   );

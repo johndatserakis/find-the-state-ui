@@ -22,6 +22,7 @@ const BackgroundColorContainer = styled.div`
 
 const StyledAppBar = styled(AppBar)`
   background: ${theme.palette.background.default};
+  background-color: ${theme.palette.background.default};
   color: ${theme.palette.text.primary};
 `;
 
@@ -36,9 +37,11 @@ export const Navbar = () => {
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
               item={
-                <Typography component="h1" variant="h6">
-                  {isDesktop ? <strong>Find the State</strong> : null}
-                </Typography>
+                isDesktop ? (
+                  <Typography component="h1" variant="h6">
+                    <strong>Find the State</strong>
+                  </Typography>
+                ) : null
               }
             />
             <Box ml="auto">
