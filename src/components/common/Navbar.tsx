@@ -20,19 +20,17 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const StyledAppBar = styled(AppBar)`
-  background: ${theme.palette.background.default};
-  background-color: ${theme.palette.background.default};
-  color: ${theme.palette.text.primary};
-`;
-
 export const Navbar = () => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <BackgroundColorContainer>
       <Container>
-        <StyledAppBar position="static" elevation={0}>
+        <AppBar
+          elevation={0}
+          position="static"
+          sx={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary }}
+        >
           <Toolbar variant="dense">
             <IconWithItem
               iconLeft={<Emoji symbol="🔍" label="Search" />}
@@ -60,7 +58,7 @@ export const Navbar = () => {
               </Tooltip>
             </Box>
           </Toolbar>
-        </StyledAppBar>
+        </AppBar>
       </Container>
     </BackgroundColorContainer>
   );
