@@ -13,7 +13,7 @@ import { GameStatus, Guesses, SelectedItem, TargetItem } from '../types/game';
 import { getFeatureFromSource } from '../utils/map';
 
 const Container = styled.div`
-  background: ${colors.offWhite};
+  background: ${colors.gray[100]};
   border-radius: ${pxToRem(4)};
   border: 1px solid ${colors.gray[100]};
   box-shadow: ${theme.shadows[3]};
@@ -31,6 +31,7 @@ const Container = styled.div`
 `;
 
 const MapWrapper = styled.div<{ isLoading: boolean }>`
+  background: ${colors.gray[100]};
   bottom: 0;
   height: 100%;
   left: 0;

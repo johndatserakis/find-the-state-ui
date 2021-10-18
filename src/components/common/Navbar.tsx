@@ -9,15 +9,15 @@ import { theme } from '../../styles/theme';
 import { IconWithItem } from '../mui/IconWithItem';
 import { Emoji } from './Emoji';
 
+const BackgroundColorContainer = styled.div`
+  background: ${theme.palette.background.default};
+  color: ${theme.palette.text.primary};
+`;
+
 const Container = styled.div`
   margin: 0 auto;
   max-width: ${DEFAULT_CONTAINER_MAX_WIDTH}px;
   width: 100%;
-`;
-
-const BackgroundColorContainer = styled.div`
-  background: ${theme.palette.background.default};
-  color: ${theme.palette.text.primary};
 `;
 
 const StyledAppBar = styled(AppBar)`
