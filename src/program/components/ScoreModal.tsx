@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { sortBy as _sortBy } from 'lodash';
@@ -6,6 +7,7 @@ import { DEFAULT_PROGRAM_BREAKPOINT } from '../../constants/style';
 import { formatStopwatchFromDatabase } from '../../utils/stopwatch';
 import { pxToRem } from '../../utils/style';
 import { useGetScores } from '../api/score';
+import { Scores } from '../types/game';
 
 const NoRowsOverlayContainer = styled.div`
   align-items: center;
@@ -36,7 +38,7 @@ const DataGridContainer = styled.div`
 
 export const ScoreModal = () => {
   const { data, loading } = useGetScores();
-  const scores = data !== undefined ? _sortBy(data, 'created_date').reverse() : [];
+  const [scores, setScores] = useState<Scores>([]);
 
   const columns: GridColDef[] = [
     {
@@ -65,6 +67,14 @@ export const ScoreModal = () => {
       },
     },
   ];
+
+  // MUI's DataGrid is forcing me to use a `useEffect` here because it doesn't seem to want to rerender
+  // after the data is fetched.
+  useEffect(() => {
+    const sortedScores = _sortBy(data, 'score');
+
+    setScores(data !== undefined ? sortedScores : []);
+  }, [data]);
 
   return (
     <DataGridContainer>

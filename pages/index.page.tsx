@@ -125,6 +125,7 @@ export default function Home() {
       const guessCountForCurrentTarget = currentGuesses[targetItem] || 0;
       currentGuesses[targetItem] = guessCountForCurrentTarget + 1;
       setGuesses(currentGuesses);
+      setSelectedItem(undefined);
 
       return;
     }

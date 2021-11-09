@@ -46,6 +46,10 @@ yarn test
 
 I used a few new libraries during the building of this project. I took some notes below on things I needed to reference often, both new and old.
 
+## Folder Structure
+
+For the most part, the structure of the project is what you'd expect from a normal Next.js app. The main thing I wanted to point out was that I use a `./src/program` folder that mirrors the main `./src` structure, but is specifically for files that are unique to this project. The reason I do this is because I share a lot of the same "base" code in my projects, so this lets me iterate as I make new projects, building up my base, while keeping my "program" files somewhat separate.
+
 ## MUI
 
 - [Material Design Library docs](https://material.io/components)

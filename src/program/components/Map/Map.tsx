@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from '@mui/material';
 import { Map as MapboxMap, NavigationControl } from 'mapbox-gl';
 import styled from 'styled-components';
-// Seems to not like the .geojson filename, json works fine though
+// TypeScript seems to not like the .geojson filename
 // @ts-ignore
 import _states from '../../../../public/data/states.geojson';
 import { colors } from '../../../styles/colors';
@@ -19,8 +19,8 @@ const MapContainer = styled.div`
 `;
 
 interface MapProps {
-  onLoad: (mapboxMap: MapboxMap) => void;
   onClick: (item: string) => void;
+  onLoad: (mapboxMap: MapboxMap) => void;
   resetBoundsOnThisValueChange?: unknown;
 }
 
@@ -38,11 +38,11 @@ export const Map = ({ onLoad, onClick, resetBoundsOnThisValueChange }: MapProps)
 
     const map = new MapboxMap({
       accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
       center: [DEFAULT_LNG, DEFAULT_LAT],
-      zoom: DEFAULT_ZOOM,
+      container: mapContainer.current,
       logoPosition,
+      style: 'mapbox://styles/mapbox/streets-v11',
+      zoom: DEFAULT_ZOOM,
     });
 
     map.addControl(new NavigationControl());

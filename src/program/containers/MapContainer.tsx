@@ -81,6 +81,7 @@ export const MapContainer = ({ gameStatus, guesses, setGuesses, setSelectedItem,
       key: 'STATE_NAME',
       value: targetItem,
     });
+
     if (!feature) return;
 
     const { id } = feature;
@@ -96,6 +97,7 @@ export const MapContainer = ({ gameStatus, guesses, setGuesses, setSelectedItem,
         key: 'STATE_NAME',
         value: key,
       });
+
       if (!feature) continue;
 
       const { id } = feature;
